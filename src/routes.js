@@ -7,6 +7,7 @@ import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
 import UserDashboard from "views/Dashboard/UserDashboard"
+import SuperAdmin from "views/SuperAdmin/Dashboard";
 
 import {
   HomeIcon,
@@ -28,14 +29,22 @@ var dashRoutes = [
     component: TopNavigation,
     layout: "/admin",
   },
-  {
-    path: "/user/leaderboard",
-    name: "Leaderboard",
-    rtlName: "لوحة القيادة",
-    icon: <HomeIcon color="inherit" />,
-    component: UserDashboard,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/user/leaderboard",
+  //   name: "Leaderboard",
+  //   rtlName: "لوحة القيادة",
+  //   icon: <HomeIcon color="inherit" />,
+  //   component: UserDashboard,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/admin/dashboard",
+  //   name: "Admin Dashboard",
+  //   rtlName: "لوحة القيادة",
+  //   icon: <HomeIcon color="inherit" />,
+  //   component: SuperAdmin,
+  //   layout: "/admin",
+  // },
   {
     path: "/dashboard",
     name: "Dashboard",

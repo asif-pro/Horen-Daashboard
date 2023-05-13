@@ -1,4 +1,5 @@
 import React from 'react'
+import './Guage.scss'
 
 function Widget({title, children}) {
     return (
@@ -89,7 +90,7 @@ function Widget({title, children}) {
   }
 
 const Guage = () => {
-    const [percentage, setPercentage] = React.useState(83)
+    const [percentage, setPercentage] = React.useState(66)
     return (
       <>
         <div>

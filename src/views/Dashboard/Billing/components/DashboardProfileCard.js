@@ -10,6 +10,7 @@ import { Separator } from "components/Separator/Separator";
 import React from "react";
 import ChartStatistics from "views/Dashboard/Dashboard/components/ChartStatistics";
 import MiniStatistics from "views/Dashboard/Dashboard/components/MiniStatistics";
+import Guage from "components/Guage/Guage";
 
 const DashboardProfileCard = ({ icon, title, description, amount }) => {
   const iconteal = useColorModeValue("teal.300", "teal.300");
@@ -68,6 +69,7 @@ const DashboardProfileCard = ({ icon, title, description, amount }) => {
                         icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
                         />
                     </SimpleGrid>
+                    <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}><Guage></Guage></SimpleGrid>
                     <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}>
                         <MiniStatistics
                         title={"Average per minute"}

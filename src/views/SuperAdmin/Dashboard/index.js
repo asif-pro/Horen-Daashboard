@@ -17,7 +17,7 @@ import {
   import BarChart from "components/Charts/BarChart";
   import LineChart from "components/Charts/LineChart";
   import BellChart from "components/Charts/BellChart";
-  import MiniStatistics from "../Dashboard/components/MiniStatistics";
+  import MiniStatistics from "views/Dashboard/Dashboard/components/MiniStatistics";
   // Custom icons
   import {
     CartIcon,
@@ -37,18 +37,15 @@ import {
   import SalesOverview from "./components/SalesOverview";
   import WorkWithTheRockets from "./components/WorkWithTheRockets";
 //   import PaymentStatistics from "./components/PaymentStatistics";
-import PaymentStatistics from "../Billing/components/PaymentStatistics";
+import PaymentStatistics from "views/Dashboard/Billing/components/PaymentStatistics";
 import ChartStatistics from "./components/ChartStatistics";
-import DashboardProfileCard from "../Billing/components/DashboardProfileCard";
+import DashboardProfileCard from "views/Dashboard/Billing/components/DashboardProfileCard";
 import Guage from "components/Guage/Guage";
 import TopChart from "./components/TopChart";
 import AreaHorn from "./components/AreaHorn";
 import GlobalHorn from "./components/GlobalHorn copy";
 
-  
-  function UserDashboard() {
-    // const iconBoxInside = useColorModeValue("white", "white");
-  
+const SuperAdmin = () => {
     return (
         <Flex flexDirection='column' pt={{ base: "50px", md: "20px" }}>
     
@@ -57,7 +54,7 @@ import GlobalHorn from "./components/GlobalHorn copy";
                 <GridItem colSpan={4} h='10'>
                         <Box mb={5}>
                             <TopChart 
-                                title={"Number of Horns played per Day"}
+                                title={"Super Admin"}
                                 percentage={5}
                                 chart={<LineChart />}
                                 />
@@ -121,6 +118,7 @@ import GlobalHorn from "./components/GlobalHorn copy";
                         icon={<WalletIcon h={"24px"} w={"24px"} color='white' />}
                         />
                     </SimpleGrid> */}
+                    {/* <Guage></Guage> */}
                 </GridItem>
             </Grid>            
 
@@ -129,4 +127,5 @@ import GlobalHorn from "./components/GlobalHorn copy";
         </Flex>
         );
 }
-export default UserDashboard
+
+export default SuperAdmin
