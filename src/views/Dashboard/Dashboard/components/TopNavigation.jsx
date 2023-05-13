@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, TabIndicator } from '@chakra-ui/react'
 import UserDashboard from 'views/Dashboard/UserDashboard'
+import Orders from 'views/SuperAdmin/Orders/Orders'
 
 const TopNavigation = () => {
   return (
@@ -8,11 +9,12 @@ const TopNavigation = () => {
     <TabList>
       <Tab>Dashboard</Tab>
       <Tab>Leaderboard</Tab>
-      <Tab>Our Product</Tab>
+      <Tab>Orders</Tab>
+      <Tab>Devices</Tab>
     </TabList>
     <TabIndicator
       height="5px"
-      bg="gray.400"
+      bg="yellow.400"
       borderRadius="1px"
     />
     <TabPanels>
@@ -24,7 +26,10 @@ const TopNavigation = () => {
         <p>two!</p>
       </TabPanel>
       <TabPanel>
-        <p>three!</p>
+        <Orders></Orders>
+      </TabPanel>
+      <TabPanel>
+        <p>Four!</p>
       </TabPanel>
     </TabPanels>
   </Tabs>

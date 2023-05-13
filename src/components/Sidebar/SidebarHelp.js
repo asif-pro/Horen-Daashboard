@@ -20,7 +20,7 @@ export function SidebarHelp(props) {
       w="100%"
     >
       <IconBox width="35px" h="35px" bg="white" mb="auto">
-        <QuestionIcon color="black.300" h="18px" w="18px" />
+        <QuestionIcon color="teal.300" h="18px" w="18px" />
       </IconBox>
       <Text fontSize="sm" color="white" fontWeight="bold">
         Need help?
@@ -46,7 +46,7 @@ export function SidebarHelp(props) {
           _focus={{
             boxShadow: "none",
           }}
-          color="black"
+          color="teal"
         >
           DOCUMENTATION
         </Button>

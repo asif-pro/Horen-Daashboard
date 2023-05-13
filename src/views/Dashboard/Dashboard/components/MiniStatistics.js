@@ -14,7 +14,7 @@ import IconBox from "components/Icons/IconBox";
 import React from "react";
 
 const MiniStatistics = ({ title, amount, percentage, icon }) => {
-  const iconblack = useColorModeValue("black.300", "black.300");
+  const iconteal = useColorModeValue("teal.300", "teal.300");
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
@@ -45,7 +45,7 @@ const MiniStatistics = ({ title, amount, percentage, icon }) => {
               </StatHelpText>
             </Flex>
           </Stat>
-          <IconBox as='box' h={"45px"} w={"45px"} bg={iconblack}>
+          <IconBox as='box' h={"45px"} w={"45px"} bg={iconteal}>
             {icon}
           </IconBox>
         </Flex>

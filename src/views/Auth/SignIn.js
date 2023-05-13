@@ -18,7 +18,7 @@ import signInImage from "assets/img/signInImage.png";
 
 function SignIn() {
   // Chakra color mode
-  const titleColor = useColorModeValue("black.300", "black.200");
+  const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
   return (
     <Flex position='relative' mb='40px'>
@@ -76,7 +76,7 @@ function SignIn() {
                 size='lg'
               />
               <FormControl display='flex' alignItems='center'>
-                <Switch id='remember-login' colorScheme='black' me='10px' />
+                <Switch id='remember-login' colorScheme='teal' me='10px' />
                 <FormLabel
                   htmlFor='remember-login'
                   mb='0'
@@ -88,17 +88,17 @@ function SignIn() {
               <Button
                 fontSize='10px'
                 type='submit'
-                bg='black.300'
+                bg='teal.300'
                 w='100%'
                 h='45'
                 mb='20px'
                 color='white'
                 mt='20px'
                 _hover={{
-                  bg: "black.200",
+                  bg: "teal.200",
                 }}
                 _active={{
-                  bg: "black.400",
+                  bg: "teal.400",
                 }}>
                 SIGN IN
               </Button>

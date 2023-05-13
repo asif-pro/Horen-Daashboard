@@ -40,7 +40,7 @@ const ProjectCard = ({ image, name, category, avatars, description }) => {
         <Flex justifyContent='space-between'>
           <Button
             variant='outline'
-            colorScheme='black'
+            colorScheme='teal'
             minW='110px'
             h='36px'
             fontSize='xs'

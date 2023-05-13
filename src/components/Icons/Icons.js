@@ -77,7 +77,7 @@ export const CreativeTimLogo = createIcon({
       version="1.1"
     >
       <g
-        id="logo-creative-tim-black"
+        id="logo-creative-tim-teal"
         stroke="none"
         strokeWidth="1"
         fill="none"

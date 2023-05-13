@@ -3,14 +3,14 @@ import IconBox from "components/Icons/IconBox";
 import React from "react";
 
 const ChartStatistics = ({ title, amount, icon, percentage }) => {
-  const iconblack = useColorModeValue("black.300", "black.300");
+  const iconteal = useColorModeValue("teal.300", "teal.300");
   const iconBoxInside = useColorModeValue("white", "white");
   const textColor = useColorModeValue("gray.700", "white");
   const overlayRef = React.useRef();
   return (
     <Flex direction='column'>
       <Flex alignItems='center'>
-        <IconBox as='box' h={"30px"} w={"30px"} bg={iconblack} me='6px'>
+        <IconBox as='box' h={"30px"} w={"30px"} bg={iconteal} me='6px'>
           {icon}
         </IconBox>
         <Text fontSize='sm' color='gray.400' fontWeight='semibold'>
@@ -21,7 +21,7 @@ const ChartStatistics = ({ title, amount, icon, percentage }) => {
         {amount}
       </Text>
       <Progress
-        colorScheme='black'
+        colorScheme='teal'
         borderRadius='12px'
         h='5px'
         value={percentage}

@@ -19,10 +19,10 @@ import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
 function SignUp() {
-  const titleColor = useColorModeValue("black.300", "black.200");
+  const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
-  const bgIcons = useColorModeValue("black.200", "rgba(255, 255, 255, 0.5)");
+  const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
   return (
     <Flex
       direction='column'
@@ -188,14 +188,14 @@ function SignUp() {
               size='lg'
             />
             <FormControl display='flex' alignItems='center' mb='24px'>
-              <Switch id='remember-login' colorScheme='black' me='10px' />
+              <Switch id='remember-login' colorScheme='teal' me='10px' />
               <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
                 Remember me
               </FormLabel>
             </FormControl>
             <Button
               type='submit'
-              bg='black.300'
+              bg='teal.300'
               fontSize='10px'
               color='white'
               fontWeight='bold'
@@ -203,10 +203,10 @@ function SignUp() {
               h='45'
               mb='24px'
               _hover={{
-                bg: "black.200",
+                bg: "teal.200",
               }}
               _active={{
-                bg: "black.400",
+                bg: "teal.400",
               }}>
               SIGN UP
             </Button>

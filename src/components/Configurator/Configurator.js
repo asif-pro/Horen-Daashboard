@@ -75,9 +75,9 @@ export default function Configurator(props) {
                     w="50%"
                     p="8px 32px"
                     me="8px"
-                    colorScheme="black"
-                    borderColor="black.300"
-                    color="black.300"
+                    colorScheme="teal"
+                    borderColor="teal.300"
+                    color="teal.300"
                     variant="outline"
                     fontSize="xs"
                     onClick={props.onTransparent}
@@ -86,11 +86,11 @@ export default function Configurator(props) {
                   </Button>
                   <Button
                     type="submit"
-                    bg="black.300"
+                    bg="teal.300"
                     w="50%"
                     p="8px 32px"
                     mb={5}
-                    _hover="black.300"
+                    _hover="teal.300"
                     color="white"
                     fontSize="xs"
                     onClick={props.onOpaque}
@@ -108,7 +108,7 @@ export default function Configurator(props) {
                   Navbar Fixed
                 </Text>
                 <Switch
-                  colorScheme="black"
+                  colorScheme="teal"
                   isChecked={switched}
                   onChange={(event) => {
                     if (switched === true) {
