@@ -6,7 +6,6 @@ function Widget({title, children}) {
       <article className='widget'>
           <header>
             <h4>{title}</h4>
-            <div className='ellipsis'><div></div><div></div><div></div></div>
           </header>
           <section className='widget_body'>
             {children}
@@ -46,11 +45,11 @@ function Widget({title, children}) {
                     <svg style={{transform:`rotate(${rotateValue[0]}deg)`}} id='test' width="100%" height="100%" viewBox="0 0 399 399" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <defs>
                         <linearGradient id="Gradient1" gradientTransform="rotate(-25)">
-                          <stop id="stop1" offset="0%" stop-color="#F29363" />
+                          <stop id="stop1" offset="0%" stop-color="#F7CF47" />
                           <stop id="stop2" offset="100%" stop-color="#F6B597" />
                         </linearGradient>
                        <linearGradient id="Gradient2" gradientTransform="rotate(120)">
-                          <stop id="stop1" offset="0%" stop-color="#586084" />
+                          <stop id="stop1" offset="0%" stop-color="#D5DBDB" />
                           <stop id="stop2" offset="100%" stop-color="#343D60" />
                         </linearGradient>
                      </defs>
@@ -62,13 +61,13 @@ function Widget({title, children}) {
               <div className='dial'>
                 <svg className='dial_pointer' style={{transform:`rotate(${rotateValue[1]}deg)`}} width="41" height="53" viewBox="0 0 41 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20.5 0C9.45488 0 0.625 8.82988 0.625 19.875C0.625 23.6947 1.76367 26.6449 3.74082 29.6365L18.409 51.8924C18.8541 52.5652 19.6201 53 20.5 53C21.3799 53 22.1563 52.5549 22.591 51.8924L37.2592 29.6365C39.2363 26.6449 40.375 23.6947 40.375 19.875C40.375 8.82988 31.5451 0 20.5 0Z" fill="white"/>
-                <path d="M20.5402 1.92221C10.6963 1.92221 2.82669 9.79182 2.82669 19.6357C2.82669 23.0401 3.84153 25.6694 5.60366 28.3357L18.6766 48.1712C19.0733 48.7708 19.756 49.1583 20.5402 49.1583C21.3244 49.1583 22.0164 48.7616 22.4038 48.1712L35.4768 28.3357C37.2389 25.6694 38.2538 23.0401 38.2538 19.6357C38.2538 9.79182 30.3842 1.92221 20.5402 1.92221ZM20.5402 29.4705C15.1062 29.4705 10.6963 25.0605 10.6963 19.6173C10.6963 14.1741 15.1062 9.76414 20.5402 9.76414C25.9742 9.76414 30.3842 14.1741 30.3842 19.6173C30.3842 25.0605 25.9742 29.4705 20.5402 29.4705Z" fill="#576085"/>
+                <path d="M20.5402 1.92221C10.6963 1.92221 2.82669 9.79182 2.82669 19.6357C2.82669 23.0401 3.84153 25.6694 5.60366 28.3357L18.6766 48.1712C19.0733 48.7708 19.756 49.1583 20.5402 49.1583C21.3244 49.1583 22.0164 48.7616 22.4038 48.1712L35.4768 28.3357C37.2389 25.6694 38.2538 23.0401 38.2538 19.6357C38.2538 9.79182 30.3842 1.92221 20.5402 1.92221ZM20.5402 29.4705C15.1062 29.4705 10.6963 25.0605 10.6963 19.6173C10.6963 14.1741 15.1062 9.76414 20.5402 9.76414C25.9742 9.76414 30.3842 14.1741 30.3842 19.6173C30.3842 25.0605 25.9742 29.4705 20.5402 29.4705Z" fill="#F9896B"/>
               </svg>
               </div>
         </div>
               <div className='legend'>
-                <LegendOption option={options[0]} value={percentage} color='#F6B597' unit='%' />
-                <LegendOption option={options[1]} value={100-percentage} color='#586084' unit='%' />
+                <LegendOption option={options[0]} value={percentage} color='#F7CF47' unit='%' />
+                <LegendOption option={options[1]} value={100-percentage} color='#D5DBDB' unit='%' />
               </div>
             </>
     );
@@ -78,14 +77,14 @@ function Widget({title, children}) {
   function LegendOption({option, color, value, unit}) {
     return(
       <section className='legend_option'>
-        <div className='option_title'>
-          <div className='option_mark' style={{backgroundColor:`${color}`}}></div>
-          {option}
-        </div>
-        <div className='option_value'>
-          {value}{unit}
-        </div>
-      </section>
+      <div className='option_title'>
+        <div className='option_mark' style={{backgroundColor:`${color}`}}></div>
+        {option}
+      </div>
+      <div className='option_value'>
+        {value}{unit}
+      </div>
+    </section>
     )
   }
 
@@ -97,7 +96,7 @@ const Guage = () => {
           <label>Set Submitted Amt </label>
             <input value={percentage} onChange={e => setPercentage(e.target.value)} type='number' min='0' max='100'/>
         </div> */}
-        <Widget title='Application Completion'>  
+        <Widget title='Total Sound Pollution Created'>  
           <Graph percentage={percentage} options={['Completed', 'Pending']}/>
         </Widget>
       </>

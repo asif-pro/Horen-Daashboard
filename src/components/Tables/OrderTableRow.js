@@ -10,6 +10,7 @@ import {
   useColorModeValue,
   Badge,
 } from "@chakra-ui/react";
+import moment from "moment";
 import { FaShippingFast } from "react-icons/fa";
 import { updateDeliveryStatus } from "Services/oderServices";
 
@@ -18,7 +19,7 @@ function DashboardTableRow(props) {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Tr>
-      <Td minWidth={{ sm: "250px" }} pl="0px">
+      <Td minWidth={{ sm: "200px" }} pl="0px">
         <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           {/* <Icon as={logo} h={"24px"} w={"24px"} me="18px" /> */}
           <Text
@@ -32,13 +33,14 @@ function DashboardTableRow(props) {
         </Flex>
       </Td>
       <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+        <Text fontSize="md" color={textColor}  pb=".5rem">
           {user_id}
         </Text>
       </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {timeStamp}
+      <Td minWidth={{ sm: "200px" }}>
+        <Text fontSize="md" color={textColor}  pb=".5rem">
+          {moment(timeStamp).format('LL')} <br/>
+          {moment(timeStamp).format('LT')}  
         </Text>
       </Td>
       <Td>
@@ -63,35 +65,39 @@ function DashboardTableRow(props) {
       <Td>
         <Flex direction="column">
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {price}
+        &#2547;{price}
         </Text>
         </Flex>
       </Td>
       <Td>
-        <Flex direction="column">
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+      <Badge
+          bg={paymentStatus === "pending" ? "orange.300" : (paymentStatus === "paid" ? "green.300" : paymentStatus)}
+          color={paymentStatus === "pending" ? "black" : (paymentStatus === "paid" ? "white" : paymentStatus)}
+          fontSize="16px"
+          p="3px 10px"
+          borderRadius="8px"
+        >
           {paymentStatus}
-        </Text>
-        </Flex>
+        </Badge>
       </Td>
       <Td>
         <Flex direction="column">
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+        <Text fontSize="md" color={textColor} pb=".5rem">
           {phonenumber}
         </Text>
         </Flex>
       </Td>
       <Td>
         <Flex direction="column">
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+        <Text fontSize="md" color={textColor} pb=".5rem">
           {shippingAddress}
         </Text>
         </Flex>
       </Td>
       <Td>
       <Badge
-          bg={deliveryStatus === "requested-for-delivery" ? "green.400" : deliveryStatus}
-          color={deliveryStatus === "pending" ? "black" : deliveryStatus}
+          bg={deliveryStatus === "pending" ? "orange.300" : (deliveryStatus === "requested-for-delivery" ? "green.300" : deliveryStatus)}
+          color={deliveryStatus === "pending" ? "black" : (deliveryStatus === "requested-for-delivery" ? "white" : deliveryStatus)}
           fontSize="16px"
           p="3px 10px"
           borderRadius="8px"

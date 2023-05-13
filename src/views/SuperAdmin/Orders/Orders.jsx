@@ -7,6 +7,7 @@ import React from "react";
 import OrdersTable from "views/Dashboard/Tables/components/OrdersTable";
 import { dashboardTableData } from "variables/general";
 import { getOrder, updateDeliveryStatus } from "Services/oderServices";
+import { getAccessToken, createOrder } from "Services/deliveryServices";
 
 const Orders = () => {
   const [orders, setOrders ] = React.useState([]);
@@ -20,13 +21,16 @@ const Orders = () => {
     {
       orderToChange.deliveryStatus = 'requested-for-delivery';
       await updateDeliveryStatus(id,orderToChange)
-        .then(()=>{
+        .then((res)=>{
           const allOrders = orders.filter((order)=>{
             return order._id!==id;
           });
     
           setOrders([...allOrders,orderToChange].sort((a,b)=>new Date(b.timeStamp)-new Date(a.timeStamp)))
-        });
+          return res;
+        }).then((res)=>{
+          createOrder(res.data)
+        })
   
     
     }
@@ -42,10 +46,13 @@ const Orders = () => {
     }).then((res)=>{
       setOrders(res);
     })
+
+    
   },[])
   console.log(orders)
+  // console.log()
   return (
-    <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
+    <Flex direction='column' pt={{ base: "120px", md: "75px" }} >
       <OrdersTable
         title={"Orders Table"}
         captions={["Order ID", "Customer ID", "Order Date", "Quantity","Amount", "Payment Status", "Customer Phone", "Shipping Address", "Delivery Status", "",]}

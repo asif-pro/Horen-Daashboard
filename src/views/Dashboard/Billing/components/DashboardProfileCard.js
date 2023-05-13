@@ -23,7 +23,7 @@ const DashboardProfileCard = ({ icon, title, description, amount }) => {
           {/* <IconBox as='box' h={"60px"} w={"60px"} bg={iconteal}>
             {icon}
           </IconBox> */}
-          <Img borderRadius={'50%'} src={'https://res.cloudinary.com/dru7kzv3i/image/upload/v1683963472/asif_zxkrt8.jpg'}></Img>
+          <Img borderRadius={'50%'} width={'150px'} src={'https://res.cloudinary.com/dru7kzv3i/image/upload/v1683963472/asif_zxkrt8.jpg'}></Img>
           <Flex
             direction='column'
             m='14px'
