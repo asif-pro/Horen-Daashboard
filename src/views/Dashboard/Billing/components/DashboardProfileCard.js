@@ -1,5 +1,5 @@
 // Chakra imports
-import { Flex, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Img, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -20,9 +20,10 @@ const DashboardProfileCard = ({ icon, title, description, amount }) => {
     <Card p='16px' display='flex' align='center' justify='center'>
       <CardBody>
         <Flex direction='column' align='center' w='100%' py='14px'>
-          <IconBox as='box' h={"60px"} w={"60px"} bg={iconteal}>
+          {/* <IconBox as='box' h={"60px"} w={"60px"} bg={iconteal}>
             {icon}
-          </IconBox>
+          </IconBox> */}
+          <Img borderRadius={'50%'} src={'https://res.cloudinary.com/dru7kzv3i/image/upload/v1683963472/asif_zxkrt8.jpg'}></Img>
           <Flex
             direction='column'
             m='14px'
@@ -42,9 +43,9 @@ const DashboardProfileCard = ({ icon, title, description, amount }) => {
             </Text>
             <Separator />
           </Flex>
-          <Text fontSize='lg' color={textColor} fontWeight='bold'>
+          {/* <Text fontSize='lg' color={textColor} fontWeight='bold'>
             {`%${amount}`}
-          </Text>
+          </Text> */}
         </Flex>
         
        

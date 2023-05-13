@@ -87,25 +87,25 @@ h4{
   position:absolute;
   top:0;
   box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.03);
-  &:before{
-    border-radius: 50%;
-    background-color:rgba(255,255,255,.5);
-    width:75%;
-    height:75%;
-    translate: 16.5% 16.5%;
-    position:absolute;
-    content: '';
-    box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.05);
-  }
-  &:after{
-    border-radius: 50%;
-    background-color:#EBE7E2;
-    width:40%;
-    height:40%;
-    translate: 75% 75%;
-    position:absolute;
-    content: '';
-  }
+  // &:before{
+  //   border-radius: 50%;
+  //   background-color:rgba(255,255,255,.5);
+  //   width:75%;
+  //   height:75%;
+  //   translate: 16.5% 16.5%;
+  //   position:absolute;
+  //   content: '';
+  //   box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.05);
+  // }
+  // &:after{
+  //   border-radius: 50%;
+  //   background-color:#EBE7E2;
+  //   width:40%;
+  //   height:40%;
+  //   translate: 75% 75%;
+  //   position:absolute;
+  //   content: '';
+  // }
   .dial_pointer{
     position:absolute;
     z-index:10;

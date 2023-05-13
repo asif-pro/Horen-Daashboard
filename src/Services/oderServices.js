@@ -1,10 +1,15 @@
 import axios from "axios";
 
+// const url = 'https://6885-113-11-37-34.ngrok-free.app/';
+// const url = 'https://3c49-113-11-37-34.ngrok-free.app/';
 const url = 'http://localhost:4000/';
+
 
 export async function getOrder() {
   return await fetch(url+'order').then((response) => response.json());
- 
+//  const orders = axios.get(url+'order')
+//  console.log(orders)
+//  return orders
 }
 
 export async function updateDeliveryStatus(id,changedOrder) {

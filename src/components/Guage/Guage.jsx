@@ -93,18 +93,13 @@ const Guage = () => {
     const [percentage, setPercentage] = React.useState(66)
     return (
       <>
-        <div>
+        {/* <div>
           <label>Set Submitted Amt </label>
             <input value={percentage} onChange={e => setPercentage(e.target.value)} type='number' min='0' max='100'/>
-        </div>
+        </div> */}
         <Widget title='Application Completion'>  
           <Graph percentage={percentage} options={['Completed', 'Pending']}/>
         </Widget>
-        <footer>
-          <small>
-            Built for fun by <a href='https://codepen.io/gschadegg'>gschadegg</a>, designed by <a href='https://dribbble.com/shots/19531333-Dashboard-Social-Media-Analytics' target='_blank'>Mehmet Özsoy</a>.
-          </small>
-        </footer>
       </>
     );
   }; 

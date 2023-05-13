@@ -15,28 +15,35 @@ const Orders = () => {
     const orderToChange = orders.filter((order)=>{
       return order._id === id;
     })[0]
-    console.log(orderToChange)
+    
     if(orderToChange.deliveryStatus ==='pending') 
     {
       orderToChange.deliveryStatus = 'requested-for-delivery';
-      await updateDeliveryStatus(id,orderToChange);
-      setOrders((prevOrders)=>{
-        const allOrders = prevOrders.filter((order)=>{
-          order._id!==id;
+      await updateDeliveryStatus(id,orderToChange)
+        .then(()=>{
+          const allOrders = orders.filter((order)=>{
+            return order._id!==id;
+          });
+    
+          setOrders([...allOrders,orderToChange].sort((a,b)=>new Date(b.timeStamp)-new Date(a.timeStamp)))
         });
-        return [...allOrders,orderToChange];
-      });
+  
     
     }
+    console.log(orders)
    
   }
 
   React.useEffect(()=>{
     getOrder().then((res)=>{
       // console.log(res);
-      setOrders(res)
+      return res.sort((a,b)=>new Date(b.timeStamp)-new Date(a.timeStamp))
+      
+    }).then((res)=>{
+      setOrders(res);
     })
   },[])
+  console.log(orders)
   return (
     <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
       <OrdersTable

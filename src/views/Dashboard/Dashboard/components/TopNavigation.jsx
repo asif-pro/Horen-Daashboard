@@ -33,7 +33,7 @@ const TopNavigation = () => {
         <Orders></Orders>
       </TabPanel>
       <TabPanel>
-        <p>Four!</p>
+        <p>Devices User</p>
       </TabPanel>
       <TabPanel>
         <AdminDevices></AdminDevices>

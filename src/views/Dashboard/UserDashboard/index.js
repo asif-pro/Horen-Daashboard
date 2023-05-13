@@ -83,8 +83,8 @@ import GlobalHorn from "./components/GlobalHorn copy";
                 <GridItem  h='10'  colSpan={2}>
                     <DashboardProfileCard
                         icon={<Icon h={"24px"} w={"24px"} color='white' as={FaPaypal} />}
-                        title={"Mr. John"}
-                        description={"SELISE Digital Platfroms"}
+                        title={"Mr. Eshtiaque Khan"}
+                        description={"Project Code"}
                         amount={4550}
                     />
                     {/* <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={3}>
