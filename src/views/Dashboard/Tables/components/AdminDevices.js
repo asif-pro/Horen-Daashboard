@@ -13,7 +13,7 @@ import {
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
-import TablesProjectRow from "components/Tables/TablesProjectRow";
+import AdminDevicesTableRow from "components/Tables/AdminDevicesTableRow";
 import React from "react";
 
 const AdminDevices = ({ title, captions, data }) => {
@@ -43,7 +43,7 @@ const AdminDevices = ({ title, captions, data }) => {
           <Tbody>
             {data.map((row) => {
               return (
-                <TablesProjectRow
+                <AdminDevicesTableRow                  
                   key={row.name}
                   name={row.name}
                   logo={row.logo}

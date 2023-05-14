@@ -2,6 +2,7 @@ import { Box, Button, Flex, FormControl, FormLabel, Grid, Icon, Input, InputGrou
 import React from 'react'
 import { tablesTableData, dashboardTableData } from "variables/general";
 import AllEmployeeTable from 'views/Dashboard/Tables/components/AllEmployeeTable'
+import './AllEmployee.css'
 import {
     Modal,
     ModalOverlay,
@@ -14,10 +15,18 @@ import {
 import { FaPlus } from 'react-icons/fa';
 
 const AllEmployee = () => {
+    const [image, setImage] = React.useState('')
     const { isOpen, onOpen, onClose } = useDisclosure()
 
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+
+  function handelImage(e){
+    console.log(e.target.files)
+    setImage(e.target.files[0])
+  }
+
+
   return (
     // <Box maxWidth={'50vw'} background={'rgba(227, 213, 199)'}>
     //     <Stack spacing={6}>
@@ -77,6 +86,10 @@ const AllEmployee = () => {
           <FormControl mt={4}>
             <FormLabel>Car Number</FormLabel>
             <Input ref={initialRef} placeholder='Car Number' />
+          </FormControl>
+          <FormControl mt={4}>
+            <FormLabel>Upload Image</FormLabel>
+            <Input ref={initialRef} type='file' name='emp_image' onChange={handelImage} />
           </FormControl>
         </ModalBody>
 

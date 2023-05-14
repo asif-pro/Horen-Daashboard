@@ -90,7 +90,7 @@ function DashboardTableRow(props) {
       <Td>
         <Flex direction="column">
         <Text fontSize="md" color={textColor} pb=".5rem">
-          {shippingAddress}
+          {`${shippingAddress.fullAddress == undefined  ? "" : shippingAddress.fullAddress},${shippingAddress.area?.area_name},${shippingAddress.city?.city}`}
         </Text>
         </Flex>
       </Td>
