@@ -53,20 +53,20 @@ const DashboardProfileCard = ({ icon, title, description, amount }) => {
       <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={3}>
                         <ChartStatistics
                         title={"Registered"}
-                        amount={"320"}
-                        percentage={40}
+                        amount={"64"}
+                        // percentage={40}
                         icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
                         />
                         <ChartStatistics
                         title={"Active"}
-                        amount={"320"}
-                        percentage={40}
+                        amount={"32"}
+                        // percentage={40}
                         icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
                         />
                         <ChartStatistics
                         title={"Trips"}
-                        amount={"320"}
-                        percentage={40}
+                        amount={"745"}
+                        // percentage={40}
                         icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
                         />
                     </SimpleGrid>

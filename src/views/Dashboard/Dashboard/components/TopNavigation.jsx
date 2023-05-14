@@ -4,6 +4,10 @@ import UserDashboard from 'views/Dashboard/UserDashboard'
 import SuperAdmin from 'views/SuperAdmin/Dashboard'
 import Orders from 'views/SuperAdmin/Orders/Orders'
 import AdminDevices from 'views/SuperAdmin/Devices/AdminDevices'
+import LeaderBoard from 'components/LeaderBoard/LeaderBoard'
+import CompanyDevices from 'views/Company/Devices/Devices'
+import UserDevices from 'views/Dashboard/UserDashboard/Devices'
+import AllEmployee from 'views/Company/Employee/AllEmployee'
 
 const TopNavigation = () => {
   return (
@@ -13,8 +17,10 @@ const TopNavigation = () => {
       <Tab>Leaderboard</Tab>
       <Tab>Orders</Tab>
       <Tab>Devices(user)</Tab>
+      <Tab>Devices(Company)</Tab>
       <Tab>Devices(Admin)</Tab>
       <Tab>Dashboard(Admin)</Tab>
+      <Tab>Employee</Tab>
     </TabList>
     <TabIndicator
       height="5px"
@@ -27,19 +33,25 @@ const TopNavigation = () => {
         <UserDashboard/>
       </TabPanel>
       <TabPanel>
-        <p>Leaderboard</p>
+        <LeaderBoard></LeaderBoard>
       </TabPanel>
       <TabPanel>
         <Orders></Orders>
       </TabPanel>
       <TabPanel>
-        <p>Devices User</p>
+        <UserDevices></UserDevices>
+      </TabPanel>
+      <TabPanel>
+        <CompanyDevices/>
       </TabPanel>
       <TabPanel>
         <AdminDevices></AdminDevices>
       </TabPanel>
       <TabPanel>
         <SuperAdmin/>
+      </TabPanel>
+      <TabPanel>
+        <AllEmployee/>
       </TabPanel>
     </TabPanels>
   </Tabs>

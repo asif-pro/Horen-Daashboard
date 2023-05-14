@@ -9,23 +9,23 @@ const ChartStatistics = ({ title, amount, icon, percentage }) => {
   const overlayRef = React.useRef();
   return (
     <Flex direction='column'>
-      <Flex alignItems='center'>
-        <IconBox as='box' h={"30px"} w={"30px"} bg={iconteal} me='6px'>
-          {icon}
-        </IconBox>
+      <Flex alignItems='center' justifyContent={'center'}>
+       
         <Text fontSize='sm' color='gray.400' fontWeight='semibold'>
           {title}
         </Text>
       </Flex>
+      <Flex alignItems='center' justifyContent={'center'}>
       <Text fontSize='lg' color={textColor} fontWeight='bold' mb='6px' my='6px'>
         {amount}
       </Text>
-      <Progress
+      </Flex>
+      {/* <Progress
         colorScheme='teal'
         borderRadius='12px'
         h='5px'
         value={percentage}
-      />
+      /> */}
     </Flex>
   );
 };
