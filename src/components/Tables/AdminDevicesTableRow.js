@@ -28,7 +28,7 @@ import { FaEllipsisV } from "react-icons/fa";
 import QRCode from "qrcode.react";
 
 function DashboardTableRow(props) {
-  const { logo, name, status, budget, progression } = props;
+  const { deviceID, ru_id, qr_code, device_config} = props;
   const textColor = useColorModeValue("gray.700", "white");
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -47,28 +47,26 @@ function DashboardTableRow(props) {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   };
-
-
   return (
     <>
       <Tr>
       <Td minWidth={{ sm: "250px" }} pl="0px">
         <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Icon as={logo} h={"24px"} w={"24px"} me="18px" />
+          {/* <Icon as={logo} h={"24px"} w={"24px"} me="18px" /> */}
           <Text
             fontSize="md"
             color={textColor}
             fontWeight="bold"
             minWidth="100%"
           >
-            {name}
+            {deviceID}
           </Text>
         </Flex>
       </Td>
       <Td onClick={onOpen}>
       <QRCode
         id="123456"
-        value="123456"
+        value={qr_code}
         size={55}
         level={"H"}
         includeMargin={true}
@@ -77,10 +75,28 @@ function DashboardTableRow(props) {
       </Td>
       <Td>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {status}
+          {/* {status} */}
+          userID
         </Text>
       </Td>
       <Td>
+        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+          {/* {status} */}
+          {ru_id}
+        </Text>
+      </Td>
+      <Td>
+        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+          {/* {status} */}
+          {device_config}
+        </Text>
+      </Td>
+      <Td>
+        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+          yes/NO
+        </Text>
+      </Td>
+      {/* <Td>
         <Flex direction="column">
           <Text
             fontSize="md"
@@ -95,12 +111,12 @@ function DashboardTableRow(props) {
             borderRadius="15px"
           />
         </Flex>
-      </Td>
-      <Td>
+      </Td> */}
+      {/* <Td>
         <Button p="0px" bg="transparent">
           <Icon as={FaEllipsisV} color="gray.400" cursor="pointer" />
         </Button>
-      </Td>
+      </Td> */}
     </Tr>
     {/* //QR Code Modal */}
     <Modal
@@ -120,7 +136,7 @@ function DashboardTableRow(props) {
             <Box>
             <QRCode
             id='23456234'
-            value='https://react-icons.github.io/react-icons/search?q=check'
+            value={qr_code}
             size={'150'}
             level='H'
             includeMargin={true} 

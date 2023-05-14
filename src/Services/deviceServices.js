@@ -1,7 +1,8 @@
 const url = 'http://localhost:4000/';
 
 export async function getAllDevices() {
-    return await fetch(url+'device').then((response) => response);
+
+    return fetch(url+'device').then((response) => response.json());
 }
 
 export async function postDevice(device) {

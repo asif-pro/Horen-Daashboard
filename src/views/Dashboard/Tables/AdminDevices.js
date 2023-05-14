@@ -38,7 +38,7 @@ function AdminDevices() {
     setRU_id(value)
   }
   const handleConfigChange = (e) => {
-    // console.log(e.target.name.value)
+    console.log(e.target.name.value)
     const { value } = e.target;
     setDeviceConfig(value)
   }
@@ -55,7 +55,10 @@ function AdminDevices() {
   }
 
   React.useEffect(()=>{
-   getAllDevices().then((res)=>console.log(res));
+    getAllDevices().then((res) => {
+      setAllDevices(res);
+    })
+    
   },[])
 
 
@@ -67,11 +70,11 @@ function AdminDevices() {
         <Icon as={FaPlus} color="gray.400" cursor="pointer" fontSize={'18'} /> Add Device
         </Button>
       </Box>
-      <AdminDevicesTable
+      {allDevices && <AdminDevicesTable
         title={"All Devices"}
         captions={["Device ID", "QR Code", "User ID", "RU ID", "Device Config.", "Block Device"]}
-        data={dashboardTableData}
-      />
+        data={allDevices}
+      />}
 
 
       <Modal

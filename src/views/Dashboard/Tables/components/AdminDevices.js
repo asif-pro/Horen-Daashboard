@@ -18,6 +18,7 @@ import React from "react";
 
 const AdminDevices = ({ title, captions, data }) => {
   const textColor = useColorModeValue("gray.700", "white");
+
   return (
     <Card my='22px' overflowX={{ sm: "scroll", xl: "hidden" }}>
       <CardHeader p='6px 0px 22px 0px'>
@@ -44,12 +45,11 @@ const AdminDevices = ({ title, captions, data }) => {
             {data.map((row) => {
               return (
                 <AdminDevicesTableRow                  
-                  key={row.name}
-                  name={row.name}
-                  logo={row.logo}
-                  status={row.status}
-                  budget={row.budget}
-                  progression={row.progression}
+                  key={row._id}
+                  deviceID={row._id}
+                  ru_id={row.RU_id}
+                  qr_code={row.qr_code}
+                  device_config={row.device_configure}
                 />
               );
             })}
