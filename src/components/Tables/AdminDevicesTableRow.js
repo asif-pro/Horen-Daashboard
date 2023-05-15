@@ -32,7 +32,6 @@ function DashboardTableRow(props) {
   const textColor = useColorModeValue("gray.700", "white");
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  // const { isOpenQR, onOpenQR, onCloseQR } = useDisclosure()
 
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
@@ -74,9 +73,9 @@ function DashboardTableRow(props) {
 
       </Td>
       <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+        <Text fontSize="md" color={textColor} pb=".5rem">
           {/* {status} */}
-          userID
+          Not Assigned yet
         </Text>
       </Td>
       <Td>
@@ -86,7 +85,7 @@ function DashboardTableRow(props) {
         </Text>
       </Td>
       <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+        <Text fontSize="md" color={textColor} pb=".5rem">
           {/* {status} */}
           {device_config}
         </Text>

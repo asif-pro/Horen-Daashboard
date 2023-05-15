@@ -49,7 +49,18 @@ function AdminDevices() {
     device.RU_id = rU_id;
     device.device_configure = deviceConfig;
     device.qr_code = qRCodeURL;
-    postDevice(device);
+    postDevice(device).then((response)=>{
+      getAllDevices().then((res) => {
+        setAllDevices(res);
+      })
+    })
+    // .then((res)=>{
+    //   const devices = allDevices.filter((eachDevice)=>{
+    //     return eachDevice.RU_id !== device.RU_id;
+    //   });
+    //   setAllDevices([...devices,device])
+    //   return res;
+    // })
     initialRef.current.value=""
     finalRef.current.value=""
   }
