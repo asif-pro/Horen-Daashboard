@@ -1,4 +1,4 @@
-const url = 'http://localhost:4000/';
+const url = 'http://localhost:4001/';
 
 export async function getAccessToken() {
     return await fetch(url+'delivery/accessToken').then((response) => response.json());

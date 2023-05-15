@@ -83,7 +83,7 @@ function AdminDevices() {
       </Box>
       {allDevices && <AdminDevicesTable
         title={"All Devices"}
-        captions={["Device ID", "QR Code", "User ID", "RU ID", "Device Config.", "Block Device"]}
+        captions={["Device ID", "QR Code", "User ID", "RU ID", "Device Config.", "Block Device", ""]}
         data={allDevices}
       />}
 

@@ -13,17 +13,47 @@ import {
     ModalCloseButton,
   } from '@chakra-ui/react'
 import { FaPlus } from 'react-icons/fa';
+import axios from 'axios';
 
 const AllEmployee = () => {
-    const [image, setImage] = React.useState('')
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const apiUrl = "https://api.cloudinary.com/v1_1/dftfcxnxd";
+    const [image, setImage] = React.useState('');
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
 
   function handelImage(e){
-    console.log(e.target.files)
+    // console.log(e.target.files)
     setImage(e.target.files[0])
+    // const formData = new FormData();
+    // formData.append("file", file);
+    // formData.append("upload_preset", "petScan");
+    // formData.append("cloud_name", "dru7kzv3i");
+    //   const res = await axios.post(`${apiUrl}/image/upload`, formData);
+    //   setImage(res.data.url);
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(image);
+  
+    try {
+      const formData = new FormData();
+      // const fileReader = new FileReader();
+      // fileReader.readAsDataURL(image);
+      // console.log(fileReader.result);
+      formData.append("file", image);
+      formData.append("upload_preset", "horen123");
+      formData.append("cloud_name", "dftfcxnxd");
+
+      // console.log(formData.get("file"))
+      const res = await axios.post(`${apiUrl}/image/upload`, formData);
+      console.log(res.data.url)
+      // setImage(res.data.url);
+    }
+    catch(err) {
+      console.log(err)
+    }
   }
 
 
@@ -94,7 +124,7 @@ const AllEmployee = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme='blue' mr={3}>
+          <Button colorScheme='blue' mr={3} onClick={handleSubmit}>
             Save
           </Button>
           <Button onClick={onClose}>Cancel</Button>

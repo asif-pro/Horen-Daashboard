@@ -24,7 +24,7 @@ import {
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { FaEllipsisV } from "react-icons/fa";
+import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import QRCode from "qrcode.react";
 
 function DashboardTableRow(props) {
@@ -94,6 +94,11 @@ function DashboardTableRow(props) {
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
           yes/NO
         </Text>
+      </Td>
+      <Td>
+        <Button p="0px" bg="transparent">
+          <Icon as={FaTrash} color="gray.400" cursor="pointer" />
+        </Button>
       </Td>
       {/* <Td>
         <Flex direction="column">
