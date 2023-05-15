@@ -41,14 +41,12 @@ const AllEmployeeTable = ({ title, captions, data }) => {
             {data.map((row) => {
               return (
                 <AllEmployeeTableRow
-                  key={`${row.email}-${row.name}`}
+                  key={row._id}
                   name={row.name}
-                  logo={row.logo}
-                  email={row.email}
-                  subdomain={row.subdomain}
-                  domain={row.domain}
-                  status={row.status}
-                  date={row.date}
+                  department={row.department}
+                  phone={row.phone}
+                  vehicle={row.vehicle_no}
+                  image={row.image}
                 />
               );
             })}

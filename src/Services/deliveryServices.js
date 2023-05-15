@@ -1,17 +1,13 @@
-const url = 'http://localhost:4001/';
+const url = process.env.REACT_APP_SALES_URL;
 
 export async function getAccessToken() {
     return await fetch(url+'delivery/accessToken').then((response) => response.json());
-  //  const access_token = axios.get(url+'delivery/accessToken')
-  //  console.log(access_token)
-  //  return access_token
   }
 
 export async function createOrder(order) {
 
     const pathaoTokenObject = await getAccessToken();
     const pathaoToken = pathaoTokenObject.pathaoToken.access_token;
-//zone, area, address, city
     const orderDetails = {
         store_id: 97219,
         merchant_order_id: order._id,
@@ -19,10 +15,10 @@ export async function createOrder(order) {
         sender_phone: "",
         recipient_name: "Asif",
         recipient_phone: order.phonenumber,
-        recipient_address: order.shippingAddress,
-        recipient_city: order.shippingAddress.split(',').reverse()[0],
-        recipient_zone: order.shippingAddress.split(',')[0],
-        recipient_area: order.shippingAddress.split(',')[1],
+        recipient_address: order.shippingAddress.fullAddress,
+        recipient_city: order.shippingAddress.city.id,
+        recipient_zone: order.shippingAddress.zone.zone_id,
+        recipient_area: order.shippingAddress.area.area_id,
         delivery_type: "48",
         item_type: "2",
         special_instruction: "",
@@ -31,7 +27,6 @@ export async function createOrder(order) {
         amount_to_collect: 0,
         item_description: "",
       };
-    console.log(orderDetails);
     return await fetch(url+'delivery/order', {
             method: 'POST',
             headers: {
@@ -42,6 +37,5 @@ export async function createOrder(order) {
         
           }).then((response) => {
             console.log(response);
-            // response.json()
           });
 }

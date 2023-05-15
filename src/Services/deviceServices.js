@@ -1,4 +1,5 @@
-const url = 'http://localhost:4000/';
+
+const url = process.env.REACT_APP_DEVICES_URL;
 
 export async function getAllDevices() {
 

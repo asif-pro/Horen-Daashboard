@@ -30,9 +30,7 @@ import QRCode from "qrcode.react";
 function DashboardTableRow(props) {
   const { deviceID, ru_id, qr_code, device_config} = props;
   const textColor = useColorModeValue("gray.700", "white");
-
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
 

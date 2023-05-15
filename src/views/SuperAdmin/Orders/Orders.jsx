@@ -39,18 +39,18 @@ const Orders = () => {
   }
 
   React.useEffect(()=>{
+
+
     getOrder().then((res)=>{
-      // console.log(res);
       return res.sort((a,b)=>new Date(b.timeStamp)-new Date(a.timeStamp))
-      
     }).then((res)=>{
       setOrders(res);
     })
 
     
   },[])
-  console.log(orders)
-  // console.log()
+
+
   return (
     <Flex direction='column' pt={{ base: "120px", md: "75px" }} >
       <OrdersTable
