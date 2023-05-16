@@ -19,6 +19,7 @@ import {
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
+import QRCode from "qrcode.react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 // import Employee from "views/Company/Employee/Employee";
 
@@ -48,13 +49,17 @@ function UserDevicesTableRow(props) {
         </Flex>
       </Td>
       <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {budget}
-        </Text>
+      <QRCode
+        id="123456"
+        value={439573}
+        size={55}
+        level={"H"}
+        includeMargin={true}
+      />
       </Td>
       <Td>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {status}
+          Pesudo Name
         </Text>
       </Td>
       

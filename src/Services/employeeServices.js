@@ -1,5 +1,6 @@
 
-const url = process.env.REACT_APP_EMPLOYEE_URL;
+// const url = process.env.REACT_APP_EMPLOYEE_URL;
+const url = process.env.REACT_APP_EMPLOYEES_URL;
 
 export async function getAllEmployees() {
     return fetch(url+'employee').then((response) => response.json());

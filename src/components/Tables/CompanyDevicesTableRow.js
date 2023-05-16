@@ -19,7 +19,9 @@ import {
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
+import QRCode from "qrcode.react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { BsFillPersonPlusFill } from "react-icons/bs";
 import SelectEmployee from "views/Company/Employee/SelectEmployee";
 
 function CompanyDevicesTableRow(props) {
@@ -48,19 +50,23 @@ function CompanyDevicesTableRow(props) {
         </Flex>
       </Td>
       <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {budget}
-        </Text>
+      <QRCode
+        id="123456"
+        value={456747}
+        size={55}
+        level={"H"}
+        includeMargin={true}
+      />
       </Td>
       <Td>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {status}
+          Employee Name
         </Text>
       </Td>
       
       <Td>
         <Button p="0px" bg="transparent" onClick={onOpen}>
-          <Icon as={FaPencilAlt} color="gray.400" cursor="pointer" />
+          <Icon as={BsFillPersonPlusFill} color="gray.400" cursor="pointer" />
         </Button>
       
         <Button p="0px" bg="transparent">
