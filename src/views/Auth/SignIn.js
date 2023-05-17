@@ -1,4 +1,6 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+
 // Chakra imports
 import {
   Box,
@@ -17,9 +19,30 @@ import {
 import signInImage from "assets/img/signInImage.png";
 
 function SignIn() {
+const history = useHistory()
+  const initialRef = React.useRef(null)
+  const finalRef = React.useRef(null)
   // Chakra color mode
-  const titleColor = useColorModeValue("teal.300", "teal.200");
-  const textColor = useColorModeValue("gray.400", "white");
+  const titleColor = useColorModeValue("gray.700", "yellow.200");
+  const textColor = useColorModeValue("gray.500", "white");
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handlePassword = (e) => {
+    setPassword(e.target.value)
+  }
+  const login = async () => {
+    // console.log(email)
+    // console.log(password)
+    history.push('/billing')
+    initialRef.current.value=""
+    finalRef.current.value=""
+  }
+
+
   return (
     <Flex position='relative' mb='40px'>
       <Flex
@@ -63,6 +86,8 @@ function SignIn() {
                 type='text'
                 placeholder='Your email adress'
                 size='lg'
+                onChange={handleEmail}
+                ref={initialRef}
               />
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                 Password
@@ -74,9 +99,11 @@ function SignIn() {
                 type='password'
                 placeholder='Your password'
                 size='lg'
+                onChange={handlePassword}
+                ref={finalRef}
               />
               <FormControl display='flex' alignItems='center'>
-                <Switch id='remember-login' colorScheme='teal' me='10px' />
+                <Switch id='remember-login' colorScheme='yellow' me='10px' />
                 <FormLabel
                   htmlFor='remember-login'
                   mb='0'
@@ -85,20 +112,21 @@ function SignIn() {
                   Remember me
                 </FormLabel>
               </FormControl>
-              <Button
-                fontSize='10px'
+              <Button 
+                onClick={login}
+                fontSize='15px'
                 type='submit'
-                bg='teal.300'
+                bg='yellow.400'
                 w='100%'
                 h='45'
                 mb='20px'
                 color='white'
                 mt='20px'
                 _hover={{
-                  bg: "teal.200",
+                  bg: "yellow.500",
                 }}
                 _active={{
-                  bg: "teal.400",
+                  bg: "yellow.500",
                 }}>
                 SIGN IN
               </Button>

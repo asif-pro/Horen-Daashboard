@@ -8,6 +8,7 @@ import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
 import UserDashboard from "views/Dashboard/UserDashboard"
 import SuperAdmin from "views/SuperAdmin/Dashboard";
+import Groups from "views/Dashboard/UserDashboard/Groups";
 
 import {
   HomeIcon,
@@ -27,6 +28,14 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: TopNavigation,
+    layout: "/admin",
+  },
+  {
+    path: "/user/groups",
+    name: "Groups",
+    rtlName: "لوحة القيادة",
+    icon: <HomeIcon color="inherit" />,
+    component: Groups,
     layout: "/admin",
   },
   // {

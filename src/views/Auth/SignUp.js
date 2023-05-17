@@ -17,12 +17,57 @@ import {
 import BgSignUp from "assets/img/BgSignUp.png";
 import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import { register } from "Services/userServices";
+import axios from "axios";
 
 function SignUp() {
-  const titleColor = useColorModeValue("teal.300", "teal.200");
+  const apiUrl = "https://api.cloudinary.com/v1_1/dftfcxnxd";
+  const titleColor = useColorModeValue("yellow.500", "yellow.200");
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
-  const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
+  const bgIcons = useColorModeValue("yellow.400", "rgba(255, 255, 255, 0.5)");
+
+  const [name, setName] = React.useState('')
+  const [email, setEmail] = React.useState('')
+  const [phone, setPhone] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const [profilePic, setProfilePic] = React.useState('')
+
+  const handleName = (e) => {
+    setName(e.target.value)
+  }
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handlePhone = (e) => {
+    setPhone(e.target.value)
+  }
+  const handlePassword = (e) => {
+    setPassword(e.target.value)
+  }
+  const handleImage = (e) => {
+    setProfilePic(e.target.files[0])
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try{
+      const formData = new FormData();
+      formData.append("file", profilePic);
+      formData.append("upload_preset", "horen123");
+      formData.append("cloud_name", "dftfcxnxd");
+      const res = await axios.post(`${apiUrl}/image/upload`, formData);   
+    await register({
+    name,
+    email,
+    phone,
+    password,
+    profilePic
+    })
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
   return (
     <Flex
       direction='column'
@@ -44,7 +89,7 @@ function SignUp() {
         bgSize='cover'
         mx={{ md: "auto" }}
         mt={{ md: "14px" }}></Box>
-      <Flex
+      {/* <Flex
         direction='column'
         textAlign='center'
         justifyContent='center'
@@ -61,10 +106,9 @@ function SignUp() {
           mt='10px'
           mb='26px'
           w={{ base: "90%", sm: "60%", lg: "40%", xl: "30%" }}>
-          Use these awesome forms to login or create new account in your project
-          for free.
+            Please Sign your self up to join Horenmaare
         </Text>
-      </Flex>
+      </Flex> */}
       <Flex alignItems='center' justifyContent='center' mb='60px' mt='20px'>
         <Flex
           direction='column'
@@ -144,7 +188,7 @@ function SignUp() {
           </HStack>
           <Text
             fontSize='lg'
-            color='gray.400'
+            color='gray.700'
             fontWeight='bold'
             textAlign='center'
             mb='22px'>
@@ -162,6 +206,7 @@ function SignUp() {
               placeholder='Your full name'
               mb='24px'
               size='lg'
+              onChange={handleName}
             />
             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
               Email
@@ -174,8 +219,22 @@ function SignUp() {
               placeholder='Your email address'
               mb='24px'
               size='lg'
+              onChange={handleEmail}
             />
             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+              Phone
+            </FormLabel>
+            <Input
+              fontSize='sm'
+              ms='4px'
+              borderRadius='15px'
+              type='email'
+              placeholder='Your Phone Number'
+              mb='24px'
+              size='lg'
+              onChange={handlePhone}
+            />
+             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
               Password
             </FormLabel>
             <Input
@@ -186,27 +245,31 @@ function SignUp() {
               placeholder='Your password'
               mb='24px'
               size='lg'
+              onChange={handlePassword}
             />
+            <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>Upload Image</FormLabel>
+            <Input type='file' name='emp_image' onChange={handleImage} />
             <FormControl display='flex' alignItems='center' mb='24px'>
-              <Switch id='remember-login' colorScheme='teal' me='10px' />
+              <Switch id='remember-login' colorScheme='yellow' me='10px' />
               <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
                 Remember me
               </FormLabel>
             </FormControl>
-            <Button
+            <Button 
+              onClick={handleSubmit}
               type='submit'
-              bg='teal.300'
-              fontSize='10px'
-              color='white'
+              bg='yellow.400'
+              fontSize='15px'
+              color='gray.700'
               fontWeight='bold'
               w='100%'
               h='45'
               mb='24px'
               _hover={{
-                bg: "teal.200",
+                bg: "yellow.500",
               }}
               _active={{
-                bg: "teal.400",
+                bg: "yellow.500",
               }}>
               SIGN UP
             </Button>
