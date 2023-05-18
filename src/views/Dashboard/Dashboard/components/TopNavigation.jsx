@@ -8,19 +8,28 @@ import LeaderBoard from 'components/LeaderBoard/LeaderBoard'
 import CompanyDevices from 'views/Company/Devices/Devices'
 import UserDevices from 'views/Dashboard/UserDashboard/Devices'
 import AllEmployee from 'views/Company/Employee/AllEmployee'
+import Groups from 'views/Dashboard/UserDashboard/components/Groups'
 
 const TopNavigation = () => {
+  const [userType, setUserType] = React.useState('')
+
+  React.useEffect(()=>{
+    setUserType(localStorage.getItem('userType'))
+  }, [])
+
+
   return (
     <Tabs position="relative" variant="unstyled">
     <TabList>
-      <Tab>Dashboard</Tab>
+      {userType==='individual' && <Tab>Dashboard</Tab>}
+      {userType==='super_admin' && <Tab>Dashboard</Tab>}
       <Tab>Leaderboard</Tab>
-      <Tab>Orders</Tab>
-      <Tab>Devices(user)</Tab>
-      <Tab>Devices(Company)</Tab>
-      <Tab>Devices(Admin)</Tab>
-      <Tab>Dashboard(Admin)</Tab>
-      <Tab>Employee</Tab>
+      {userType==='super_admin' && <Tab>Orders</Tab>}
+      {userType==='individual' && <Tab>Devices</Tab>}
+      {/* {userType==='individual' && <Tab>Devices(Company)</Tab>} */}
+      {userType==='super_admin' && <Tab>Devices</Tab>}
+      {userType==='individual' && <Tab>Groups</Tab>}
+      {userType==='individual' && <Tab>Employee</Tab>}
     </TabList>
     <TabIndicator
       height="5px"
@@ -28,31 +37,33 @@ const TopNavigation = () => {
       borderRadius="1px"
     />
     <TabPanels>
-      <TabPanel>
-        {/* <Billing/> */}
+      {userType==='individual' && <TabPanel>
         <UserDashboard/>
-      </TabPanel>
+      </TabPanel>}
+      {userType==='super_admin' && <TabPanel>
+        <SuperAdmin/>
+      </TabPanel>}
       <TabPanel>
         <LeaderBoard></LeaderBoard>
       </TabPanel>
-      <TabPanel>
+      {userType==='super_admin' && <TabPanel>
         <Orders></Orders>
-      </TabPanel>
-      <TabPanel>
+      </TabPanel>}
+      {userType==='individual' && <TabPanel>
         <UserDevices></UserDevices>
-      </TabPanel>
-      <TabPanel>
+      </TabPanel>}
+      {/* {userType==='individual' && <TabPanel>
         <CompanyDevices/>
-      </TabPanel>
-      <TabPanel>
+      </TabPanel>} */}
+      {userType==='super_admin' && <TabPanel>
         <AdminDevices></AdminDevices>
-      </TabPanel>
-      <TabPanel>
-        <SuperAdmin/>
-      </TabPanel>
-      <TabPanel>
+      </TabPanel>}
+      {userType==='individual' && <TabPanel>
+        <Groups></Groups>
+      </TabPanel>}
+      {userType==='individual' && <TabPanel>
         <AllEmployee/>
-      </TabPanel>
+      </TabPanel>}
     </TabPanels>
   </Tabs>
   )

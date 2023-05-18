@@ -30,14 +30,14 @@ var dashRoutes = [
     component: TopNavigation,
     layout: "/admin",
   },
-  {
-    path: "/user/groups",
-    name: "Groups",
-    rtlName: "لوحة القيادة",
-    icon: <HomeIcon color="inherit" />,
-    component: Groups,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/user/groups",
+  //   name: "Groups",
+  //   rtlName: "لوحة القيادة",
+  //   icon: <HomeIcon color="inherit" />,
+  //   component: Groups,
+  //   layout: "/admin",
+  // },
   // {
   //   path: "/user/leaderboard",
   //   name: "Leaderboard",

@@ -1,6 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-
+import Cookies from 'js-cookie';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
+import { register, profile, gauthRegister } from "Services/userServices";
 // Chakra imports
 import {
   Box,
@@ -14,12 +17,16 @@ import {
   Switch,
   Text,
   useColorModeValue,
+  Stack,
+  AlertIcon,
+  Alert,
 } from "@chakra-ui/react";
 // Assets
 import signInImage from "assets/img/signInImage.png";
+import { signin } from "Services/userServices";
 
 function SignIn() {
-const history = useHistory()
+  const history = useHistory()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   // Chakra color mode
@@ -27,6 +34,7 @@ const history = useHistory()
   const textColor = useColorModeValue("gray.500", "white");
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [errorMsg, setErrorMsg] = React.useState(false)
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -34,12 +42,25 @@ const history = useHistory()
   const handlePassword = (e) => {
     setPassword(e.target.value)
   }
-  const login = async () => {
-    // console.log(email)
-    // console.log(password)
-    history.push('/billing')
-    initialRef.current.value=""
-    finalRef.current.value=""
+  const goSignUp = ()=> {
+    history.push('/auth/signup')
+  }
+  const login = async (e) => {
+    e.preventDefault()
+    const result = await signin(email, password)
+    if(result && (email.trim()!="" || password.trim()!="")){
+      localStorage.setItem('accessToken', result.accessToken)
+      localStorage.setItem('userType', result.type)
+      localStorage.setItem('userId', result.id)
+      setErrorMsg(false)
+      initialRef.current.value=""
+      finalRef.current.value=""
+      history.push('/admin/user/dashboard')
+    }
+    else{
+      setErrorMsg(true)
+    }
+    
   }
 
 
@@ -75,6 +96,12 @@ const history = useHistory()
               fontSize='14px'>
               Enter your email and password to sign in
             </Text>
+            { errorMsg && <Stack spacing={3}>
+              <Alert status='error'>
+                <AlertIcon/>
+                wrong user credentials
+              </Alert>
+            </Stack>}
             <FormControl>
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
                 Email
@@ -130,6 +157,76 @@ const history = useHistory()
                 }}>
                 SIGN IN
               </Button>
+      
+              <div>
+        <GoogleOAuthProvider clientId="195127431392-am7f136teict4g6hn03qi09qpnre74at.apps.googleusercontent.com">
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              //   console.log(credentialResponse);
+              const token = credentialResponse.credential;
+              const decode = jwt_decode(token);
+              // console.log ('checking goath',decode)
+              if (decode.email_verified) {
+                try{
+                  // check here if the user already exists, usign the mail
+                  // setEmail(decode.email);
+                  // setName(decode.name);
+                  // setProfilePic(decode.picture);
+
+                  
+                  gauthRegister({
+                      name:decode.name,
+                      email:decode.email,
+                      profilePic:decode.picture
+                      }).then((response)=>{
+                        if(response.message=='User already exists'){
+                          if(response.userInfo.type=='individual'){
+                            localStorage.setItem('userType', response.userInfo.type)
+                            localStorage.setItem('userId', response.userInfo._id)
+                            localStorage.setItem('accessToken', response.accessToken)
+                            history.push('/admin/user/dashboard')
+                          }
+                          if(response.userInfo.type=='corporate'){
+                            localStorage.setItem('userType', response.userInfo.type)
+                            localStorage.setItem('userId', response.userInfo._id)
+                            localStorage.setItem('accessToken', response.accessToken)
+                            // history.push('/auth/signup') send to company dashbord
+                            
+                          }
+                        }
+                          if(response.type=='individual'){
+                            localStorage.setItem('userType', response.type)
+                            localStorage.setItem('userId', response.userId)
+                            localStorage.setItem('accessToken', response.accessToken)
+                            history.push('/admin/user/dashboard')
+                          }
+                          if(response.type=='corporate'){
+                            localStorage.setItem('userType', response.type)
+                            localStorage.setItem('userId', response.userId)
+                            localStorage.setItem('accessToken', response.accessToken)
+                        // history.push('/auth/signin') send to corporate dashboard
+                          }
+                      })
+                      setErrorMsg(false)
+                  
+                }
+                catch(err){
+                  console.log(err)
+              
+            }
+          }
+              // do login in with data
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+            // width={width}
+            // border={width}
+            // type={'icon'}
+          />
+        </GoogleOAuthProvider>
+            </div>
+              
             </FormControl>
             <Flex
               flexDirection='column'
@@ -139,7 +236,7 @@ const history = useHistory()
               mt='0px'>
               <Text color={textColor} fontWeight='medium'>
                 Don't have an account?
-                <Link color={titleColor} as='span' ms='5px' fontWeight='bold'>
+                <Link color={titleColor} as='span' ms='5px' fontWeight='bold' onClick={goSignUp}>
                   Sign Up
                 </Link>
               </Text>

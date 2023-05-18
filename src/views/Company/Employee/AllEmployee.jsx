@@ -88,7 +88,6 @@ const AllEmployee = () => {
       return res
     }).then((emp)=>{
       setAllEmployees(emp)
-      console.log('ami chekl',emp)
     })
 
   },[])

@@ -57,7 +57,7 @@ import GlobalHorn from "./components/GlobalHorn copy";
                 <GridItem colSpan={4} h='10'>
                         <Box mb={5}>
                             <TopChart 
-                                title={"Number of Horns played per Day"}
+                                title={"Horns played per Day"}
                                 percentage={5}
                                 chart={<LineChart />}
                                 />

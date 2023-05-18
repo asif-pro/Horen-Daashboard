@@ -6,7 +6,6 @@ const url = process.env.REACT_APP_SALES_URL;
 
 
 export async function getOrder() {
-  console.log('sales',url)
   return await fetch(url+'order').then((response) => response.json());
 //  const orders = axios.get(url+'order')
 //  console.log(orders)

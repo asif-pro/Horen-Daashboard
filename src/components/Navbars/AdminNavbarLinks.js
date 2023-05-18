@@ -4,6 +4,7 @@ import { BellIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
+  Icon,
   IconButton,
   Input,
   InputGroup,
@@ -28,6 +29,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import routes from "routes.js";
+import { FaSignOutAlt } from "react-icons/fa";
 
 export default function HeaderLinks(props) {
   const { variant, children, fixed, secondary, onOpen, ...rest } = props;
@@ -36,7 +38,7 @@ export default function HeaderLinks(props) {
   let mainteal = useColorModeValue("teal.300", "teal.300");
   let inputBg = useColorModeValue("white", "gray.800");
   let mainText = useColorModeValue("gray.700", "gray.200");
-  let navbarIcon = useColorModeValue("gray.500", "gray.200");
+  let navbarIcon = useColorModeValue("7gray.500", "gray.200");
   let searchIcon = useColorModeValue("gray.700", "gray.200");
 
   if (secondary) {
@@ -44,6 +46,11 @@ export default function HeaderLinks(props) {
     mainText = "white";
   }
   const settingsRef = React.useRef();
+  const signOut = ()=>{
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userType');
+    localStorage.removeItem('userId');
+  }
   return (
     <Flex
       pe={{ sm: "0px", md: "16px" }}
@@ -93,7 +100,7 @@ export default function HeaderLinks(props) {
           borderRadius="inherit"
         />
       </InputGroup>
-      <NavLink to="/auth/signin">
+      <NavLink to="/auth/signin" onClick={signOut}>
         <Button
           ms="0px"
           px="0px"
@@ -109,13 +116,13 @@ export default function HeaderLinks(props) {
           }
           leftIcon={
             document.documentElement.dir ? (
-              <ProfileIcon color={navbarIcon} w="22px" h="22px" me="0px" />
+              <Icon as={FaSignOutAlt} color={navbarIcon} w="22px" h="22px" me="0px" />
             ) : (
               ""
             )
           }
         >
-          <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
+          {/* <Text display={{ sm: "none", md: "flex" }}>Sign Ina</Text> */}
         </Button>
       </NavLink>
       <SidebarResponsive

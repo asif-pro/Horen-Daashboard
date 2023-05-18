@@ -1,5 +1,5 @@
 // Chakra imports
-import { Box, Grid,Spacer, GridItem, Flex, HStack, Text, useColorModeValue, Input } from "@chakra-ui/react";
+import { Box, Grid,Spacer, GridItem, Flex, HStack, Text, useColorModeValue, Input, Select } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -14,6 +14,12 @@ const TopChart = ({ title, percentage, chart }) => {
           <Text fontSize='lg' color={textColor} fontWeight='bold' mb='6px'>
             {title}
           </Text>
+          <Select ml={'2'} placeholder='Select Device' width={'9vw'}>
+            <option value='option2'>Device1</option>
+            <option value='option3'>Device2</option>
+            <option value='option1'>Device3</option>
+            <option value='option1'>Device4</option>
+          </Select>
           <Spacer/>
           <Text p={'2'}  fontSize='lg' color={textColor} fontWeight='bold' mb='6px'>
             From:
