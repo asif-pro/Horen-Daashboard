@@ -43,9 +43,14 @@ function SignUp() {
   const [password, setPassword] = React.useState('')
   const [profilePic, setProfilePic] = React.useState('')
   const [errorMsg, setErrorMsg] = React.useState(false)
+  let corporateAccount = false;
 
   const handleName = (e) => {
     setName(e.target.value)
+  }
+  const handleType = (e) => {
+    corporateAccount = ! corporateAccount
+    console.log(corporateAccount)
   }
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -70,13 +75,25 @@ function SignUp() {
         formData.append("cloud_name", "dftfcxnxd");
         const res = await axios.post(`${apiUrl}/image/upload`, formData);   
         // console.log(res.data.url)
-      await register({
+      if(corporateAccount){
+        await register({
       name,
       email,
       phone,
+      type:'corporate',
       password,
       profilePic:res.data.url
       })
+      }
+      if(!corporateAccount){
+        await register({
+          name,
+          email,
+          phone,
+          password,
+          profilePic:res.data.url
+          })
+      }
       setErrorMsg(false)
       history.push('/auth/signin')
 
@@ -344,10 +361,10 @@ function SignUp() {
             />
             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>Upload Image</FormLabel>
             <Input type='file' name='emp_image' onChange={handleImage} />
-            <FormControl display='flex' alignItems='center' mb='24px'>
-              <Switch id='remember-login' colorScheme='yellow' me='10px' />
+            <FormControl display='flex' alignItems='center' mb='24px' mt='25px'>
+              <Switch id='remember-login' colorScheme='yellow' me='10px' onChange={handleType}/>
               <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
-                Remember me
+                Set this as a Corporate account
               </FormLabel>
             </FormControl>
             <Button 

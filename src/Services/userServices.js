@@ -1,3 +1,4 @@
+import axios from 'axios'
 // const url = process.env.REACT_APP_USERS_URL;
 const url = 'http://localhost:4007/'
 
@@ -64,3 +65,12 @@ export async function signin(email, password) {
         console.log(error);
     }
 }
+export async function updateUserType(userId, type) {
+    
+    const result =  await axios({
+    method: 'put',
+    url: `${url}updateType/${userId}/${type}`,
+  })
+  return result;
+}
+

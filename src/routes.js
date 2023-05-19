@@ -9,6 +9,8 @@ import SignUp from "views/Auth/SignUp.js";
 import UserDashboard from "views/Dashboard/UserDashboard"
 import SuperAdmin from "views/SuperAdmin/Dashboard";
 import Groups from "views/Dashboard/UserDashboard/Groups";
+import Order from 'views/Order/Order'
+import Checkout from "views/Checkout/Checkout";
 
 import {
   HomeIcon,
@@ -30,6 +32,23 @@ var dashRoutes = [
     component: TopNavigation,
     layout: "/admin",
   },
+  {
+    path: "/order",
+    name: "Order",
+    rtlName: "لوحة القيادة",
+    icon: <DocumentIcon color="inherit" />,
+    component: Order,
+    layout: "/auth",
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    rtlName: "لوحة القيادة",
+    icon: <DocumentIcon color="inherit" />,
+    component: Checkout,
+    layout: "/auth",
+  },
+  
   // {
   //   path: "/user/groups",
   //   name: "Groups",

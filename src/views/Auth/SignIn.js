@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
-import { register, profile, gauthRegister } from "Services/userServices";
+import { register, profile, gauthRegister, updateUserType} from "Services/userServices";
 // Chakra imports
 import {
   Box,
@@ -20,7 +20,17 @@ import {
   Stack,
   AlertIcon,
   Alert,
+  useDisclosure,
 } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react'
 // Assets
 import signInImage from "assets/img/signInImage.png";
 import { signin } from "Services/userServices";
@@ -30,12 +40,28 @@ function SignIn() {
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   // Chakra color mode
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const titleColor = useColorModeValue("gray.700", "yellow.200");
   const textColor = useColorModeValue("gray.500", "white");
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [errorMsg, setErrorMsg] = React.useState(false)
+  const [userType, setUserType] = React.useState('')
 
+  const handleUserType = (e) => {
+    if(e.target.value ==='individual'){
+      localStorage.setItem('userType', e.target.value)
+      history.push('/admin/user/dashboard')
+    }
+    if(e.target.value ==='corporate'){
+      const userId = localStorage.getItem('userId')
+      localStorage.setItem('userType', e.target.value)
+      updateUserType(userId, e.target.value)
+      history.push('/admin/user/dashboard')
+    }
+
+    onClose()
+  }
   const handleEmail = (e) => {
     setEmail(e.target.value)
   }
@@ -55,7 +81,13 @@ function SignIn() {
       setErrorMsg(false)
       initialRef.current.value=""
       finalRef.current.value=""
-      history.push('/admin/user/dashboard')
+      if(localStorage.getItem('orderDetails')){
+        history.push('/auth/checkout')
+      }
+      if(!localStorage.getItem('orderDetails')){
+        history.push('/admin/user/dashboard')
+      }
+      
     }
     else{
       setErrorMsg(true)
@@ -162,10 +194,8 @@ function SignIn() {
         <GoogleOAuthProvider clientId="195127431392-am7f136teict4g6hn03qi09qpnre74at.apps.googleusercontent.com">
           <GoogleLogin
             onSuccess={(credentialResponse) => {
-              //   console.log(credentialResponse);
               const token = credentialResponse.credential;
               const decode = jwt_decode(token);
-              // console.log ('checking goath',decode)
               if (decode.email_verified) {
                 try{
                   // check here if the user already exists, usign the mail
@@ -190,22 +220,21 @@ function SignIn() {
                             localStorage.setItem('userType', response.userInfo.type)
                             localStorage.setItem('userId', response.userInfo._id)
                             localStorage.setItem('accessToken', response.accessToken)
-                            // history.push('/auth/signup') send to company dashbord
+                            history.push('/admin/user/dashboard')
                             
                           }
                         }
-                          if(response.type=='individual'){
-                            localStorage.setItem('userType', response.type)
+                        if(response.message=='User Created Successfully'){
                             localStorage.setItem('userId', response.userId)
                             localStorage.setItem('accessToken', response.accessToken)
-                            history.push('/admin/user/dashboard')
+                            onOpen()
                           }
-                          if(response.type=='corporate'){
-                            localStorage.setItem('userType', response.type)
-                            localStorage.setItem('userId', response.userId)
-                            localStorage.setItem('accessToken', response.accessToken)
-                        // history.push('/auth/signin') send to corporate dashboard
-                          }
+                        //   if(response.type=='corporate'){
+                        //     localStorage.setItem('userType', response.type)
+                        //     localStorage.setItem('userId', response.userId)
+                        //     localStorage.setItem('accessToken', response.accessToken)
+                        // // history.push('/auth/signin') send to corporate dashboard
+                        //   }
                       })
                       setErrorMsg(false)
                   
@@ -260,7 +289,29 @@ function SignIn() {
             borderBottomLeftRadius='20px'></Box>
         </Box>
       </Flex>
+      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Account Type -</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text fontWeight='bold' mb='1rem'>
+              Choose your desire account type
+            </Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' value={'individual'} mr={3} onClick={handleUserType}>
+              Individual
+            </Button>
+            <Button colorScheme='yellow' value={'corporate'} mr={3} onClick={handleUserType}>
+              Corporate
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Flex>
+    
   );
 }
 

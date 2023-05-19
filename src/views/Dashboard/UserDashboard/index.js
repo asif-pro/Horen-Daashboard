@@ -48,6 +48,11 @@ import GlobalHorn from "./components/GlobalHorn copy";
   
   function UserDashboard() {
     // const iconBoxInside = useColorModeValue("white", "white");
+    if(localStorage.getItem('orderDetails')){
+      const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
+      console.log(orderDetails)
+    }
+      
   
     return (
         <Flex flexDirection='column' pt={{ base: "50px", md: "20px" }}>

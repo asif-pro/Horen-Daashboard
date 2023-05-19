@@ -9,6 +9,7 @@ import CompanyDevices from 'views/Company/Devices/Devices'
 import UserDevices from 'views/Dashboard/UserDashboard/Devices'
 import AllEmployee from 'views/Company/Employee/AllEmployee'
 import Groups from 'views/Dashboard/UserDashboard/components/Groups'
+import Order from 'views/Order/Order'
 
 const TopNavigation = () => {
   const [userType, setUserType] = React.useState('')
@@ -21,15 +22,16 @@ const TopNavigation = () => {
   return (
     <Tabs position="relative" variant="unstyled">
     <TabList>
-      {userType==='individual' && <Tab>Dashboard</Tab>}
+      {(userType==='individual' || userType==='corporate') && <Tab>Dashboard</Tab>}
       {userType==='super_admin' && <Tab>Dashboard</Tab>}
       <Tab>Leaderboard</Tab>
       {userType==='super_admin' && <Tab>Orders</Tab>}
       {userType==='individual' && <Tab>Devices</Tab>}
-      {/* {userType==='individual' && <Tab>Devices(Company)</Tab>} */}
+      {userType==='corporate' && <Tab>Devices</Tab>}
       {userType==='super_admin' && <Tab>Devices</Tab>}
-      {userType==='individual' && <Tab>Groups</Tab>}
-      {userType==='individual' && <Tab>Employee</Tab>}
+      {(userType==='individual' || userType==='corporate') && <Tab>Groups</Tab>}
+      {userType==='corporate' && <Tab>Employee</Tab>}
+      {userType!='super_admin' && <Tab>Buy</Tab>}
     </TabList>
     <TabIndicator
       height="5px"
@@ -37,7 +39,7 @@ const TopNavigation = () => {
       borderRadius="1px"
     />
     <TabPanels>
-      {userType==='individual' && <TabPanel>
+      {(userType==='individual' || userType==='corporate') && <TabPanel>
         <UserDashboard/>
       </TabPanel>}
       {userType==='super_admin' && <TabPanel>
@@ -52,17 +54,20 @@ const TopNavigation = () => {
       {userType==='individual' && <TabPanel>
         <UserDevices></UserDevices>
       </TabPanel>}
-      {/* {userType==='individual' && <TabPanel>
+      {userType==='corporate' && <TabPanel>
         <CompanyDevices/>
-      </TabPanel>} */}
+      </TabPanel>}
       {userType==='super_admin' && <TabPanel>
         <AdminDevices></AdminDevices>
       </TabPanel>}
-      {userType==='individual' && <TabPanel>
+      {(userType==='individual' || userType==='corporate') && <TabPanel>
         <Groups></Groups>
       </TabPanel>}
-      {userType==='individual' && <TabPanel>
+      {userType==='corporate' && <TabPanel>
         <AllEmployee/>
+      </TabPanel>}
+      {userType!='super_admin' && <TabPanel>
+        <Order/>
       </TabPanel>}
     </TabPanels>
   </Tabs>
