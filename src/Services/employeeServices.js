@@ -7,7 +7,7 @@ export async function getAllEmployees() {
 }
   
 export async function addEmployee(employee) {
-     console.log(employee)
+    // console.log(employee)
     return await fetch(url+'employee', {
         method: 'POST',
         headers: {

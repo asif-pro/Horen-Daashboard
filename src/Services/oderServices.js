@@ -87,4 +87,16 @@ console.log(changedOrder)
 })
 return result;
 }
+export async function createOrder(order) {
+  return await fetch(url+'order', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(order),
+    credentials: "same-origin",
+
+}).then((response) => response.json())
+.catch((error) => console.log(error));
+}
 

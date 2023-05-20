@@ -5,6 +5,9 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import { register, profile, gauthRegister, updateUserType} from "Services/userServices";
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import Card from "components/Card/Card";
+import CardBody from "components/Card/CardBody";
+import CardHeader from "components/Card/CardHeader";
 // Chakra imports
 
 import {
@@ -52,19 +55,16 @@ function SignIn() {
   const [totalAmount, setTotalAmount] = React.useState(0)
   const [quantity, setQuantity] = React.useState(0)
   const [cities, setCities] = React.useState([])
-  const [selectedCity, setSelectedCity] = React.useState('')
+  const [selectedCity, setSelectedCity] = React.useState({})
   const [zones, setZones] = React.useState([])
   const [selectedZone, setSelectedZone] = React.useState('')
   const [areas, setAreas] = React.useState([])
   const [selectedArea, setSelectedArea] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [address, setAddress] = React.useState('')
-  const unitPrice = 10;
+  const unitPrice = 6000;
 
-  const zoneA = ['a','b','c','d','e','f']
-  const zoneB = ['x','y','z','m','o','n']
-  const areaA = ['g','h','j','k','l','p']
-  const areaB = ['i','w','v','c','x','z']
+
 
   const handleQuantiy = (e) => {
     setQuantity(e.target.value)
@@ -73,23 +73,36 @@ function SignIn() {
     setPhone(e.target.value)
   }
   const handleCity = (e) => {
-    console.log(e.target.value)
+
+    setSelectedCity({
+        city : cities.filter((city)=>{
+            return city.id == e.target.value;
+        })[0].city,
+        id : e.target.value
+    })
     // setSelectedCity(e.target.value)
     getZones(e.target.value).then((res)=>{
-        // console.log(res.zones)
         setZones(res.zones)
     })
   }
   const handleZone = (e) => {
-    // console.log(e.target.value)
-    setSelectedZone(e.target.value)
+    setSelectedZone({
+        zone_id : e.target.value,
+        zone_name : zones.filter((zone)=>{
+            return zone.zone_id == e.target.value;
+        })[0].zone_name,
+    })
     getAreas(e.target.value).then((res)=>{
-        // console.log(res.areas)
         setAreas(res.areas)
     })
   }
   const handleArea = (e) => {
-    setSelectedArea(e.target.value)
+    setSelectedArea({
+        area_id : e.target.value,
+        area_name : areas.filter((area)=>{
+            return area.area_id == e.target.value;
+        })[0].area_name,
+    })
   }
   const handleAddress = (e) => {
     setAddress(e.target.value)
@@ -98,12 +111,14 @@ function SignIn() {
     // console.log('Quantity:', quantity, 'Price:', totalAmount, 'Phone Number:', phone, 'City:', city, 'Zone:', selectedZone, 'Area:' , selectedArea, 'Full Address:', address )
     const orderDetails = {
         "quantity":quantity,
-        "amount":totalAmount,
-        "phone":phone,
-        "city":selectedCity,
-        "zone":selectedZone,
-        "area":selectedArea,
-        "address":address
+        "price":totalAmount,
+        "phonenumber":phone,
+        "shippingAddress":{
+            "city":selectedCity,
+            "zone":selectedZone,
+            "area":selectedArea,
+            "fullAddress":address
+        }
     }
     localStorage.setItem('orderDetails',JSON.stringify(orderDetails))
 
@@ -116,8 +131,20 @@ function SignIn() {
     }
   }
 
+  const handleCancel =()=> {
+    if(! localStorage.getItem('accessToken')){
+        history.push('/auth/signin')
+    }
+    if( localStorage.getItem('accessToken')){
+        history.push('/admin/user/dashboard')
+        //will redirect to landing page when deployed
+    }
+    
+  }
+
   React.useEffect(() => {
     getCities().then((res)=>{
+        // console.log(res)
         setCities(res.cities)
     })
   }, [])
@@ -129,14 +156,14 @@ function SignIn() {
     setTotalAmount(unitPrice*quantity)
   }, [quantity])
 
-  React.useEffect(() => {
-    if(selectedCity==='Dhaka'){ setZones(zoneA)}
-    if(selectedCity==='Chittagong'){ setZones(zoneB)}
-  }, [selectedCity])
+//   React.useEffect(() => {
+//     if(selectedCity==='Dhaka'){ setZones(zoneA)}
+//     if(selectedCity==='Chittagong'){ setZones(zoneB)}
+//   }, [selectedCity])
 
-  React.useEffect(() => {
-    if(selectedZone==='a'){ setAreas(areaA)}
-  }, [selectedZone])
+//   React.useEffect(() => {
+//     if(selectedZone==='a'){ setAreas(areaA)}
+//   }, [selectedZone])
 
 
   
@@ -229,7 +256,7 @@ function SignIn() {
               {cities.map((city) => {
               return (
                 
-                <option key={city.id} value={city.id}>{city.city}</option>
+                <option key={city.id} name={city.city} label={city.city} value={city.id}>{city.city}</option>
               );
             })}
              </Select>}
@@ -293,6 +320,7 @@ function SignIn() {
                 </FormLabel>
               </FormControl> */}
               <Button 
+                // onClick={onOpen}
                 onClick={handleSubmit}
                 fontSize='15px'
                 type='submit'
@@ -309,6 +337,23 @@ function SignIn() {
                   bg: "yellow.500",
                 }}>
                 Pay {totalAmount} &#x9F3; BDT
+              </Button>
+              <Button 
+                onClick={handleCancel}
+                fontSize='15px'
+                bg='gray.700'
+                w='100%'
+                h='45'
+                mb='20px'
+                color='white'
+                mt='20px'
+                _hover={{
+                  bg: "yellow.500",
+                }}
+                _active={{
+                  bg: "yellow.500",
+                }}>
+                Cancel
               </Button>
               
             </FormControl>
@@ -347,22 +392,95 @@ function SignIn() {
       {/* <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Account Type -</ModalHeader>
-          <ModalCloseButton />
+         
           <ModalBody>
-            <Text fontWeight='bold' mb='1rem'>
-              Choose your desire account type
+          <Card p='16px' my={{ sm: "24px", xl: "250px" }} >
+      <CardHeader p='12px 5px' mb='12px'>
+        <Text fontSize='lg' color={textColor} fontWeight='bold'>
+          title
+        </Text>
+      </CardHeader>
+      <CardBody px='5px'>
+        <Flex direction='column'>
+          <Text fontSize='md' color='gray.500' fontWeight='400' mb='30px'>
+            Description
+          </Text>
+          <Flex align='center' mb='18px'>
+            <Text fontSize='md' color={textColor} fontWeight='bold' me='10px'>
+              Number of Device:{" "}
             </Text>
+            <Text fontSize='md' color='gray.500' fontWeight='400'>
+              quantity
+            </Text>
+          </Flex>
+          <Flex align='center' mb='18px'>
+            <Text fontSize='md' color={textColor} fontWeight='bold' me='10px'>
+              Total Price:{" "}
+            </Text>
+            <Text fontSize='md' color='gray.500' fontWeight='400'>
+              price &#x9F3;
+            </Text>
+          </Flex>
+          <Flex align='center' mb='18px'>
+            <Text fontSize='md' color={textColor} fontWeight='bold' me='10px'>
+              Phone Number:{" "}
+            </Text>
+            <Text fontSize='md' color='gray.500' fontWeight='400'>
+              number
+            </Text>
+          </Flex>
+          <Flex align='center' mb='18px'>
+            <Text fontSize='md' color={textColor} fontWeight='bold' me='10px'>
+              Delivery Address:{" "}
+            </Text>
+            address
+
+          </Flex>
+          <Flex align='center' mb='18px'>
+          <Button 
+                fontSize='15px'
+                type='submit'
+                bg='yellow.400'
+                w='100%'
+                h='45'
+                mb='20px'
+                color='white'
+                mr={'20px'}
+                mt='20px'
+                _hover={{
+                  bg: "yellow.500",
+                }}
+                _active={{
+                  bg: "yellow.500",
+                }}>
+                Pay price &#x9F3; BDT
+              </Button>
+              <Button 
+                fontSize='15px'
+                type='submit'
+                bg='gray.700'
+                w='100%'
+                h='45'
+                mb='20px'
+                color='white'
+                ml={'20px'}
+                mt='20px'
+                _hover={{
+                  bg: "yellow.500",
+                }}
+                _active={{
+                  bg: "yellow.500",
+                }}>
+                Cancel
+              </Button>
+          
+          </Flex>
+        </Flex>
+      </CardBody>
+    </Card>
           </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme='blue' value={'individual'} mr={3} >
-              Individual
-            </Button>
-            <Button colorScheme='yellow' value={'corporate'} mr={3} >
-              Corporate
-            </Button>
-          </ModalFooter>
+       
         </ModalContent>
       </Modal> */}
     </Flex>
