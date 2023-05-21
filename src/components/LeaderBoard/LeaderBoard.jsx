@@ -26,20 +26,20 @@ const LeaderBoard = () => {
             </Box> 
         </Box>
         <Box className="leaderboardBottomContainer">
-            <Box >
+            {((localStorage.getItem('userType')==='corporate') || (localStorage.getItem('userType')==='super_admin')) && <Box >
                     <GlobalRankTable
                         title={"Inter Company Rank"}
                         captions={["Rank", "Name", "Horns",]}
                         data={tablesTableData}
                     />
-                </Box> 
-                <Box>
+                </Box> }
+                {(localStorage.getItem('userType')==='corporate') && <Box>
                     <GlobalRankTable
                         title={"Intra Company Rank"}
                         captions={["Rank", "Name", "Horns",]}
                         data={tablesTableData}
                     />
-                </Box>
+                </Box>}
         </Box>
     </Box>
   )

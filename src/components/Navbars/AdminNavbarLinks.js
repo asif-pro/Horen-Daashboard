@@ -96,7 +96,7 @@ export default function HeaderLinks(props) {
           fontSize="xs"
           py="11px"
           color={mainText}
-          placeholder="Type here..."
+          placeholder="Search here..."
           borderRadius="inherit"
         />
       </InputGroup>

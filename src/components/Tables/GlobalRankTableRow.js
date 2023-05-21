@@ -21,7 +21,7 @@ function GlobalRankTableRow(props) {
       <Td>
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
-            {domain}
+            2
           </Text>
           </Flex>
           </Td>
@@ -47,10 +47,10 @@ function GlobalRankTableRow(props) {
       <Td>
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
-            {domain}
+            328
           </Text>
           <Text fontSize="sm" color="gray.400" fontWeight="normal">
-            {subdomain}
+            Intotal
           </Text>
         </Flex>
       </Td>

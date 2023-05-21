@@ -28,15 +28,16 @@ const CheckoutConfirmation = ({
     })
     try {
       axios
-      .get(`https://orders-service.fly.dev/payment/${_id}/${orderDetails.price}`, {
+      .get(`https://order-service.fly.dev/payment/${_id}/${orderDetails.price}`, {
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(),
       })
       .then((res) => {
-        setLoadingPayment(false);
-        Linking.openURL(res.data.url);
+        // setLoadingPayment(false);
+        document.location = res.data.url
+        // Linking.openURL(res.data.url);
       }).then((result)=>{
         localStorage.removeItem('orderDetails')
         history.push('/admin/user/dashboard')
