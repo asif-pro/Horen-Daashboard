@@ -5,8 +5,17 @@ import CardHeader from 'components/Card/CardHeader'
 import { useColorModeValue } from '@chakra-ui/system'
 import CardBody from 'components/Card/CardBody'
 import { Button, Flex, Text } from '@chakra-ui/react'
+import { useHistory } from "react-router-dom";
+
 const OrderSuccess = () => {
     const textColor = useColorModeValue("gray.700", "white");
+    const history =  useHistory()
+
+    const goToDashboard = ()=>{
+      history.push('/admin/user/dashboard')
+    }
+
+
   return (
         <Card p='16px' my={{ sm: "24px", xl: "15px" }} ml={'10px'}>
       <div className='container'>
@@ -29,6 +38,7 @@ const OrderSuccess = () => {
           </Text>
           <Flex align='center' mb='18px'>
           <Button 
+                onClick={goToDashboard}
                 fontSize='15px'
                 type='submit'
                 bg='yellow.400'

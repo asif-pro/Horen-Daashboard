@@ -8,13 +8,11 @@ import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useToast } from '@chakra-ui/react'
 
 const CheckoutConfirmation = ({
   title,
   orderDetails
 }) => {
-  const toast = useToast()
   const history =  useHistory()
 
   const placeOrder = async ()=>{

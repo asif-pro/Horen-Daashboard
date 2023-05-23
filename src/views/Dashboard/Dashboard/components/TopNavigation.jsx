@@ -10,6 +10,8 @@ import UserDevices from 'views/Dashboard/UserDashboard/Devices'
 import AllEmployee from 'views/Company/Employee/AllEmployee'
 import Groups from 'views/Dashboard/UserDashboard/components/Groups'
 import Order from 'views/Order/Order'
+import UserOrderStatus from 'views/SuperAdmin/Orders/UserOrderStatus'
+
 
 const TopNavigation = () => {
   const [userType, setUserType] = React.useState('')
@@ -31,6 +33,7 @@ const TopNavigation = () => {
       {userType==='super_admin' && <Tab>Devices</Tab>}
       {(userType==='individual' || userType==='corporate') && <Tab>Groups</Tab>}
       {userType==='corporate' && <Tab>Employee</Tab>}
+      {(userType==='individual' || userType==='corporate') && <Tab>Orders</Tab>}
       {userType!='super_admin' && <Tab>Buy</Tab>}
     </TabList>
     <TabIndicator
@@ -65,6 +68,9 @@ const TopNavigation = () => {
       </TabPanel>}
       {userType==='corporate' && <TabPanel>
         <AllEmployee/>
+      </TabPanel>}
+      {userType!='super_admin' && <TabPanel>
+        <UserOrderStatus/>
       </TabPanel>}
       {userType!='super_admin' && <TabPanel>
         <Order/>

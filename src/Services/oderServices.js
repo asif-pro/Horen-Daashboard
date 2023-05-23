@@ -98,5 +98,11 @@ export async function createOrder(order) {
 
 }).then((response) => response.json())
 .catch((error) => console.log(error));
+} 
+export async function getOrdersByUserId(id) {
+  return await fetch(url+'order/user_id/'+id).then((response) => response.json());
+//  const orders = axios.get(url+'order')
+//  console.log(orders)
+//  return orders
 }
 
