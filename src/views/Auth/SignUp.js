@@ -43,6 +43,8 @@ function SignUp() {
   const [password, setPassword] = React.useState('')
   const [profilePic, setProfilePic] = React.useState('')
   const [errorMsg, setErrorMsg] = React.useState(false)
+  const [passwordErrorMsg, setPasswordErrorMsg] = React.useState(false)
+  const [requiredFields, setRequiredFields] = React.useState(false)
   let corporateAccount = false;
 
   const handleName = (e) => {
@@ -59,15 +61,26 @@ function SignUp() {
     setPhone(e.target.value)
   }
   const handlePassword = (e) => {
-    setPassword(e.target.value)
+    if((e.target.value).length>4){setPassword(e.target.value);setPasswordErrorMsg(false)}
+    if((e.target.value).length<4){setPasswordErrorMsg(true)}
+    
   }
   const handleImage = (e) => {
     setProfilePic(e.target.files[0])
   }
+
+  const validateForm = () => {
+    if ( name !== "" && email !== "" && phone !== "" && profilePic !== ""  && (!passwordErrorMsg)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    if(name!="" && email!=="" && phone!=="" && password!="" && profilePic!=""){
+    
+    if(!errorMsg && !passwordErrorMsg){
       try{
         const formData = new FormData();
         formData.append("file", profilePic);
@@ -75,28 +88,28 @@ function SignUp() {
         formData.append("cloud_name", "dftfcxnxd");
         const res = await axios.post(`${apiUrl}/image/upload`, formData);   
         // console.log(res.data.url)
-      if(corporateAccount){
-        await register({
-      name,
-      email,
-      phone,
-      type:'corporate',
-      password,
-      profilePic:res.data.url
-      })
-      }
-      if(!corporateAccount){
-        await register({
-          name,
-          email,
-          phone,
-          password,
-          profilePic:res.data.url
+        if(corporateAccount){
+          await register({
+            name,
+            email,
+            phone,
+            type:'corporate',
+            password,
+            profilePic:res.data.url
           })
-      }
-      setErrorMsg(false)
-      history.push('/auth/signin')
-
+        }
+        if(!corporateAccount){
+          await register({
+            name,
+            email,
+            phone,
+            password,
+            profilePic:res.data.url
+          })
+        }
+        setErrorMsg(false)
+        history.push('/auth/signin')
+        
       }
       catch(err){
         console.log(err)
@@ -105,7 +118,15 @@ function SignUp() {
     else{
       setErrorMsg(true)
     }
+
   }
+
+  React.useEffect(() => {
+    const validation = validateForm()
+    console.log(validation)
+    if (validation) setRequiredFields(true);
+    if (!validation) setRequiredFields(false);
+  }, [name, email, phone, password, profilePic]);
   return (
     <Flex
       direction='column'
@@ -163,7 +184,7 @@ function SignUp() {
             fontWeight='bold'
             textAlign='center'
             mb='22px'>
-            Register With
+            Fillup the Form
           </Text>
           <HStack spacing='15px' justify='center' mb='22px'>
             {/* <Flex
@@ -204,7 +225,7 @@ function SignUp() {
                 />
               </Link>
             </Flex> */}
-            <div>
+            {/* <div>
         <GoogleOAuthProvider clientId="195127431392-am7f136teict4g6hn03qi09qpnre74at.apps.googleusercontent.com">
           <GoogleLogin
             onSuccess={(credentialResponse) => {
@@ -271,7 +292,7 @@ function SignUp() {
             // type={'icon'}
           />
         </GoogleOAuthProvider>
-      </div>
+      </div> */}
             {/* <Flex
               justify='center'
               align='center'
@@ -292,18 +313,24 @@ function SignUp() {
               </Link>
             </Flex> */}
           </HStack>
-          <Text
+          {/* <Text
             fontSize='lg'
             color='gray.700'
             fontWeight='bold'
             textAlign='center'
             mb='22px'>
             or
-          </Text>
+          </Text> */}
           { errorMsg && <Stack spacing={3}>
               <Alert status='error'>
                 <AlertIcon/>
                 All the input fields are require
+              </Alert>
+            </Stack>}
+            { passwordErrorMsg && <Stack spacing={3}>
+              <Alert status='error'>
+                <AlertIcon/>
+                Password Must be at least 5 characters long
               </Alert>
             </Stack>}
           <FormControl>
@@ -340,7 +367,7 @@ function SignUp() {
               fontSize='sm'
               ms='4px'
               borderRadius='15px'
-              type='email'
+              type='number'
               placeholder='Your Phone Number'
               mb='24px'
               size='lg'
@@ -369,6 +396,7 @@ function SignUp() {
             </FormControl>
             <Button 
               onClick={handleSubmit}
+              disabled={!requiredFields}
               type='submit'
               bg='yellow.400'
               fontSize='15px'
