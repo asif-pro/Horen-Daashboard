@@ -19,13 +19,6 @@ const CheckoutConfirmation = ({
 
   const placeOrder = async ()=>{
    const { _id } = await createOrder(orderDetails);
-   toast({
-     title: 'Order Placed Successfully',
-     description: "Your Order has been placed successfylly",
-     status: 'success',
-     duration: 6000,
-     isClosable: true,
-    })
     try {
       axios
       .get(`https://order-service.fly.dev/payment/${_id}/${orderDetails.price}`, {
