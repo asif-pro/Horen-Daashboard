@@ -63,6 +63,7 @@ function SignIn() {
   const [phone, setPhone] = React.useState('')
   const [address, setAddress] = React.useState('')
   const unitPrice = 6000;
+  const [requiredFields, setRequiredFields] = React.useState(false)
 
 
 
@@ -142,6 +143,16 @@ function SignIn() {
     
   }
 
+  const validateForm = () => {
+    if ( quantity > 0 && selectedZone !== "" && phone !== "" && selectedCity !== "" && selectedArea !== "" ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+
+
   React.useEffect(() => {
     getCities().then((res)=>{
         // console.log(res)
@@ -155,6 +166,11 @@ function SignIn() {
   React.useEffect(() => {
     setTotalAmount(unitPrice*quantity)
   }, [quantity])
+
+  React.useEffect(() => {
+    if (validateForm()) setRequiredFields(true);
+    if (! validateForm()) setRequiredFields(false);
+  }, [quantity, selectedZone, selectedCity, selectedArea, phone]);
 
 //   React.useEffect(() => {
 //     if(selectedCity==='Dhaka'){ setZones(zoneA)}
@@ -322,6 +338,7 @@ function SignIn() {
               <Button 
                 // onClick={onOpen}
                 onClick={handleSubmit}
+                disabled={!requiredFields}
                 fontSize='15px'
                 type='submit'
                 bg='yellow.400'
