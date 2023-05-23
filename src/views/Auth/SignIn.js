@@ -203,8 +203,8 @@ function SignIn() {
               </Button>
       
               <div>
-        <GoogleOAuthProvider clientId="195127431392-am7f136teict4g6hn03qi09qpnre74at.apps.googleusercontent.com">
-        {/* <GoogleOAuthProvider clientId="817453303535-urc0dcloheraap8nt91abpmcdigi74ec.apps.googleusercontent.com"> */}
+        {/* <GoogleOAuthProvider clientId="195127431392-am7f136teict4g6hn03qi09qpnre74at.apps.googleusercontent.com"> */}
+        <GoogleOAuthProvider clientId="1042382240408-o31jqdeo1tfm3jqse4h8gfdi6luc5ohn.apps.googleusercontent.com">
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               const token = credentialResponse.credential;
