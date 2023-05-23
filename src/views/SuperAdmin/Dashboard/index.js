@@ -44,6 +44,7 @@ import Guage from "components/Guage/Guage";
 import TopChart from "./components/TopChart";
 import AreaHorn from "./components/AreaHorn";
 import GlobalHorn from "./components/GlobalHorn copy";
+import DashboardStatistics from "views/Dashboard/UserDashboard/components/DashboardStatistics";
 
 const SuperAdmin = () => {
     return (
@@ -52,14 +53,38 @@ const SuperAdmin = () => {
             <Grid templateColumns='repeat(6, 1fr)' gap={4}>
     
                 <GridItem colSpan={4} h='10'>
-                        <Box mb={5}>
+                        {/* <Box mb={5}>
                             <TopChart 
                                 title={"Super Admin"}
                                 percentage={5}
                                 chart={<LineChart />}
                                 />
-                        </Box>
-                        <Grid templateColumns='repeat(6, 1fr)' gap={2}>
+                        </Box> */}
+                        <Grid templateColumns='repeat(9, 1fr)' gap={2} mb={'30px'}>
+                        <GridItem colSpan={3}>
+                        <DashboardStatistics
+                          stat={'82%'}
+                          title={"Active"}
+                          description={"Percentage of Devices"}
+                        />
+                        </GridItem>
+                        <GridItem colSpan={3}>
+                        <DashboardStatistics
+                          title={"Orders"}
+                          stat={'39'}
+                          description={"Number of Orders"}
+                        />
+                        </GridItem>
+                        <GridItem colSpan={3}>
+                        <DashboardStatistics
+                          title={"Devices"}
+                          description={"Available Devices"}
+                          // amount={200}
+                          stat={'276'}
+                        />
+                        </GridItem>
+                        </Grid>
+                        <Grid>
                         <GridItem colSpan={3}>
                             <GlobalHorn 
                                 title={"HC/Hr-Global"}
@@ -67,13 +92,13 @@ const SuperAdmin = () => {
                                 chart={<BellChart />}
                             />
                         </GridItem>
-                        <GridItem colSpan={3}>
+                        {/* <GridItem colSpan={3}>
                             <AreaHorn 
                                 title={"HC/Hr-Area"}
                                 percentage={5}
                                 chart={<BellChart />}
                             />
-                        </GridItem>
+                        </GridItem> */}
                         </Grid>
                 </GridItem>
 

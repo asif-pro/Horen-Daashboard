@@ -11,6 +11,7 @@ import SuperAdmin from "views/SuperAdmin/Dashboard";
 import Groups from "views/Dashboard/UserDashboard/Groups";
 import Order from 'views/Order/Order'
 import Checkout from "views/Checkout/Checkout";
+import OrderSuccess from "views/Order/OrderSuccess";
 
 import {
   HomeIcon,
@@ -46,6 +47,14 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <DocumentIcon color="inherit" />,
     component: Checkout,
+    layout: "/auth",
+  },
+  {
+    path: "/order_success",
+    name: "Order Success",
+    rtlName: "لوحة القيادة",
+    icon: <DocumentIcon color="inherit" />,
+    component: OrderSuccess,
     layout: "/auth",
   },
   

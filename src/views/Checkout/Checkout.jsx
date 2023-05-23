@@ -51,9 +51,11 @@ const Checkout = () => {
 //setting the user id in the object
     React.useEffect(() => {
        const user_id = localStorage.getItem('userId');
-       const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
-       orderDetails.user_id = user_id ;
-       setOrderInfo(orderDetails);
+      //  if(localStorage.getItem('orderDetails')){
+        const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+        orderDetails.user_id = user_id ;
+        setOrderInfo(orderDetails);
+      //  }
     //    console.log(orderDetails)
       }, [])
 
