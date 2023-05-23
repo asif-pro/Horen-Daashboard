@@ -51,13 +51,25 @@ function SignIn() {
   const handleUserType = (e) => {
     if(e.target.value ==='individual'){
       localStorage.setItem('userType', e.target.value)
-      history.push('/admin/user/dashboard')
+      // history.push('/admin/user/dashboard')
+      if(localStorage.getItem('orderDetails')){
+        history.push('/auth/checkout')
+      }
+      if(!localStorage.getItem('orderDetails')){
+        history.push('/admin/user/dashboard')
+      }
     }
     if(e.target.value ==='corporate'){
       const userId = localStorage.getItem('userId')
       localStorage.setItem('userType', e.target.value)
       updateUserType(userId, e.target.value)
-      history.push('/admin/user/dashboard')
+      // history.push('/admin/user/dashboard')
+      if(localStorage.getItem('orderDetails')){
+        history.push('/auth/checkout')
+      }
+      if(!localStorage.getItem('orderDetails')){
+        history.push('/admin/user/dashboard')
+      }
     }
 
     onClose()
@@ -192,18 +204,13 @@ function SignIn() {
       
               <div>
         <GoogleOAuthProvider clientId="195127431392-am7f136teict4g6hn03qi09qpnre74at.apps.googleusercontent.com">
+        {/* <GoogleOAuthProvider clientId="817453303535-urc0dcloheraap8nt91abpmcdigi74ec.apps.googleusercontent.com"> */}
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               const token = credentialResponse.credential;
               const decode = jwt_decode(token);
               if (decode.email_verified) {
                 try{
-                  // check here if the user already exists, usign the mail
-                  // setEmail(decode.email);
-                  // setName(decode.name);
-                  // setProfilePic(decode.picture);
-
-                  
                   gauthRegister({
                       name:decode.name,
                       email:decode.email,
@@ -214,13 +221,25 @@ function SignIn() {
                             localStorage.setItem('userType', response.userInfo.type)
                             localStorage.setItem('userId', response.userInfo._id)
                             localStorage.setItem('accessToken', response.accessToken)
-                            history.push('/admin/user/dashboard')
+                            // history.push('/admin/user/dashboard')
+                            if(localStorage.getItem('orderDetails')){
+                              history.push('/auth/checkout')
+                            }
+                            if(!localStorage.getItem('orderDetails')){
+                              history.push('/admin/user/dashboard')
+                            }
                           }
                           if(response.userInfo.type=='corporate'){
                             localStorage.setItem('userType', response.userInfo.type)
                             localStorage.setItem('userId', response.userInfo._id)
                             localStorage.setItem('accessToken', response.accessToken)
-                            history.push('/admin/user/dashboard')
+                            // history.push('/admin/user/dashboard')
+                            if(localStorage.getItem('orderDetails')){
+                              history.push('/auth/checkout')
+                            }
+                            if(!localStorage.getItem('orderDetails')){
+                              history.push('/admin/user/dashboard')
+                            }
                             
                           }
                         }

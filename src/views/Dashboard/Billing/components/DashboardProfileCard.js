@@ -1,5 +1,5 @@
 // Chakra imports
-import { Flex, Img, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Icon, Img, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -11,7 +11,8 @@ import React from "react";
 import ChartStatistics from "views/Dashboard/Dashboard/components/ChartStatistics";
 import MiniStatistics from "views/Dashboard/Dashboard/components/MiniStatistics";
 import Guage from "components/Guage/Guage";
-
+import DashboardStatistics from "views/Dashboard/UserDashboard/components/DashboardStatistics";
+import { FaWallet } from "react-icons/fa";
 const DashboardProfileCard = ({ icon, title, description, amount }) => {
   const iconteal = useColorModeValue("teal.300", "teal.300");
   const textColor = useColorModeValue("gray.700", "white");
@@ -72,17 +73,25 @@ const DashboardProfileCard = ({ icon, title, description, amount }) => {
                     </SimpleGrid>
                     <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}><Guage></Guage></SimpleGrid>
                     <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}>
-                        <MiniStatistics
+                        {/* <MiniStatistics
                         title={"Average per minute"}
                         amount={"119 dB"}
                         percentage={17}
                         icon={<WalletIcon h={"24px"} w={"24px"} color='white' />}
+                        /> */}
+                        <DashboardStatistics
+                          icon={<Icon h={"24px"} w={"24px"} color='white' as={FaWallet} />}
+                          title={"db"}
+                          description={"Per Minute"}
+                          amount={17}
+                          stat={119}
                         />
-                        <MiniStatistics
-                        title={"Average per km"}
-                        amount={"14 dB"}
-                        percentage={14}
-                        icon={<WalletIcon h={"24px"} w={"24px"} color='white' />}
+                        <DashboardStatistics
+                          icon={<Icon h={"24px"} w={"24px"} color='white' as={FaWallet} />}
+                          title={"db"}
+                          description={"Per km"}
+                          amount={14}
+                          stat={110}
                         />
                     </SimpleGrid>
     </Card>

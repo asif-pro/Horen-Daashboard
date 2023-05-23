@@ -38,6 +38,7 @@ import {
   import WorkWithTheRockets from "./components/WorkWithTheRockets";
 //   import PaymentStatistics from "./components/PaymentStatistics";
 import PaymentStatistics from "../Billing/components/PaymentStatistics";
+import DashboardStatistics from "./components/DashboardStatistics";
 import ChartStatistics from "./components/ChartStatistics";
 import DashboardProfileCard from "../Billing/components/DashboardProfileCard";
 import Guage from "components/Guage/Guage";
@@ -60,14 +61,38 @@ import GlobalHorn from "./components/GlobalHorn copy";
             <Grid templateColumns='repeat(6, 1fr)' gap={4}>
     
                 <GridItem colSpan={4} h='10'>
-                        <Box mb={5}>
+                        {/* <Box mb={5}>
                             <TopChart 
                                 title={"Horns played per Day"}
                                 percentage={5}
                                 chart={<LineChart />}
                                 />
-                        </Box>
-                        <Grid templateColumns='repeat(6, 1fr)' gap={2}>
+                        </Box> */}
+                        <Grid templateColumns='repeat(9, 1fr)' gap={2} mb={'30px'}>
+                        <GridItem colSpan={3}>
+                        <DashboardStatistics
+                          stat={'5%'}
+                          title={"Polution"}
+                          description={"percentage of contribution"}
+                        />
+                        </GridItem>
+                        <GridItem colSpan={3}>
+                        <DashboardStatistics
+                          title={"Per Hour"}
+                          stat={'39'}
+                          description={"Number of Horn"}
+                        />
+                        </GridItem>
+                        <GridItem colSpan={3}>
+                        <DashboardStatistics
+                          title={"db"}
+                          description={"exposed horns today"}
+                          // amount={200}
+                          stat={'10'}
+                        />
+                        </GridItem>
+                        </Grid>
+                        <Grid templateColumns='repeat(6, 1fr)' gap={2} mb={'30px'}>
                         <GridItem colSpan={3}>
                             <GlobalHorn 
                                 title={"HC/Hr-Global"}
@@ -83,9 +108,16 @@ import GlobalHorn from "./components/GlobalHorn copy";
                             />
                         </GridItem>
                         </Grid>
+                        <Box mb={5}>
+                            <TopChart 
+                                title={"Horns played per Day"}
+                                percentage={5}
+                                chart={<LineChart />}
+                                />
+                        </Box>
                 </GridItem>
 
-                <GridItem  h='10'  colSpan={2}>
+                <GridItem  h='100%'  colSpan={2}>
                     <DashboardProfileCard
                         icon={<Icon h={"24px"} w={"24px"} color='white' as={FaPaypal} />}
                         title={"Mr. Eshtiaque Khan"}
