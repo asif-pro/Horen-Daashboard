@@ -1,6 +1,7 @@
 import axios from 'axios'
 // const url = process.env.REACT_APP_USERS_URL;
-const url = 'http://localhost:4007/'
+// const url = 'http://localhost:4007/'
+const url = 'https://user-service.fly.dev/'
 
 export async function getUser(id) {
 
