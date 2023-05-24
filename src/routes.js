@@ -12,6 +12,7 @@ import Groups from "views/Dashboard/UserDashboard/Groups";
 import Order from 'views/Order/Order'
 import Checkout from "views/Checkout/Checkout";
 import OrderSuccess from "views/Order/OrderSuccess";
+import Drawer from "components/Drawer/Drawer";
 
 import {
   HomeIcon,
@@ -56,6 +57,14 @@ var dashRoutes = [
     icon: <DocumentIcon color="inherit" />,
     component: OrderSuccess,
     layout: "/auth",
+  },
+  {
+    path: "/drawer",
+    name: "Drawer",
+    rtlName: "لوحة القيادة",
+    icon: <DocumentIcon color="inherit" />,
+    component: Drawer,
+    layout: "/admin",
   },
   
   // {

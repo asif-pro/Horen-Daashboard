@@ -31,7 +31,7 @@ const TopNavigation = () => {
       {userType==='individual' && <Tab>Devices</Tab>}
       {userType==='corporate' && <Tab>Devices</Tab>}
       {userType==='super_admin' && <Tab>Devices</Tab>}
-      {(userType==='individual' || userType==='corporate') && <Tab>Groups</Tab>}
+      {/* {(userType==='individual' || userType==='corporate') && <Tab>Groups</Tab>} */}
       {userType==='corporate' && <Tab>Employee</Tab>}
       {(userType==='individual' || userType==='corporate') && <Tab>Orders</Tab>}
       {userType!='super_admin' && <Tab>Buy</Tab>}
@@ -63,9 +63,9 @@ const TopNavigation = () => {
       {userType==='super_admin' && <TabPanel>
         <AdminDevices></AdminDevices>
       </TabPanel>}
-      {(userType==='individual' || userType==='corporate') && <TabPanel>
+      {/* {(userType==='individual' || userType==='corporate') && <TabPanel>
         <Groups></Groups>
-      </TabPanel>}
+      </TabPanel>} */}
       {userType==='corporate' && <TabPanel>
         <AllEmployee/>
       </TabPanel>}

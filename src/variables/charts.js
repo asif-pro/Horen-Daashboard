@@ -85,13 +85,13 @@ export const barChartOptions = {
 
 export const lineChartData = [
   {
-    name: "Mobile apps",
+    name: "Number of Horns",
     data: [50, 40, 300, 220, 500, 250, 400, 230, 500, 220, 500, 250,],
   },
-  {
-    name: "Websites",
-    data: [30, 90, 40, 140, 290, 290, 340, 230, 400,140, 290, 290,],
-  },
+  // {
+  //   name: "Websites",
+  //   data: [30, 90, 40, 140, 290, 290, 340, 230, 400,140, 290, 290,],
+  // },
 
     // {
     //   name: 'Bell Curve',
@@ -167,9 +167,9 @@ export const lineChartOptions = {
       opacityTo: 0,
       stops: [],
     },
-    colors: ["#4FD1C5", "#2D3748"],
+    colors: ["#F7CF47", "#2D3748"],
   },
-  colors: ["#4FD1C5", "#2D3748"],
+  colors: ["#F7CF47", "#2D3748"],
   // chart: {
   //   toolbar: {
   //     show: false
@@ -288,7 +288,7 @@ export const bellChartOptions = {
       opacityTo: 0,
       stops: [],
     },
-    colors: ['#4FD1C5', '#2D3748'],
+    colors: ['#F7CF47', '#2D3748'],
   },
-  colors: ['#4FD1C5', '#2D3748'],
+  colors: ['#F7CF47', '#2D3748'],
 };
