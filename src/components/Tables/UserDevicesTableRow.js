@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, useDisclosure, FormControl, FormLabel, Input, Textarea } from "@chakra-ui/react";
 import {
   Modal,
@@ -24,13 +24,29 @@ import { FaPencilAlt, FaTrash } from "react-icons/fa";
 // import Employee from "views/Company/Employee/Employee";
 
 function UserDevicesTableRow(props) {
+  const textColor = useColorModeValue("gray.700", "white");
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+  const [newPseudoname,setNewPseudoname] = React.useState("")
+  const [deviceIDtoChange, setDeviceIDtoChange] = React.useState("")
 
+  const { RU_id, qr_code, pseudo_name, device_id} = props;
 
-  const { RU_id, qr_code} = props;
-  const textColor = useColorModeValue("gray.700", "white");
+React.useEffect(()=>{
+  setNewPseudoname(pseudo_name);
+},[pseudo_name]);
+
+function handlePseudonameChange(e){
+  setNewPseudoname(e.target.value);
+  setDeviceIDtoChange(e.target.name);
+}
+
+const changePseudoName = () => {
+  console.log(deviceIDtoChange)
+  console.log(newPseudoname);
+}
+
 
   return (
    <>
@@ -58,7 +74,7 @@ function UserDevicesTableRow(props) {
       </Td>
       <Td>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          Pesudo Name
+          {pseudo_name}
         </Text>
       </Td>
       
@@ -87,7 +103,7 @@ size="xl"
   <ModalBody pb={6}>
   <FormControl>
               <FormLabel>Pseudo Name</FormLabel>
-              <Input ref={initialRef} placeholder='Enter a Pseudo Name for the Device' />
+              <Input name={device_id} value={newPseudoname} onChange={handlePseudonameChange} placeholder='Enter a Pseudo Name for the Device' />
             </FormControl>
 
     {/* <FormControl mt={4}>
@@ -97,7 +113,7 @@ size="xl"
   </ModalBody>
 
   <ModalFooter>
-    <Button colorScheme='blue' mr={3}>
+    <Button colorScheme='blue' mr={3} onClick={changePseudoName}>
       Save
     </Button>
     <Button onClick={onClose}>Cancel</Button>

@@ -45,8 +45,10 @@ const UserDevicesTableData = ({ title, captions, data }) => {
               return (
                 <UserDevicesTableRow
                   key={row._id}
+                  device_id= {row._id}
                   RU_id={row.RU_id}
                   qr_code={row.qr_code}
+                  pseudo_name={row.pseudo_name ? row.pseudo_name : row.RU_id }
                 />
               );
             })}
