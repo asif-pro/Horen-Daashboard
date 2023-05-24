@@ -29,13 +29,13 @@ function UserDevicesTableRow(props) {
   const finalRef = React.useRef(null)
 
 
-  const { logo, name, status, budget, progression } = props;
+  const { RU_id, qr_code} = props;
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
    <>
      <Tr>
-      <Td minWidth={{ sm: "250px" }} pl="0px">
+      <Td minWidth={{ sm: "100px" }} pl="0px">
         <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           <Text
             fontSize="md"
@@ -43,15 +43,15 @@ function UserDevicesTableRow(props) {
             fontWeight="bold"
             minWidth="100%"
           >
-            RU-04HK82
+            {RU_id}
           </Text>
         </Flex>
       </Td>
       <Td>
       <QRCode
         id="123456"
-        value={439573}
-        size={55}
+        value={qr_code}
+        size={75}
         level={"H"}
         includeMargin={true}
       />

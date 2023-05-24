@@ -1,9 +1,15 @@
 
-const url = process.env.REACT_APP_DEVICES_URL;
+// const url = process.env.REACT_APP_DEVICES_URL;
+const url = 'https://device-service.fly.dev/'
 
 export async function getAllDevices() {
 
     return fetch(url+'device').then((response) => response.json());
+}
+export async function getDevicesByUserId(user_id) {
+
+    return await fetch(url+'device/user_id/'+user_id).then((response) => response.json());
+    
 }
 
 export async function postDevice(device) {
