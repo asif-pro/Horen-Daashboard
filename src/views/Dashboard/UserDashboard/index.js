@@ -72,8 +72,8 @@ import GlobalHorn from "./components/GlobalHorn";
                         <GridItem colSpan={3}>
                         <DashboardStatistics
                           stat={'5%'}
-                          title={"Polution"}
-                          description={"percentage of contribution"}
+                          title={"Top Polluters"}
+                          description={"You're in the top 5% of sound polluter"}
                         />
                         </GridItem>
                         <GridItem colSpan={3}>

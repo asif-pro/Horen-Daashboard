@@ -32,7 +32,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 // Assets
-import signInImage from "assets/img/horn.jpg";
+import signInImage from "assets/img/honkhate.jpeg";
 import { signin } from "Services/userServices";
 
 function SignIn() {
@@ -311,16 +311,19 @@ function SignIn() {
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Account Type -</ModalHeader>
+          {/* <ModalHeader>Account Type -</ModalHeader> */}
           <ModalCloseButton />
-          <ModalBody>
-            <Text fontWeight='bold' mb='1rem'>
+          <ModalBody display="flex"  justifyContent={'center'}>
+            <Text fontSize={'2xl'} fontWeight='bold' mb='1rem'>
               Choose your desire account type
             </Text>
+            
+           
+            
           </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme='blue' value={'individual'} mr={3} onClick={handleUserType}>
+          <ModalFooter display="flex" justifyContent="center" >
+          <Button colorScheme='blue' value={'individual'} mr={3} onClick={handleUserType}>
               Individual
             </Button>
             <Button colorScheme='yellow' value={'corporate'} mr={3} onClick={handleUserType}>
