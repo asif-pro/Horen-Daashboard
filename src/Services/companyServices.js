@@ -1,5 +1,6 @@
-const url = 'https://company-service.fly.dev/'
 import axios from 'axios'
+
+const url = 'https://company-service.fly.dev/'
 
 export async function createCompany(name, owner) {
     axios.post(url+'company', {
@@ -8,4 +9,10 @@ export async function createCompany(name, owner) {
         // console.log(response);
         // response.json()
     });
+}
+
+export async function getCompanyByOwner(user_id) {
+
+    return await fetch(url+'company/'+user_id).then((response) => response.json());
+    
 }

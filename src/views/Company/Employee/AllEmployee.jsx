@@ -2,6 +2,9 @@ import { Box, Button, Flex, FormControl, FormLabel, Grid, Icon, Input, InputGrou
 import React from 'react'
 import { tablesTableData, dashboardTableData } from "variables/general";
 import AllEmployeeTable from 'views/Dashboard/Tables/components/AllEmployeeTable'
+import { getCompanyByOwner } from 'Services/companyServices';
+import { getAllEmployeesByCompany } from 'Services/employeeServices';
+
 import './AllEmployee.css'
 import {
     Modal,
@@ -15,7 +18,6 @@ import {
 import { FaPlus } from 'react-icons/fa';
 import axios, { all } from 'axios';
 import { addEmployee, allEmployees } from 'Services/employeeServices';
-import { getAllEmployees } from 'Services/employeeServices';
 
 const AllEmployee = () => {
     const apiUrl = "https://api.cloudinary.com/v1_1/dftfcxnxd";
@@ -26,6 +28,7 @@ const AllEmployee = () => {
     const [phone, setPhone] = React.useState('');
     const [vehicle, setVehicle] = React.useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [companyId, setCompanyId] = React.useState('');
 
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
@@ -67,6 +70,7 @@ const AllEmployee = () => {
           department,
           phone,
           vehicle_no: vehicle,
+          company: companyId,
           image:res.data.url
         }).then((res)=>{
           return res;
@@ -82,16 +86,27 @@ const AllEmployee = () => {
     }
   }
 
+  // React.useEffect(()=>{
+  //   getCompanyByOwner(localStorage.getItem('userId')).then((res)=>{
+  //     console.log(res)
+  //   })
+  //   // getAllEmployees().then((res)=>{
+  //   //   return res
+  //   // }).then((emp)=>{
+  //   //   setAllEmployees(emp)
+  //   // })
+
+  // },[])
   React.useEffect(()=>{
-    
-    getAllEmployees().then((res)=>{
-      return res
-    }).then((emp)=>{
-      setAllEmployees(emp)
+    getCompanyByOwner(localStorage.getItem('userId')).then((res)=>{
+      setCompanyId(res[0]._id)
+      getAllEmployeesByCompany(res[0]._id).then((result)=>{
+        setAllEmployees(result)
+        // console.log(result)
+      })
     })
 
   },[])
-
 
 
   return (
