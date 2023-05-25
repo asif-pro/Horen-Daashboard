@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
+import { createCompany } from "Services/companyServices";
 import { register, profile, gauthRegister, updateUserType} from "Services/userServices";
 // Chakra imports
 import {
@@ -47,6 +48,8 @@ function SignIn() {
   const [password, setPassword] = React.useState('')
   const [errorMsg, setErrorMsg] = React.useState(false)
   const [userType, setUserType] = React.useState('')
+  const [companyName, setCompanyName] = React.useState('')
+  const [corporateAccount, setCorporateAccount] = React.useState(false);
 
   const handleUserType = (e) => {
     if(e.target.value ==='individual'){
@@ -63,6 +66,7 @@ function SignIn() {
       const userId = localStorage.getItem('userId')
       localStorage.setItem('userType', e.target.value)
       updateUserType(userId, e.target.value)
+      createCompany(companyName, userId)
       // history.push('/admin/user/dashboard')
       if(localStorage.getItem('orderDetails')){
         history.push('/auth/checkout')
@@ -74,12 +78,20 @@ function SignIn() {
 
     onClose()
   }
+  const handleCompanyName = (e) => {
+    // console.log(e.target.value)
+    setCompanyName(e.target.value)
+  }
   const handleEmail = (e) => {
     setEmail(e.target.value)
   }
   const handlePassword = (e) => {
     setPassword(e.target.value)
   }
+  const handleCorporateAccount = () => {
+    setCorporateAccount(!corporateAccount)
+  }
+
   const goSignUp = ()=> {
     history.push('/auth/signup')
   }
@@ -322,13 +334,34 @@ function SignIn() {
             
           </ModalBody>
 
-          <ModalFooter display="flex" justifyContent="center" >
-          <Button colorScheme='blue' value={'individual'} mr={3} onClick={handleUserType}>
+          <ModalFooter display="flex" justifyContent="center" flexDirection={'column'}>
+         < div display="flex" justifyContent="center" flexDirection={'row'} mb={'20px'} >
+         <Button colorScheme='blue' value={'individual'} mr={3} onClick={handleUserType}>
               Individual
             </Button>
-            <Button colorScheme='yellow' value={'corporate'} mr={3} onClick={handleUserType}>
+            <Button colorScheme='blue' mr={3} onClick={handleCorporateAccount}>
               Corporate
             </Button>
+         </div>
+            {corporateAccount && <>
+              {/* <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+              Company Name
+            </FormLabel> */}
+            <Input
+              onChange={handleCompanyName}
+              fontSize='sm'
+              ms='4px'
+              mt={'20px'}
+              borderRadius='15px'
+              type='text'
+              placeholder='Name of your company'
+              mb='24px'
+              size='lg'
+            />
+            <Button colorScheme='yellow' value={'corporate'} mr={3} onClick={handleUserType}>
+              Save
+            </Button>
+            </>}
           </ModalFooter>
         </ModalContent>
       </Modal>

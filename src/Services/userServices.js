@@ -40,7 +40,7 @@ export async function register(user) {
         }
         const response = await fetch(registerUrl, options);
         const data = await response.json()
-        console.log(data);
+        // console.log(data);
             return data;
     } catch (error) {
         console.log(error);
