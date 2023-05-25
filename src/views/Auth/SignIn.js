@@ -230,12 +230,14 @@ function SignIn() {
                       profilePic:decode.picture
                       }).then((response)=>{
                         if(response.message=='User already exists'){
+
+                          localStorage.setItem('userType', response.userInfo.type)
+                          localStorage.setItem('userId', response.userInfo._id)
+                          localStorage.setItem('accessToken', response.accessToken)
+                          localStorage.setItem('profilePic', response.profilePic)
+
                           if(response.userInfo.type=='individual'){
-                            localStorage.setItem('userType', response.userInfo.type)
-                            localStorage.setItem('userId', response.userInfo._id)
-                            localStorage.setItem('accessToken', response.accessToken)
-                            localStorage.setItem('profilePic', response.profilePic)
-                            // history.push('/admin/user/dashboard')
+
                             if(localStorage.getItem('orderDetails')){
                               history.push('/auth/checkout')
                             }
@@ -244,11 +246,7 @@ function SignIn() {
                             }
                           }
                           if(response.userInfo.type=='corporate'){
-                            localStorage.setItem('userType', response.userInfo.type)
-                            localStorage.setItem('userId', response.userInfo._id)
-                            localStorage.setItem('accessToken', response.accessToken)
-                            localStorage.setItem('profilePic', response.profilePic)
-                            // history.push('/admin/user/dashboard')
+                            
                             if(localStorage.getItem('orderDetails')){
                               history.push('/auth/checkout')
                             }
