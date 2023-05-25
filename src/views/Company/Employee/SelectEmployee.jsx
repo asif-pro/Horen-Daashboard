@@ -1,6 +1,8 @@
 import React from 'react'
 import './SelectEmployee.css'
 import { Box, Grid,Spacer, GridItem, Flex, HStack, Text, useColorModeValue, Select } from "@chakra-ui/react";
+import { getAllEmployeesByCompany } from 'Services/employeeServices';
+import { getCompanyByOwner } from 'Services/companyServices';
 
 const { useState, useEffect } = React;
 
@@ -8,7 +10,7 @@ const data = [{id: 0, label: "Mr. John", emp_id: 'E-2323' }, {id: 1, label: "Mr.
 
 
 const SelectEmployee = () => {
-    
+  const [allEmployees, setAllEmployees] = React.useState('');
 //     const [isOpen, setOpen] = useState(false);
 //   const [items, setItem] = useState(data);
 //   const [selectedItem, setSelectedItem] = useState(null);
@@ -20,16 +22,26 @@ const SelectEmployee = () => {
 //     console.log(id)
 //     setOpen(false)
 //   }
+    React.useEffect(()=>{
+      getCompanyByOwner(localStorage.getItem('userId')).then((res)=>{
+        getAllEmployeesByCompany(res[0]._id).then((result)=>{
+          setAllEmployees(result)
+          console.log(result)
+        })
+      })
+
+    },[])
 
 
   return (
     <Select placeholder='Select Employee' >
-        <option value='option2'>
-            Mr. John - E-7878
-            
-        </option>
-        
+      {allEmployees && allEmployees.map(employee => 
+      <option value={employee._id}>
+        {employee.name} [{employee.department}]
+      </option>
+      )}
     </Select>
+
 
     // <div className='dropdown'>
     //   <div className='dropdown-header' onClick={toggleDropdown}>
