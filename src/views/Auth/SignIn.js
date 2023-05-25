@@ -102,6 +102,7 @@ function SignIn() {
       localStorage.setItem('accessToken', result.accessToken)
       localStorage.setItem('userType', result.type)
       localStorage.setItem('userId', result.id)
+      localStorage.setItem('profilePic', result.profilePic)
       setErrorMsg(false)
       initialRef.current.value=""
       finalRef.current.value=""
@@ -233,6 +234,7 @@ function SignIn() {
                             localStorage.setItem('userType', response.userInfo.type)
                             localStorage.setItem('userId', response.userInfo._id)
                             localStorage.setItem('accessToken', response.accessToken)
+                            localStorage.setItem('profilePic', response.profilePic)
                             // history.push('/admin/user/dashboard')
                             if(localStorage.getItem('orderDetails')){
                               history.push('/auth/checkout')
@@ -245,6 +247,7 @@ function SignIn() {
                             localStorage.setItem('userType', response.userInfo.type)
                             localStorage.setItem('userId', response.userInfo._id)
                             localStorage.setItem('accessToken', response.accessToken)
+                            localStorage.setItem('profilePic', response.profilePic)
                             // history.push('/admin/user/dashboard')
                             if(localStorage.getItem('orderDetails')){
                               history.push('/auth/checkout')
@@ -258,6 +261,7 @@ function SignIn() {
                         if(response.message=='User Created Successfully'){
                             localStorage.setItem('userId', response.userId)
                             localStorage.setItem('accessToken', response.accessToken)
+                            localStorage.setItem('profilePic', response.profilePic)
                             onOpen()
                           }
                         //   if(response.type=='corporate'){

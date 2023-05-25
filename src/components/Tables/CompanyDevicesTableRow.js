@@ -38,14 +38,13 @@ function CompanyDevicesTableRow(props) {
      <Tr>
       <Td minWidth={{ sm: "250px" }} pl="0px">
         <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Icon as={logo} h={"24px"} w={"24px"} me="18px" />
           <Text
             fontSize="md"
             color={textColor}
             fontWeight="bold"
             minWidth="100%"
           >
-            {name}
+            RU-2345
           </Text>
         </Flex>
       </Td>
