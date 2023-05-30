@@ -50,6 +50,7 @@ export default function HeaderLinks(props) {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userType');
     localStorage.removeItem('userId');
+    localStorage.removeItem('profilePic');
   }
   return (
     <Flex

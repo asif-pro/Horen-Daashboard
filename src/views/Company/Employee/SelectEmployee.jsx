@@ -6,7 +6,7 @@ import { getCompanyByOwner } from 'Services/companyServices';
 
 const { useState, useEffect } = React;
 
-const data = [{id: 0, label: "Mr. John", emp_id: 'E-2323' }, {id: 1, label: "Mr. Zaman", emp_id: 'E-45873' }];
+// const data = [{id: 0, label: "Mr. John", emp_id: 'E-2323' }, {id: 1, label: "Mr. Zaman", emp_id: 'E-45873' }];
 
 
 const SelectEmployee = () => {

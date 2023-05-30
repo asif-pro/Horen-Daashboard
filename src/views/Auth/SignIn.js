@@ -102,6 +102,7 @@ function SignIn() {
       localStorage.setItem('accessToken', result.accessToken)
       localStorage.setItem('userType', result.type)
       localStorage.setItem('userId', result.id)
+      console.log(result)
       localStorage.setItem('profilePic', result.profilePic)
       setErrorMsg(false)
       initialRef.current.value=""
@@ -234,7 +235,7 @@ function SignIn() {
                           localStorage.setItem('userType', response.userInfo.type)
                           localStorage.setItem('userId', response.userInfo._id)
                           localStorage.setItem('accessToken', response.accessToken)
-                          localStorage.setItem('profilePic', response.profilePic)
+                          localStorage.setItem('profilePic', decode.picture)
 
                           if(response.userInfo.type=='individual'){
 
@@ -246,7 +247,7 @@ function SignIn() {
                             }
                           }
                           if(response.userInfo.type=='corporate'){
-                            
+
                             if(localStorage.getItem('orderDetails')){
                               history.push('/auth/checkout')
                             }
@@ -259,7 +260,7 @@ function SignIn() {
                         if(response.message=='User Created Successfully'){
                             localStorage.setItem('userId', response.userId)
                             localStorage.setItem('accessToken', response.accessToken)
-                            localStorage.setItem('profilePic', response.profilePic)
+                            localStorage.setItem('profilePic', decode.picture)
                             onOpen()
                           }
                         //   if(response.type=='corporate'){

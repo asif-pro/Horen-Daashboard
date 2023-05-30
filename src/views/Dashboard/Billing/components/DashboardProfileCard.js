@@ -16,6 +16,7 @@ import { FaWallet } from "react-icons/fa";
 const DashboardProfileCard = ({ icon, title, description, amount }) => {
   const iconteal = useColorModeValue("teal.300", "teal.300");
   const textColor = useColorModeValue("gray.700", "white");
+  const profilePic = localStorage.getItem('profilePic')
 
   return (
     <Card p='16px' display='flex' align='center' justify='center'>
@@ -24,7 +25,7 @@ const DashboardProfileCard = ({ icon, title, description, amount }) => {
           {/* <IconBox as='box' h={"60px"} w={"60px"} bg={iconteal}>
             {icon}
           </IconBox> */}
-          <Img borderRadius={'50%'} width={'150px'} src={'https://res.cloudinary.com/dru7kzv3i/image/upload/v1683963472/asif_zxkrt8.jpg'}></Img>
+          <Img borderRadius={'50%'} width={'150px'} src={profilePic}></Img>
           <Flex
             direction='column'
             m='14px'
