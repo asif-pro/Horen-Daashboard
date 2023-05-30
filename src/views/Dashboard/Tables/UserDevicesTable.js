@@ -5,6 +5,7 @@ import Authors from "./components/Authors";
 import UserDevicesTableData from "./components/UserDevicesTableData";
 import { tablesTableData, dashboardTableData } from "variables/general";
 import { FaPlus } from "react-icons/fa";
+import { getDevicesByUserId } from "Services/deviceServices";
 
 
 import {
@@ -22,6 +23,18 @@ function UserDevicesTable() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+  const [allDevices, setAllDevices] = React.useState([])
+
+
+  React.useEffect(()=>{
+    
+    getDevicesByUserId(localStorage.getItem('userId')).then((res)=>{
+      return res
+    }).then((devices)=>{
+      setAllDevices(devices)
+    })
+
+  },[])
 
   return (
     <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
@@ -33,7 +46,7 @@ function UserDevicesTable() {
       <UserDevicesTableData
         title={"All Devices"}
         captions={["Device ID", "QR Code", "Pseudo Name", "Action"]}
-        data={dashboardTableData}
+        data={allDevices}
       />
 
 

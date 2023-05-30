@@ -24,7 +24,7 @@ import DashboardProfileCard from "../Billing/components/DashboardProfileCard";
 
 import TopChart from "./components/TopChart";
 import AreaHorn from "./components/AreaHorn";
-import GlobalHorn from "./components/GlobalHorn copy";
+import GlobalHorn from "./components/GlobalHorn";
 
   
   function UserDashboard() {
@@ -97,8 +97,8 @@ import GlobalHorn from "./components/GlobalHorn copy";
                         <GridItem colSpan={3}>
                         <DashboardStatistics
                           stat={'5%'}
-                          title={"Polution"}
-                          description={"percentage of contribution"}
+                          title={"Top Polluters"}
+                          description={"You're in the top 5% of sound polluter"}
                         />
                         </GridItem>
                         <GridItem colSpan={3}>
@@ -121,7 +121,7 @@ import GlobalHorn from "./components/GlobalHorn copy";
                         <GridItem colSpan={3}>
                             <GlobalHorn 
                                 title={"HC/Hr-Global"}
-                                percentage={5}
+                                percentage={8}
                                 chart={<BellChart />}
                             />
                         </GridItem>

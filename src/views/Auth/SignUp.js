@@ -1,5 +1,6 @@
 // Chakra imports
 import { register, profile, gauthRegister } from "Services/userServices";
+import { createCompany } from "Services/companyServices";
 
 import {
   Alert,
@@ -34,7 +35,7 @@ function SignUp() {
   const titleColor = useColorModeValue("yellow.500", "yellow.200");
   const textColor = useColorModeValue("gray.700", "white");
   const bgColor = useColorModeValue("white", "gray.700");
-  const bgIcons = useColorModeValue("yellow.400", "rgba(255, 255, 255, 0.5)");
+  // const bgIcons = useColorModeValue("yellow.400", "rgba(255, 255, 255, 0.5)");
   const history = useHistory()
 
   const [name, setName] = React.useState('')
@@ -45,14 +46,21 @@ function SignUp() {
   const [errorMsg, setErrorMsg] = React.useState(false)
   const [passwordErrorMsg, setPasswordErrorMsg] = React.useState(false)
   const [requiredFields, setRequiredFields] = React.useState(false)
-  let corporateAccount = false;
+  const [corporateAccount, setCorporateAccount] = React.useState(false);
+  const [companyName, setCompanyName] = React.useState('')
 
   const handleName = (e) => {
     setName(e.target.value)
   }
   const handleType = (e) => {
-    corporateAccount = ! corporateAccount
-    console.log(corporateAccount)
+    setCorporateAccount(!corporateAccount)
+    // if (companyName){
+    //   console.log('yes')
+    // }
+    // if (!companyName){
+    //   console.log('no')
+    // }
+    // console.log(corporateAccount)
   }
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -67,6 +75,10 @@ function SignUp() {
   }
   const handleImage = (e) => {
     setProfilePic(e.target.files[0])
+  }
+  const handleCompanyName = (e) => {
+    // console.log(e.target.value)
+    setCompanyName(e.target.value)
   }
 
   const validateForm = () => {
@@ -89,14 +101,17 @@ function SignUp() {
         const res = await axios.post(`${apiUrl}/image/upload`, formData);   
         // console.log(res.data.url)
         if(corporateAccount){
-          await register({
+           register({
             name,
             email,
             phone,
             type:'corporate',
             password,
             profilePic:res.data.url
+          }).then((res)=>{
+            createCompany(companyName, res.userId )
           })
+
         }
         if(!corporateAccount){
           await register({
@@ -123,7 +138,7 @@ function SignUp() {
 
   React.useEffect(() => {
     const validation = validateForm()
-    console.log(validation)
+    // console.log(validation)
     if (validation) setRequiredFields(true);
     if (!validation) setRequiredFields(false);
   }, [name, email, phone, password, profilePic]);
@@ -394,6 +409,21 @@ function SignUp() {
                 Set this as a Corporate account
               </FormLabel>
             </FormControl>
+            {corporateAccount && <>
+             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+              Company Name
+            </FormLabel>
+            <Input
+              onChange={handleCompanyName}
+              fontSize='sm'
+              ms='4px'
+              borderRadius='15px'
+              type='text'
+              placeholder='Name of your company'
+              mb='24px'
+              size='lg'
+            />
+            </>}
             <Button 
               onClick={handleSubmit}
               disabled={!requiredFields}

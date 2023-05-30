@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
+import { createCompany } from "Services/companyServices";
 import { register, profile, gauthRegister, updateUserType} from "Services/userServices";
 // Chakra imports
 import {
@@ -32,7 +33,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 // Assets
-import signInImage from "assets/img/signInImage.png";
+import signInImage from "assets/img/honkhate.jpeg";
 import { signin } from "Services/userServices";
 
 function SignIn() {
@@ -47,6 +48,8 @@ function SignIn() {
   const [password, setPassword] = React.useState('')
   const [errorMsg, setErrorMsg] = React.useState(false)
   const [userType, setUserType] = React.useState('')
+  const [companyName, setCompanyName] = React.useState('')
+  const [corporateAccount, setCorporateAccount] = React.useState(false);
 
   const handleUserType = (e) => {
     if(e.target.value ==='individual'){
@@ -63,6 +66,7 @@ function SignIn() {
       const userId = localStorage.getItem('userId')
       localStorage.setItem('userType', e.target.value)
       updateUserType(userId, e.target.value)
+      createCompany(companyName, userId)
       // history.push('/admin/user/dashboard')
       if(localStorage.getItem('orderDetails')){
         history.push('/auth/checkout')
@@ -74,12 +78,20 @@ function SignIn() {
 
     onClose()
   }
+  const handleCompanyName = (e) => {
+    // console.log(e.target.value)
+    setCompanyName(e.target.value)
+  }
   const handleEmail = (e) => {
     setEmail(e.target.value)
   }
   const handlePassword = (e) => {
     setPassword(e.target.value)
   }
+  const handleCorporateAccount = () => {
+    setCorporateAccount(!corporateAccount)
+  }
+
   const goSignUp = ()=> {
     history.push('/auth/signup')
   }
@@ -90,6 +102,8 @@ function SignIn() {
       localStorage.setItem('accessToken', result.accessToken)
       localStorage.setItem('userType', result.type)
       localStorage.setItem('userId', result.id)
+      console.log(result)
+      localStorage.setItem('profilePic', result.profilePic)
       setErrorMsg(false)
       initialRef.current.value=""
       finalRef.current.value=""
@@ -217,11 +231,14 @@ function SignIn() {
                       profilePic:decode.picture
                       }).then((response)=>{
                         if(response.message=='User already exists'){
+
+                          localStorage.setItem('userType', response.userInfo.type)
+                          localStorage.setItem('userId', response.userInfo._id)
+                          localStorage.setItem('accessToken', response.accessToken)
+                          localStorage.setItem('profilePic', decode.picture)
+
                           if(response.userInfo.type=='individual'){
-                            localStorage.setItem('userType', response.userInfo.type)
-                            localStorage.setItem('userId', response.userInfo._id)
-                            localStorage.setItem('accessToken', response.accessToken)
-                            // history.push('/admin/user/dashboard')
+
                             if(localStorage.getItem('orderDetails')){
                               history.push('/auth/checkout')
                             }
@@ -230,10 +247,7 @@ function SignIn() {
                             }
                           }
                           if(response.userInfo.type=='corporate'){
-                            localStorage.setItem('userType', response.userInfo.type)
-                            localStorage.setItem('userId', response.userInfo._id)
-                            localStorage.setItem('accessToken', response.accessToken)
-                            // history.push('/admin/user/dashboard')
+
                             if(localStorage.getItem('orderDetails')){
                               history.push('/auth/checkout')
                             }
@@ -246,6 +260,7 @@ function SignIn() {
                         if(response.message=='User Created Successfully'){
                             localStorage.setItem('userId', response.userId)
                             localStorage.setItem('accessToken', response.accessToken)
+                            localStorage.setItem('profilePic', decode.picture)
                             onOpen()
                           }
                         //   if(response.type=='corporate'){
@@ -311,21 +326,45 @@ function SignIn() {
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Account Type -</ModalHeader>
+          {/* <ModalHeader>Account Type -</ModalHeader> */}
           <ModalCloseButton />
-          <ModalBody>
-            <Text fontWeight='bold' mb='1rem'>
+          <ModalBody display="flex"  justifyContent={'center'}>
+            <Text fontSize={'2xl'} fontWeight='bold' mb='1rem'>
               Choose your desire account type
             </Text>
+            
+           
+            
           </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme='blue' value={'individual'} mr={3} onClick={handleUserType}>
+          <ModalFooter display="flex" justifyContent="center" flexDirection={'column'}>
+         < div display="flex" justifyContent="center" flexDirection={'row'} mb={'20px'} >
+         <Button colorScheme='blue' value={'individual'} mr={3} onClick={handleUserType}>
               Individual
             </Button>
-            <Button colorScheme='yellow' value={'corporate'} mr={3} onClick={handleUserType}>
+            <Button colorScheme='blue' mr={3} onClick={handleCorporateAccount}>
               Corporate
             </Button>
+         </div>
+            {corporateAccount && <>
+              {/* <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+              Company Name
+            </FormLabel> */}
+            <Input
+              onChange={handleCompanyName}
+              fontSize='sm'
+              ms='4px'
+              mt={'20px'}
+              borderRadius='15px'
+              type='text'
+              placeholder='Name of your company'
+              mb='24px'
+              size='lg'
+            />
+            <Button colorScheme='yellow' value={'corporate'} mr={3} onClick={handleUserType}>
+              Save
+            </Button>
+            </>}
           </ModalFooter>
         </ModalContent>
       </Modal>

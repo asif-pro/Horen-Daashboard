@@ -39,7 +39,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 // Assets
-import signInImage from "assets/img/signInImage.png";
+import signInImage from "assets/img/honkhate.jpeg";
 import { signin } from "Services/userServices";
 import { getCities, getZones, getAreas } from "Services/oderServices";
 

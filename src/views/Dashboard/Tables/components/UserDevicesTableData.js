@@ -44,11 +44,11 @@ const UserDevicesTableData = ({ title, captions, data }) => {
             {data.map((row) => {
               return (
                 <UserDevicesTableRow
-                  key={row.name}
-                  name={row.name}
-                  logo={row.logo}
-                  status={row.status}
-                  budget={row.budget}
+                  key={row._id}
+                  device_id= {row._id}
+                  RU_id={row.RU_id}
+                  qr_code={row.qr_code}
+                  pseudo_name={row.pseudo_name ? row.pseudo_name : row.RU_id }
                 />
               );
             })}
