@@ -12,36 +12,16 @@ import {
   } from "@chakra-ui/react";
   import { FaPaypal, FaWallet } from "react-icons/fa";
 //   // assets
-  import peopleImage from "assets/img/people-image.png";
-  import logoChakra from "assets/svg/logo-white.svg";
-  import BarChart from "components/Charts/BarChart";
   import LineChart from "components/Charts/LineChart";
   import BellChart from "components/Charts/BellChart";
   import MiniStatistics from "../Dashboard/components/MiniStatistics";
   // Custom icons
-  import {
-    CartIcon,
-    DocumentIcon,
-    GlobeIcon,
-    WalletIcon,
-    RocketIcon,
-    StatsIcon,
-  } from "components/Icons/Icons.js";
   import React from "react";
-//   import { dashboardTableData, timelineData } from "variables/general";
-  import ActiveUsers from "./components/ActiveUsers";
-  import BuiltByDevelopers from "./components/BuiltByDevelopers";
-//   import MiniStatistics from "./components/MiniStatistics";
-//   import OrdersOverview from "./components/OrdersOverview";
-//   import Projects from "./components/Projects";
-  import SalesOverview from "./components/SalesOverview";
-  import WorkWithTheRockets from "./components/WorkWithTheRockets";
-//   import PaymentStatistics from "./components/PaymentStatistics";
-import PaymentStatistics from "../Billing/components/PaymentStatistics";
+
+
 import DashboardStatistics from "./components/DashboardStatistics";
-import ChartStatistics from "./components/ChartStatistics";
 import DashboardProfileCard from "../Billing/components/DashboardProfileCard";
-import Guage from "components/Guage/Guage";
+
 import TopChart from "./components/TopChart";
 import AreaHorn from "./components/AreaHorn";
 import GlobalHorn from "./components/GlobalHorn copy";
@@ -53,7 +33,52 @@ import GlobalHorn from "./components/GlobalHorn copy";
       const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
       console.log(orderDetails)
     }
-      
+    
+    React.useEffect(
+      React.useCallback(() => {
+        
+        
+        const fetchchartData = async () => {
+          try {
+            const userId = await AsyncStorage.getItem("userId");
+            const deviceResponse = await fetch(
+              `${config.Device_URL}/device/user_id/${userId}`
+            );
+            const deviceData = await deviceResponse.json();
+            setDevices(deviceData);
+            
+            const ruId = deviceData[0].RU_id;
+            const requestBody = {
+              deviceRUids: [ruId],
+            };
+           
+            const response = await fetch(
+              // `${config.SIGNAL_URL}/signal/SignalSumByDateByDevices`,
+              `https://2967-113-11-37-36.ngrok-free.app/signal/SignalSumByDateByDevices`,
+              
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestBody),
+              }
+            );
+            const week = getWeekBracket();
+           
+            const chartData = await response.json().then((res) => {
+             return cleanDataByTime(week, res);
+            });
+            
+            setDevices(deviceData);
+            setchart1Data(chartData);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchchartData();
+      }, [])
+    );
   
     return (
         <Flex flexDirection='column' pt={{ base: "50px", md: "20px" }}>
