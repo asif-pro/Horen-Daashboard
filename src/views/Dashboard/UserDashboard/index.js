@@ -87,20 +87,20 @@ import { getWeekBracket } from "utils/chartCleaning";
                         <DashboardStatistics
                           stat={'5%'}
                           title={"Top Polluters"}
-                          description={"You're in the top 5% of sound polluter"}
+                          description={"You're in the top 5% of sound polluters"}
                         />
                         </GridItem>
                         <GridItem colSpan={3}>
                         <DashboardStatistics
-                          title={"Per Hour"}
-                          stat={'39'}
-                          description={"Number of Horn"}
+                          title={"Per km"}
+                          stat={'12'}
+                          description={"You click the horn 12 times for every km travelled"}
                         />
                         </GridItem>
                         <GridItem colSpan={3}>
                         <DashboardStatistics
-                          title={"db"}
-                          description={"exposed horns today"}
+                          title={"dB"}
+                          description={"You were exposed to 10dB of sound today"}
                           // amount={200}
                           stat={'10'}
                         />

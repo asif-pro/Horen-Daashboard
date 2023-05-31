@@ -70,25 +70,25 @@ console.log(user)
       </CardBody>
       <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={3}>
                         <ChartStatistics
-                        title={"Total Mileage"}
+                        title={"Registered"}
                         amount={"64"}
                         // percentage={40}
                         icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
                         />
                         <ChartStatistics
-                        title={"Active Devices"}
-                        amount={"2"}
+                        title={"Active"}
+                        amount={"32"}
                         // percentage={40}
                         icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
                         />
                         <ChartStatistics
-                        title={"Total Horns"}
-                        amount={"74"}
+                        title={"Trips"}
+                        amount={"745"}
                         // percentage={40}
                         icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
                         />
                     </SimpleGrid>
-                    <SimpleGrid justifyContent="center" gap={{ lg: "12px" }} pl={'60px'} columns={1}><Guage></Guage></SimpleGrid>
+                    <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}><Guage></Guage></SimpleGrid>
                     <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}>
                         {/* <MiniStatistics
                         title={"Average per minute"}
@@ -99,7 +99,7 @@ console.log(user)
                         <DashboardStatistics
                           icon={<Icon h={"24px"} w={"24px"} color='white' as={FaWallet} />}
                           title={"db"}
-                          description={"Per Minute"}
+                          description={"Per Hour"}
                           amount={17}
                           stat={119}
                         />

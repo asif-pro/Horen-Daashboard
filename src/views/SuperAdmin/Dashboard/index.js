@@ -1,48 +1,14 @@
 // // Chakra imports
 import {
-    Box,
     Flex,
     Grid,
     GridItem,
-    HStack,
-    Image,
-    SimpleGrid,
-    useColorModeValue,
     Icon
   } from "@chakra-ui/react";
-  import { FaPaypal, FaWallet } from "react-icons/fa";
-//   // assets
-  import peopleImage from "assets/img/people-image.png";
-  import logoChakra from "assets/svg/logo-white.svg";
-  import BarChart from "components/Charts/BarChart";
-  import LineChart from "components/Charts/LineChart";
-  import BellChart from "components/Charts/BellChart";
-  import MiniStatistics from "views/Dashboard/Dashboard/components/MiniStatistics";
-  // Custom icons
-  import {
-    CartIcon,
-    DocumentIcon,
-    GlobeIcon,
-    WalletIcon,
-    RocketIcon,
-    StatsIcon,
-  } from "components/Icons/Icons.js";
-  import React from "react";
-//   import { dashboardTableData, timelineData } from "variables/general";
-  import ActiveUsers from "./components/ActiveUsers";
-  import BuiltByDevelopers from "./components/BuiltByDevelopers";
-//   import MiniStatistics from "./components/MiniStatistics";
-//   import OrdersOverview from "./components/OrdersOverview";
-//   import Projects from "./components/Projects";
-  import SalesOverview from "./components/SalesOverview";
-  import WorkWithTheRockets from "./components/WorkWithTheRockets";
-//   import PaymentStatistics from "./components/PaymentStatistics";
-import PaymentStatistics from "views/Dashboard/Billing/components/PaymentStatistics";
-import ChartStatistics from "./components/ChartStatistics";
-import DashboardProfileCard from "views/Dashboard/Billing/components/DashboardProfileCard";
-import Guage from "components/Guage/Guage";
-import TopChart from "./components/TopChart";
-import AreaHorn from "./components/AreaHorn";
+import { FaPaypal, FaWallet } from "react-icons/fa";
+import BellChart from "components/Charts/BellChart";
+import React from "react";
+import DashboardProfileCard from "./DashboardProfileCard";
 import GlobalHorn from "./components/GlobalHorn copy";
 import DashboardStatistics from "views/Dashboard/UserDashboard/components/DashboardStatistics";
 
@@ -53,13 +19,7 @@ const SuperAdmin = () => {
             <Grid templateColumns='repeat(6, 1fr)' gap={4}>
     
                 <GridItem colSpan={4} h='10'>
-                        {/* <Box mb={5}>
-                            <TopChart 
-                                title={"Super Admin"}
-                                percentage={5}
-                                chart={<LineChart />}
-                                />
-                        </Box> */}
+                    
                         <Grid templateColumns='repeat(9, 1fr)' gap={2} mb={'30px'}>
                         <GridItem colSpan={3}>
                         <DashboardStatistics

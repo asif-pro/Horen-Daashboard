@@ -35,11 +35,11 @@ const DashboardStatistics = ({ icon, title, description, amount, stat }) => {
               fontWeight='semibold'>
               {description}
             </Text>
-            <Separator />
+         
           </Flex>
-          { amount && <Text fontSize='lg' color={textColor} fontWeight='bold'>
+          {/* { amount && <Text fontSize='lg' color={textColor} fontWeight='bold'>
             {`%${amount}`}
-          </Text>}
+          </Text>} */}
         </Flex>
       </CardBody>
     </Card>

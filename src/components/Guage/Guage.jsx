@@ -97,8 +97,10 @@ const Guage = () => {
             <input value={percentage} onChange={e => setPercentage(e.target.value)} type='number' min='0' max='100'/>
         </div> */}
         {/* <Widget title='Total Sound Pollution Created'>   */}
-        <Widget title=''>  
-          <Graph percentage={percentage} options={['Completed', 'Pending']}/>
+        <Widget width="100%" title=''>  
+          <p>Horn Quota</p>
+          
+          <Graph percentage={percentage} options={['Used', 'Left']}/>
         </Widget>
       </>
     );
