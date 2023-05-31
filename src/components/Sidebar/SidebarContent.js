@@ -19,18 +19,60 @@ import { BsDeviceSsdFill } from 'react-icons/bs';
 
 // this function creates the links and collapses that appear in the sidebar (left menu)
 
-
+const devicesData = [
+  {id: "1",name:"RU-245", clicked:"deactive"},
+  {id: "2",name:"Sedean Car", clicked:"deactive"},
+  {id: "3",name:"RU-756", clicked:"deactive"},
+  {id: "4",name:"SUV", clicked:"deactive"}
+];
 const SidebarContent = ({ logoText, routes }) => {
 
     // to check for active links and opened collapses
   let location = useLocation();
   // this is for the rest of the collapses
   const [state, setState] = React.useState({});
+  const [devices, setDevices] = React.useState([]);
+
+  React.useEffect(()=>{
+    setDevices(devicesData)
+  
+  }, [])
 
   // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) => {
-    return location.pathname === routeName ? "active" : "";
-  };
+  // const activeRoute = (routeName) => {
+  //   return location.pathname === routeName ? "active" : "";
+  // };
+  const handleClick = (id)=>{
+   const updatedDevices = devices.map((device)=>{
+      if (device.id==id){
+        if(device.clicked==="deactive"){
+          device.clicked="active"
+        }
+      }
+      if (device.id!=id){
+        if(device.clicked==="active"){
+          device.clicked="deactive"
+        }
+      }
+      return device
+    })
+
+    setDevices(updatedDevices)
+  }
+
+  // const handleClick = (name)=>{
+  //   // console.log(name)
+  // //  const updatedDevices = devices.map((device)=>{
+  // //     if (device.name===name){
+  // //       if(device.clicked==="deactive"){
+  // //         device.clicked="active"
+  // //         setDevices([...devices,device])
+  // //       }
+  // //       // device.clicked = "active";
+  // //     }
+  // //   })
+  // }
+
   const createLinks = (routes) => {
     // Chakra Color Mode
     const activeBg = useColorModeValue("white", "gray.700");
@@ -38,13 +80,8 @@ const SidebarContent = ({ logoText, routes }) => {
     const activeColor = useColorModeValue("gray.700", "white");
     const inactiveColor = useColorModeValue("gray.400", "gray.400");
 
-    const devices = [
-      {name:"RU-245", clicked:"deactive"},
-      {name:"Sedean Car", clicked:"active"},
-      {name:"RU-756", clicked:"deactive"},
-      {name:"SUV", clicked:"deactive"}
-    ];
-    return devices.map((prop, key) => {
+    
+    return devices?.map((prop, key) => {
       // if (prop.redirect) {
       //   return null;
       // }
@@ -180,7 +217,7 @@ const SidebarContent = ({ logoText, routes }) => {
       //   </NavLink>
       // );
       return (
-        <Box key={prop.name}>
+        <Box key={prop.id}>
           {prop.clicked === "active" ? (
             <Button
               boxSize="initial"
@@ -227,11 +264,12 @@ const SidebarContent = ({ logoText, routes }) => {
               </Flex>
             </Button>
           ) : (
-            <Button
+            <Button 
+              onClick={ ()=>{handleClick(prop.id)}}
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
-              bg="transparent"
+              bg="white"
               mb={{
                 xl: "12px",
               }}
@@ -282,7 +320,7 @@ const SidebarContent = ({ logoText, routes }) => {
 
   return (
     <>
-        <Box pt={"25px"} mb="12px">
+      <Box pt={"25px"} mb="12px">
       <Link
         href={`${process.env.PUBLIC_URL}/#/`}
         target="_blank"

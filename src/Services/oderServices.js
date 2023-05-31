@@ -87,7 +87,7 @@ console.log(changedOrder)
 })
 return result;
 }
-export async function createOrder(order) {
+export async function createOrder() {
   return await fetch(url+'order', {
     method: 'POST',
     headers: {
