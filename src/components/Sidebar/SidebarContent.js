@@ -15,6 +15,7 @@ import { Separator } from "components/Separator/Separator";
 import { SidebarHelp } from "components/Sidebar/SidebarHelp";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { BsDeviceSsdFill } from 'react-icons/bs';
 
 // this function creates the links and collapses that appear in the sidebar (left menu)
 
@@ -37,8 +38,13 @@ const SidebarContent = ({ logoText, routes }) => {
     const activeColor = useColorModeValue("gray.700", "white");
     const inactiveColor = useColorModeValue("gray.400", "gray.400");
 
-    const devices = [{name:"RU-245", clicked:"active", icon:"icon"}];
-    return routes.map((prop, key) => {
+    const devices = [
+      {name:"RU-245", clicked:"deactive"},
+      {name:"Sedean Car", clicked:"active"},
+      {name:"RU-756", clicked:"deactive"},
+      {name:"SUV", clicked:"deactive"}
+    ];
+    return devices.map((prop, key) => {
       // if (prop.redirect) {
       //   return null;
       // }
@@ -175,12 +181,12 @@ const SidebarContent = ({ logoText, routes }) => {
       // );
       return (
         <Box key={prop.name}>
-          {activeRoute(prop.layout + prop.path) === "active" ? (
+          {prop.clicked === "active" ? (
             <Button
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
-              bg={activeBg}
+              // bg={activeBg}
               mb={{
                 xl: "12px",
               }}
@@ -207,18 +213,16 @@ const SidebarContent = ({ logoText, routes }) => {
               <Flex>
                 
                   <IconBox
-                    bg="teal.300"
+                    bg="yellow.300"
                     color="white"
                     h="30px"
                     w="30px"
                     me="12px"
                   >
-                    {prop.icon}
+                    <Icon as={BsDeviceSsdFill} color="gray.700" cursor="pointer" fontSize={'18'} />
                   </IconBox>
                 <Text color={activeColor} my="auto" fontSize="sm">
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
+                  {prop.name}
                 </Text>
               </Flex>
             </Button>
@@ -252,9 +256,7 @@ const SidebarContent = ({ logoText, routes }) => {
               }}
             >
               <Flex>
-                {typeof prop.icon === "string" ? (
-                  <Icon>{prop.icon}</Icon>
-                ) : (
+                
                   <IconBox
                     bg={inactiveBg}
                     color="teal.300"
@@ -262,9 +264,9 @@ const SidebarContent = ({ logoText, routes }) => {
                     w="30px"
                     me="12px"
                   >
-                    {prop.icon}
+                    <Icon as={BsDeviceSsdFill} color="gray.400" cursor="pointer" fontSize={'18'} />
                   </IconBox>
-                )}
+                
                 <Text color={inactiveColor} my="auto" fontSize="sm">
                   {prop.name}
                 </Text>
