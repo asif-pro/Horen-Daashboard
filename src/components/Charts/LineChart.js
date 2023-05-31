@@ -1,35 +1,50 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
-import { lineChartData, lineChartOptions } from "variables/charts";
 
-class LineChart extends React.Component {
-  constructor(props) {
-    super(props);
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from "recharts";
 
-    this.state = {
-      chartData: [],
-      chartOptions: {},
-    };
-  }
+function HornsPerDay({chartData}){
 
-  componentDidMount() {
-    this.setState({
-      chartData: lineChartData,
-      chartOptions: lineChartOptions,
-    });
-  }
 
-  render() {
-    return (
-      <ReactApexChart
-        options={this.state.chartOptions}
-        series={this.state.chartData}
-        type="area"
-        width="100%"
-        height="100%"
+  return (
+    <>    { chartData?.length > 0 && (
+      <LineChart
+      width={950}
+      height={300}
+      data={chartData}
+      margin={{
+        top: 5,
+        right: 10,
+        left: 10,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="date" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line
+        type="monotone"
+        dataKey="horns"
+        stroke="#f7cf47"
+        strokeWidth={4}
+      
       />
-    );
-  }
-}
+      
+    </LineChart>)
+   
 
-export default LineChart;
+    }
+     </>
+    
+  )
+}
+export default HornsPerDay;

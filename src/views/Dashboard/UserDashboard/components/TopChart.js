@@ -4,8 +4,9 @@ import { Box, Grid,Spacer, GridItem, Flex, HStack, Text, useColorModeValue, Inpu
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import React from "react";
+import HornsPerDay from "components/Charts/LineChart";
 
-const TopChart = ({ title, percentage, chart }) => {
+const TopChart = ({ title, percentage, chartData }) => {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Card p='28px 10px 16px 0px' mb={{ sm: "26px", lg: "0px" }}>
@@ -43,7 +44,7 @@ const TopChart = ({ title, percentage, chart }) => {
         
       </CardHeader>
       <Box w='100%' h={{ sm: "300px" }} ps='8px'>
-        {chart}
+        <HornsPerDay chartData={chartData}/>
       </Box>
     </Card>
   );

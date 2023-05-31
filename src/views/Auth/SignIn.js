@@ -102,6 +102,7 @@ function SignIn() {
       localStorage.setItem('accessToken', result.accessToken)
       localStorage.setItem('userType', result.type)
       localStorage.setItem('userId', result.id)
+      
       console.log(result)
       localStorage.setItem('profilePic', result.profilePic)
       setErrorMsg(false)

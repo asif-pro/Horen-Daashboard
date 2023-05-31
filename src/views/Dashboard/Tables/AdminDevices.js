@@ -3,9 +3,7 @@ import { Flex, Box, Button, Icon, useDisclosure, FormControl, FormLabel, Input, 
 import React from "react";
 import Authors from "./components/Authors";
 import AdminDevicesTable from "./components/AdminDevices";
-import { tablesTableData, dashboardTableData } from "variables/general";
 import { FaPlus } from "react-icons/fa";
-import QRCode from "qrcode.react"
 import { postDevice, getAllDevices } from "Services/deviceServices";
 
 
@@ -71,8 +69,6 @@ function AdminDevices() {
     })
     
   },[])
-
-
 
   return (
     <Flex direction='column' pt={{ base: "120px", md: "75px" }}>

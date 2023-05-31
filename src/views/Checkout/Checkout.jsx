@@ -53,8 +53,11 @@ const Checkout = () => {
        const user_id = localStorage.getItem('userId');
       //  if(localStorage.getItem('orderDetails')){
         const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
-        orderDetails.user_id = user_id ;
-        setOrderInfo(orderDetails);
+        if(orderDetails){
+          orderDetails.user_id = user_id ;
+          setOrderInfo(orderDetails);
+        }
+       
       //  }
     //    console.log(orderDetails)
       }, [])
