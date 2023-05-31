@@ -75,7 +75,10 @@ var dashRoutes = [
     component: Drawer,
     layout: "/admin",
   },
-  
+  {
+    name: "RU-23490",
+    icon: <DocumentIcon color="inherit" />,
+  },
   // {
   //   path: "/user/groups",
   //   name: "Groups",
