@@ -3,21 +3,37 @@ import { Flex, Icon, Img, SimpleGrid, Text, useColorModeValue } from "@chakra-ui
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import IconBox from "components/Icons/IconBox";
-import { WalletIcon } from "components/Icons/Icons";
 import { StatsIcon } from "components/Icons/Icons";
 import { Separator } from "components/Separator/Separator";
 import React from "react";
 import ChartStatistics from "views/Dashboard/Dashboard/components/ChartStatistics";
-import MiniStatistics from "views/Dashboard/Dashboard/components/MiniStatistics";
 import Guage from "components/Guage/Guage";
 import DashboardStatistics from "views/Dashboard/UserDashboard/components/DashboardStatistics";
 import { FaWallet } from "react-icons/fa";
+import axios from "axios";
+
 const DashboardProfileCard = ({ icon, title, description, amount }) => {
+
   const iconteal = useColorModeValue("teal.300", "teal.300");
   const textColor = useColorModeValue("gray.700", "white");
-  const profilePic = localStorage.getItem('profilePic')
+  const profilePic = localStorage.getItem('profilePic');
+  const userId = localStorage.getItem('userId');
+  const [user,setUser] = React.useState({});
+React.useEffect(()=>{
+  async function fetchName(){
+    await axios.get(`${process.env.REACT_APP_USERS_URL}profile/${userId}`).then((res)=>{
+      //  return res.json()
+       setUser(res.data)
+    }).then((res)=>{
+      
+    });
+    
+    
+  }
+  fetchName()
 
+},[])
+console.log(user)
   return (
     <Card p='16px' display='flex' align='center' justify='center'>
       <CardBody>
@@ -34,14 +50,14 @@ const DashboardProfileCard = ({ icon, title, description, amount }) => {
             align='center'
             w='100%'>
             <Text fontSize='md' color={textColor} fontWeight='bold'>
-              {title}
+              {user?.name}
             </Text>
             <Text
               mb='24px'
               fontSize='xs'
               color='gray.400'
               fontWeight='semibold'>
-              {description}
+              {user?.type?.toUpperCase()}{" "}USER
             </Text>
             <Separator />
           </Flex>

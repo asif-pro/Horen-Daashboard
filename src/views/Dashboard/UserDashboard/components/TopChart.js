@@ -4,8 +4,9 @@ import { Box, Grid,Spacer, GridItem, Flex, HStack, Text, useColorModeValue, Inpu
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import React from "react";
+import HornsPerDay from "components/Charts/LineChart";
 
-const TopChart = ({ title, percentage, chart }) => {
+const TopChart = ({ title, percentage, chartData }) => {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Card p='28px 10px 16px 0px' mb={{ sm: "26px", lg: "0px" }}>
@@ -14,31 +15,21 @@ const TopChart = ({ title, percentage, chart }) => {
           <Text fontSize='lg' color={textColor} fontWeight='bold' mb='6px'>
             {title}
           </Text>
+          <Spacer/>
           <Select ml={'2'} placeholder='Select Device' width={'9vw'}>
             <option value='option2'>Device1</option>
             <option value='option3'>Device2</option>
             <option value='option1'>Device3</option>
             <option value='option1'>Device4</option>
           </Select>
-          <Spacer/>
-          <Text p={'2'}  fontSize='lg' color={textColor} fontWeight='bold' mb='6px'>
-            From:
-          </Text>
-          <Input
-            placeholder="Select Date and Time"
-            size="md"
-            width={'9vw'}
-            type="date"
-            />
-            <Text p={'2'} pl={'5'}  fontSize='lg' color={textColor} fontWeight='bold' mb='6px'>
-            To:
-          </Text>
-          <Input
-            placeholder="Select Date and Time"
-            size="md"
-            width={'9vw'}
-            type="date"
-            />
+         
+         
+          <Select ml={'2'} placeholder='Time-frame' width={'9vw'}>
+            <option value='option2'>Week</option>
+            <option value='option3'>Month</option>
+     
+          </Select>
+            
           {/* <Text fontSize='md' fontWeight='medium' color='gray.400'>
             <Text
               as='span'
@@ -53,7 +44,7 @@ const TopChart = ({ title, percentage, chart }) => {
         
       </CardHeader>
       <Box w='100%' h={{ sm: "300px" }} ps='8px'>
-        {chart}
+        <HornsPerDay chartData={chartData}/>
       </Box>
     </Card>
   );

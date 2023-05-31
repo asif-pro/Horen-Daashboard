@@ -4,56 +4,70 @@ import {
     Flex,
     Grid,
     GridItem,
-    HStack,
-    Image,
-    SimpleGrid,
-    useColorModeValue,
     Icon
   } from "@chakra-ui/react";
   import { FaPaypal, FaWallet } from "react-icons/fa";
 //   // assets
-  import peopleImage from "assets/img/people-image.png";
-  import logoChakra from "assets/svg/logo-white.svg";
-  import BarChart from "components/Charts/BarChart";
   import LineChart from "components/Charts/LineChart";
   import BellChart from "components/Charts/BellChart";
-  import MiniStatistics from "../Dashboard/components/MiniStatistics";
   // Custom icons
-  import {
-    CartIcon,
-    DocumentIcon,
-    GlobeIcon,
-    WalletIcon,
-    RocketIcon,
-    StatsIcon,
-  } from "components/Icons/Icons.js";
   import React from "react";
-//   import { dashboardTableData, timelineData } from "variables/general";
-  import ActiveUsers from "./components/ActiveUsers";
-  import BuiltByDevelopers from "./components/BuiltByDevelopers";
-//   import MiniStatistics from "./components/MiniStatistics";
-//   import OrdersOverview from "./components/OrdersOverview";
-//   import Projects from "./components/Projects";
-  import SalesOverview from "./components/SalesOverview";
-  import WorkWithTheRockets from "./components/WorkWithTheRockets";
-//   import PaymentStatistics from "./components/PaymentStatistics";
-import PaymentStatistics from "../Billing/components/PaymentStatistics";
+import axios from 'axios';
+
 import DashboardStatistics from "./components/DashboardStatistics";
-import ChartStatistics from "./components/ChartStatistics";
 import DashboardProfileCard from "../Billing/components/DashboardProfileCard";
-import Guage from "components/Guage/Guage";
+
 import TopChart from "./components/TopChart";
 import AreaHorn from "./components/AreaHorn";
 import GlobalHorn from "./components/GlobalHorn";
+import { cleanDataByTime, formatForApex } from "utils/chartCleaning";
+import { getWeekBracket } from "utils/chartCleaning";
 
   
   function UserDashboard() {
     // const iconBoxInside = useColorModeValue("white", "white");
+
+    const [devices, setDevices] = React.useState([]);
+    const [lineChartData, setLineChartData] = React.useState({});
+
     if(localStorage.getItem('orderDetails')){
       const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
-      console.log(orderDetails)
     }
-      
+    
+      React.useEffect(() => {
+        
+        const fetchchartData = async () => {
+          try {
+            const userId = localStorage.getItem('userId');
+         
+            const deviceResponse = await fetch(
+              `${process.env.REACT_APP_DEVICES_URL}device/user_id/${userId}`
+            );
+            const deviceData = await deviceResponse.json();
+            setDevices(deviceData);
+            if(deviceData.length > 0){
+              const ruId = deviceData[0].RU_id;
+              const requestBody = {
+                deviceRUids: [ruId],
+              };
+              console.log(process.env.REACT_APP_SIGNAL_URL)
+              axios.post(`${process.env.REACT_APP_SIGNAL_URL}signal/SignalSumByDateByDevices`, requestBody)
+                .then((res)=>{
+                  const week = getWeekBracket();
+                  return cleanDataByTime(week,res.data)
+                })
+                .then((res)=>{
+                  setLineChartData(res);   
+                });
+            }
+            
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchchartData();
+      }, [])
+    
   
     return (
         <Flex flexDirection='column' pt={{ base: "50px", md: "20px" }}>
@@ -112,7 +126,7 @@ import GlobalHorn from "./components/GlobalHorn";
                             <TopChart 
                                 title={"Horns played per Day"}
                                 percentage={5}
-                                chart={<LineChart />}
+                                chartData={lineChartData}
                                 />
                         </Box>
                 </GridItem>
@@ -120,44 +134,11 @@ import GlobalHorn from "./components/GlobalHorn";
                 <GridItem  h='100%'  colSpan={2}>
                     <DashboardProfileCard
                         icon={<Icon h={"24px"} w={"24px"} color='white' as={FaPaypal} />}
-                        title={"Mr. Eshtiaque Khan"}
+                       
                         description={"Project Code"}
                         amount={4550}
                     />
-                    {/* <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={3}>
-                        <ChartStatistics
-                        title={"Registered"}
-                        amount={"320"}
-                        percentage={40}
-                        icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
-                        />
-                        <ChartStatistics
-                        title={"Active"}
-                        amount={"320"}
-                        percentage={40}
-                        icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
-                        />
-                        <ChartStatistics
-                        title={"Trips"}
-                        amount={"320"}
-                        percentage={40}
-                        icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
-                        />
-                    </SimpleGrid>
-                    <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}>
-                        <MiniStatistics
-                        title={"Average per minute"}
-                        amount={"119 dB"}
-                        percentage={17}
-                        icon={<WalletIcon h={"24px"} w={"24px"} color='white' />}
-                        />
-                        <MiniStatistics
-                        title={"Average per km"}
-                        amount={"14 dB"}
-                        percentage={14}
-                        icon={<WalletIcon h={"24px"} w={"24px"} color='white' />}
-                        />
-                    </SimpleGrid> */}
+             
                 </GridItem>
             </Grid>            
 
