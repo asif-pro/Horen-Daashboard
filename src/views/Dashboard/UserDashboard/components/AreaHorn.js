@@ -3,10 +3,27 @@ import { Box, Grid,Spacer, GridItem, Flex, HStack, Text, useColorModeValue, Sele
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
+import BellChart from "components/Charts/BellChart";
 import React from "react";
 
 const AreaHorn = ({ title, percentage, chart }) => {
   const textColor = useColorModeValue("gray.700", "white");
+  const [chartData, setChartData] = React.useState({});
+  React.useEffect(()=>{
+  
+    
+    setChartData([ 
+      {hornCount:20,honkers:4},
+      {hornCount:30,honkers:8},
+      {hornCount:40,honkers:15},
+      {hornCount:50,honkers:30},
+      {hornCount:60,honkers:40},
+      {hornCount:70,honkers:30},
+      {hornCount:80,honkers:15},
+      {hornCount:90,honkers:8},
+      {hornCount:100,honkers:4}])
+
+  },[]);
   return (
     <Card p='28px 10px 16px 0px' mb={{ sm: "26px", lg: "0px" }}>
       <CardHeader mb='20px' pl='22px'>
@@ -35,7 +52,7 @@ const AreaHorn = ({ title, percentage, chart }) => {
         
       </CardHeader>
       <Box w='100%' h={{ sm: "300px" }} ps='8px'>
-        {chart}
+        <BellChart chartData={chartData}/>
       </Box>
     </Card>
   );

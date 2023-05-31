@@ -90,25 +90,20 @@ console.log(user)
                     </SimpleGrid>
                     <SimpleGrid justifyContent="center" gap={{ lg: "12px" }} pl={'60px'} columns={1}><Guage></Guage></SimpleGrid>
                     <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}>
-                        {/* <MiniStatistics
-                        title={"Average per minute"}
-                        amount={"119 dB"}
-                        percentage={17}
-                        icon={<WalletIcon h={"24px"} w={"24px"} color='white' />}
-                        /> */}
+                        
                         <DashboardStatistics
                           icon={<Icon h={"24px"} w={"24px"} color='white' as={FaWallet} />}
-                          title={"db"}
-                          description={"Per Minute"}
+                          title={"horns"}
+                          description={"Per Hour"}
                           amount={17}
-                          stat={119}
+                          stat={17}
                         />
                         <DashboardStatistics
                           icon={<Icon h={"24px"} w={"24px"} color='white' as={FaWallet} />}
-                          title={"db"}
+                          title={"horns"}
                           description={"Per km"}
-                          amount={14}
-                          stat={110}
+                          amount={10}
+                          stat={10}
                         />
                     </SimpleGrid>
     </Card>
