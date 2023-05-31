@@ -53,17 +53,17 @@ export default function Configurator(props) {
         <DrawerContent>
           <DrawerHeader pt="24px" px="24px">
             <DrawerCloseButton />
-            <Text fontSize="xl" fontWeight="bold" mt="16px">
+            {/* <Text fontSize="xl" fontWeight="bold" mt="16px">
               Purity UI Configurator
             </Text>
             <Text fontSize="md" mb="16px">
               See your dashboard options.
             </Text>
-            <Separator />
+            <Separator /> */}
           </DrawerHeader>
           <DrawerBody w="340px" ps="24px" pe="40px">
             <Flex flexDirection="column">
-              <Box>
+              {/* <Box>
                 <Text fontSize="md" fontWeight="600">
                   Sidenav Type
                 </Text>
@@ -98,8 +98,8 @@ export default function Configurator(props) {
                     Opaque
                   </Button>
                 </Flex>
-              </Box>
-              <Box
+              </Box> */}
+              {/* <Box
                 display={fixedDisplay}
                 justifyContent="space-between "
                 mb="16px"
@@ -120,11 +120,12 @@ export default function Configurator(props) {
                     }
                   }}
                 />
-              </Box>
+              </Box> */}
               <Flex
                 justifyContent="space-between"
                 alignItems="center"
                 mb="24px"
+                mt="100px"
               >
                 <Text fontSize="md" fontWeight="600" mb="4px">
                   Dark/Light
@@ -135,7 +136,7 @@ export default function Configurator(props) {
               </Flex>
 
               <Separator />
-              <Box mt="24px">
+              {/* <Box mt="24px">
                 <Text fontSize="md" fontWeight="600">
                   Sidenav Type
                 </Text>
@@ -221,7 +222,7 @@ export default function Configurator(props) {
                     </Link>
                   </Flex>
                 </Box>
-              </Box>
+              </Box> */}
             </Flex>
           </DrawerBody>
         </DrawerContent>
