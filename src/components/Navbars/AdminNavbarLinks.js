@@ -105,6 +105,7 @@ export default function HeaderLinks(props) {
         <Button
           ms="0px"
           px="0px"
+          ml="50px"
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
           variant="transparent-with-icon"
@@ -133,7 +134,7 @@ export default function HeaderLinks(props) {
         // logo={logo}
         {...rest}
       />
-      <SettingsIcon
+      {/* <SettingsIcon
         cursor="pointer"
         ms={{ base: "16px", xl: "0px" }}
         me="16px"
@@ -142,8 +143,8 @@ export default function HeaderLinks(props) {
         color={navbarIcon}
         w="18px"
         h="18px"
-      />
-      <Menu>
+      /> */}
+      {/* <Menu>
         <MenuButton>
           <BellIcon color={navbarIcon} w="18px" h="18px" />
         </MenuButton>
@@ -178,7 +179,7 @@ export default function HeaderLinks(props) {
             </MenuItem>
           </Flex>
         </MenuList>
-      </Menu>
+      </Menu> */}
     </Flex>
   );
 }
