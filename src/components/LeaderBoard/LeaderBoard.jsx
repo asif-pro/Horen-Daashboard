@@ -8,23 +8,24 @@ import './LeaderBoard.css'
 
 const LeaderBoard = () => {
   return (
-    <Box className="leaderboardContainer">
-        <Box className="leaderboardTopContainer">
-            <Box >
+    // <Box className="leaderboardContainer">
+      <>
+         <Flex p={30} justifyContent="center" className="leaderboardTopContainer">
+            <Box pl={20} pr={20} >
                 <GlobalRankTable
                     title={"Global Rank"}
                     captions={["Rank", "Name", "Horns",]}
                     data={tablesTableData}
                 />
             </Box> 
-            <Box>
+            <Box pl={20} pr={20}>
                 <GlobalRankTable
                     title={"Country Rank"}
                     captions={["Rank", "Name", "Horns",]}
                     data={tablesTableData}
                 />
             </Box> 
-        </Box>
+        </Flex>
         <Box className="leaderboardBottomContainer">
             {((localStorage.getItem('userType')==='corporate') || (localStorage.getItem('userType')==='super_admin')) && <Box >
                     <GlobalRankTable
@@ -41,7 +42,8 @@ const LeaderBoard = () => {
                     />
                 </Box>}
         </Box>
-    </Box>
+    
+        </>
   )
 }
 
