@@ -64,7 +64,8 @@ function SignIn() {
   const [address, setAddress] = React.useState('')
   const unitPrice = 6000;
   const [requiredFields, setRequiredFields] = React.useState(false)
-
+  const [deliverCharge, setDeliverCharge] = React.useState(0)
+  
 
 
   const handleQuantiy = (e) => {
@@ -122,6 +123,7 @@ function SignIn() {
         }
     }
     localStorage.setItem('orderDetails',JSON.stringify(orderDetails))
+    localStorage.setItem('deliveryCharge',deliverCharge)
 
     if (localStorage.getItem('accessToken'))
     {
@@ -164,14 +166,22 @@ function SignIn() {
 //   }, [zones])
 
   React.useEffect(() => {
-    setTotalAmount(unitPrice*quantity)
-  }, [quantity])
+    setTotalAmount((unitPrice*quantity)+deliverCharge)
+  }, [quantity, deliverCharge])
 
   React.useEffect(() => {
     if (validateForm()) setRequiredFields(true);
     if (! validateForm()) setRequiredFields(false);
   }, [quantity, selectedZone, selectedCity, selectedArea, phone]);
 
+  React.useEffect(()=>{
+    if(selectedCity.city == 'Dhaka'){
+      setDeliverCharge(100)
+    }
+    if(selectedCity.city == 'Chattagram'){
+      setDeliverCharge(200)
+    }
+  }, [selectedCity])
 //   React.useEffect(() => {
 //     if(selectedCity==='Dhaka'){ setZones(zoneA)}
 //     if(selectedCity==='Chittagong'){ setZones(zoneB)}
@@ -301,6 +311,9 @@ function SignIn() {
                 size='lg'
                 ref={initialRef}
               />
+              <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
+                Delivery Charge : {deliverCharge}
+              </FormLabel>
             {/* <Grid>
             <Menu>
                 <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>

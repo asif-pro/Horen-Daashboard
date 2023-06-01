@@ -14,6 +14,7 @@ const CheckoutConfirmation = ({
   orderDetails
 }) => {
   const history =  useHistory()
+  const textColor = useColorModeValue("gray.700", "white");
 
   const placeOrder = async ()=>{
    const { _id } = await createOrder(orderDetails);
@@ -31,6 +32,7 @@ const CheckoutConfirmation = ({
         // Linking.openURL(res.data.url);
       }).then((result)=>{
         localStorage.removeItem('orderDetails')
+        localStorage.removeItem('deliverCharge');
         history.push('/admin/user/dashboard')
       })
   } catch (error) {
@@ -41,21 +43,21 @@ const CheckoutConfirmation = ({
   const goBack = ()=>{
     history.push('/auth/order')
     localStorage.removeItem('orderDetails');
+    localStorage.removeItem('deliverCharge');
   }
-  const textColor = useColorModeValue("gray.700", "white");
-
+  
   return (
     <Card p='16px' my={{ sm: "24px", xl: "250px" }} ml={'500px'}>
       <CardHeader p='12px 5px' mb='12px'>
-        <Text fontSize='lg' color={textColor} fontWeight='bold'>
+        <Text fontSize='lg' color={textColor} fontWeight='bold' >
           {title}
         </Text>
       </CardHeader>
       <CardBody px='5px'>
         <Flex direction='column'>
-          <Text fontSize='md' color='gray.500' fontWeight='400' mb='30px'>
+          {/* <Text fontSize='md' color='gray.500' fontWeight='400' mb='30px'>
             Description
-          </Text>
+          </Text> */}
           <Flex align='center' mb='18px'>
             <Text fontSize='md' color={textColor} fontWeight='bold' me='10px'>
               Number of Device:{" "}
@@ -93,6 +95,14 @@ const CheckoutConfirmation = ({
 
             }
 
+          </Flex>
+          <Flex align='center' mb='18px'>
+            <Text fontSize='md' color={textColor} fontWeight='bold' me='10px'>
+              Delivery Charge:{" "}
+            </Text>
+            <Text fontSize='md' color='gray.500' fontWeight='400'>
+              {localStorage.getItem('deliveryCharge')}
+            </Text>
           </Flex>
           <Flex align='center' mb='18px'>
           <Button onClick={placeOrder}
