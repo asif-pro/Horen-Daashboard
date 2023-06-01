@@ -16,15 +16,11 @@ import { SidebarHelp } from "components/Sidebar/SidebarHelp";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { BsDeviceSsdFill } from 'react-icons/bs';
+import { getDevicesByUserId } from "Services/deviceServices";
 
 // this function creates the links and collapses that appear in the sidebar (left menu)
 
-const devicesData = [
-  {id: "1",name:"RU-245", clicked:"deactive"},
-  {id: "2",name:"Sedean Car", clicked:"deactive"},
-  {id: "3",name:"RU-756", clicked:"deactive"},
-  {id: "4",name:"SUV", clicked:"deactive"}
-];
+
 const SidebarContent = ({ logoText, routes }) => {
 
     // to check for active links and opened collapses
@@ -34,21 +30,36 @@ const SidebarContent = ({ logoText, routes }) => {
   const [devices, setDevices] = React.useState([]);
 
   React.useEffect(()=>{
-    setDevices(devicesData)
+    if(localStorage.getItem('userType')==='individual'){
+      getDevicesByUserId(localStorage.getItem('userId')).then((res)=>{
+        res.map((data)=>{
+          data.clicked='deactive'
+        })
+        res[0].clicked = 'active'
+        setDevices(res);
+      })
+    }
+    if(localStorage.getItem('userType')==='company'){
+      console.log('Companyr jnne sidebar contetnt set kora hoy nai')
+    }
+    if(localStorage.getItem('userType')==='super_admin'){
+      console.log('super_admin jnne sidebar contetnt set kora hoy nai')
+    }
   }, [])
 
   // verifies if routeName is the one active (in browser input)
   // const activeRoute = (routeName) => {
   //   return location.pathname === routeName ? "active" : "";
   // };
-  const handleClick = (id)=>{
+  const handleClick = (RU_id)=>{
    const updatedDevices = devices.map((device)=>{
-      if (device.id==id){
+      if (device.RU_id==RU_id){
         if(device.clicked==="deactive"){
           device.clicked="active"
+          //logic will go here
         }
       }
-      if (device.id!=id){
+      if (device.RU_id!=RU_id){
         if(device.clicked==="active"){
           device.clicked="deactive"
         }
@@ -216,12 +227,13 @@ const SidebarContent = ({ logoText, routes }) => {
       //   </NavLink>
       // );
       return (
-        <Box key={prop.id}>
+        <Box key={prop.RU_id}>
           {prop.clicked === "active" ? (
             <Button
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
+              color={'teal.300'}
               // bg={activeBg}
               mb={{
                 xl: "12px",
@@ -250,7 +262,6 @@ const SidebarContent = ({ logoText, routes }) => {
                 
                   <IconBox
                     bg="yellow.300"
-                    color="white"
                     h="30px"
                     w="30px"
                     me="12px"
@@ -258,17 +269,18 @@ const SidebarContent = ({ logoText, routes }) => {
                     <Icon as={BsDeviceSsdFill} color="gray.700" cursor="pointer" fontSize={'18'} />
                   </IconBox>
                 <Text color={activeColor} my="auto" fontSize="sm">
-                  {prop.name}
+                {prop.pseudoname ? prop.pseudoname : prop.RU_id }
                 </Text>
               </Flex>
             </Button>
           ) : (
             <Button 
-              onClick={ ()=>{handleClick(prop.id)}}
+              onClick={ ()=>{handleClick(prop.RU_id)}}
               boxSize="initial"
               justifyContent="flex-start"
               alignItems="center"
               bg="white"
+              
               mb={{
                 xl: "12px",
               }}
@@ -305,7 +317,8 @@ const SidebarContent = ({ logoText, routes }) => {
                   </IconBox>
                 
                 <Text color={inactiveColor} my="auto" fontSize="sm">
-                  {prop.name}
+                  {/* {prop.RU_id} */}
+                  {prop.pseudoname ? prop.pseudoname : prop.RU_id }
                 </Text>
               </Flex>
             </Button>
