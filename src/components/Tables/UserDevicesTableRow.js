@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import QRCode from "qrcode.react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { updateDevicePseudoName } from "Services/deviceServices";
 // import Employee from "views/Company/Employee/Employee";
 
 function UserDevicesTableRow(props) {
@@ -29,9 +30,9 @@ function UserDevicesTableRow(props) {
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   const [newPseudoname,setNewPseudoname] = React.useState("")
-  const [deviceIDtoChange, setDeviceIDtoChange] = React.useState("")
+  const [deviceRUIDtoChange, setDeviceRUIDtoChange] = React.useState("")
 
-  const { RU_id, qr_code, pseudo_name, device_id} = props;
+  const { RU_id, qr_code, pseudo_name, device_id, setAllDevices} = props;
 
 React.useEffect(()=>{
   setNewPseudoname(pseudo_name);
@@ -39,12 +40,22 @@ React.useEffect(()=>{
 
 function handlePseudonameChange(e){
   setNewPseudoname(e.target.value);
-  setDeviceIDtoChange(e.target.name);
+  setDeviceRUIDtoChange(e.target.name);
 }
 
 const changePseudoName = () => {
-  console.log(deviceIDtoChange)
-  console.log(newPseudoname);
+  if(deviceRUIDtoChange=="") return onClose()
+  updateDevicePseudoName(deviceRUIDtoChange, newPseudoname).then((res)=>{
+    setAllDevices(prev=>{
+      return prev.map((device)=>{
+        if(device.RU_id===res.data.RU_id) {
+          return res.data;
+        }
+        return device; 
+      })
+    })
+    onClose()
+  })
 }
 
 
@@ -65,11 +76,11 @@ const changePseudoName = () => {
       </Td>
       <Td>
       <QRCode
-        id="123456"
+        // id="123456"
         value={qr_code}
         size={75}
         level={"H"}
-        includeMargin={true}
+        // includeMargin={true}
       />
       </Td>
       <Td>
@@ -103,7 +114,7 @@ size="xl"
   <ModalBody pb={6}>
   <FormControl>
               <FormLabel>Pseudo Name</FormLabel>
-              <Input name={device_id} value={newPseudoname} onChange={handlePseudonameChange} placeholder='Enter a Pseudo Name for the Device' />
+              <Input name={RU_id} value={newPseudoname} onChange={handlePseudonameChange} placeholder='Enter a Pseudo Name for the Device' />
             </FormControl>
 
     {/* <FormControl mt={4}>

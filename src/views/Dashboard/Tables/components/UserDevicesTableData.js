@@ -16,7 +16,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import UserDevicesTableRow from "components/Tables/UserDevicesTableRow";
 import React from "react";
 
-const UserDevicesTableData = ({ title, captions, data }) => {
+const UserDevicesTableData = ({ title, captions, data, setAllDevices}) => {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Card my='22px' overflowX={{ sm: "scroll", xl: "hidden" }}>
@@ -48,7 +48,8 @@ const UserDevicesTableData = ({ title, captions, data }) => {
                   device_id= {row._id}
                   RU_id={row.RU_id}
                   qr_code={row.qr_code}
-                  pseudo_name={row.pseudo_name ? row.pseudo_name : row.RU_id }
+                  pseudo_name={row.pseudoname ? row.pseudoname : row.RU_id }
+                  setAllDevices={setAllDevices}
                 />
               );
             })}

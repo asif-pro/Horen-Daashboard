@@ -79,7 +79,7 @@ export async function updateDeliveryStatus(id,changedOrder) {
 //     console.log(response);
 //     // response.json()
 //   });
-console.log(changedOrder)
+// console.log(changedOrder)
  const result =  await axios({
   method: 'put',
   url: `${url}order/${id}`,
@@ -88,6 +88,7 @@ console.log(changedOrder)
 return result;
 }
 export async function createOrder(order) {
+  
   return await fetch(url+'order', {
     method: 'POST',
     headers: {

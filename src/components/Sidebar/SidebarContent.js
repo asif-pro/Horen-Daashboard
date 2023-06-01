@@ -35,7 +35,6 @@ const SidebarContent = ({ logoText, routes }) => {
 
   React.useEffect(()=>{
     setDevices(devicesData)
-  
   }, [])
 
   // verifies if routeName is the one active (in browser input)

@@ -106,6 +106,7 @@ async function handleSave (){
         title={"All Devices"}
         captions={["Device ID", "QR Code", "Pseudo Name", "Action"]}
         data={allDevices}
+        setAllDevices={setAllDevices}
       />
 
 

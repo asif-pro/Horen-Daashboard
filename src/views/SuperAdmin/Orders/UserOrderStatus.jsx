@@ -12,7 +12,7 @@ const UserOrderStatus = () => {
         getOrdersByUserId(userId).then((res)=>{
           return res
         }).then((order)=>{
-            // console.log(order)
+          console.log(order)
           setOrders(order)
         })
     
