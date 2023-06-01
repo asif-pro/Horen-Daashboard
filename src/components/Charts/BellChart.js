@@ -1,6 +1,5 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
-import { bellChartData, bellChartOptions } from "variables/charts";
+
 import {
   LineChart,
   Line,
@@ -8,7 +7,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  ReferenceLine
 } from "recharts";
 
 
@@ -40,6 +40,7 @@ function BellChart({chartData}){
         strokeWidth={4}
       
       />
+      <ReferenceLine x={50} strokeWidth={4} stroke={"green"} style={{color:"#000000"}} colorProfile="#000000"/>
       
     </LineChart>)
    
