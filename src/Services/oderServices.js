@@ -98,7 +98,7 @@ export async function createOrder(order) {
     credentials: "same-origin",
 
 }).then((response) => response.json())
-.catch((error) => console.log(error));
+  .catch((error) => console.log(error));
 } 
 export async function getOrdersByUserId(id) {
   return await fetch(url+'order/user_id/'+id).then((response) => response.json());

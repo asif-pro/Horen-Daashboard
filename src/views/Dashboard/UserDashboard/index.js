@@ -54,7 +54,9 @@ import { getWeekBracket } from "utils/chartCleaning";
               axios.post(`${process.env.REACT_APP_SIGNAL_URL}signal/SignalSumByDateByDevices`, requestBody)
                 .then((res)=>{
                   const week = getWeekBracket();
+                 
                   return cleanDataByTime(week,res.data)
+
                 })
                 .then((res)=>{
                   setLineChartData(res);   
