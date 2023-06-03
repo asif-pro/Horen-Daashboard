@@ -50,7 +50,7 @@ const AdminDevices = ({ title, captions, data }) => {
                   ru_id={row.RU_id}
                   qr_code={row.qr_code}
                   device_config={row.device_configure}
-                  user_name={row.user_id ? row.user_id : (row.company_id ? row.company_id : 'Not Claimed Yet')}
+                  user_name={row.user_id ? `User: ${row.user_id}` : (row.company_id ? `Company: ${row.company_id}` : 'Not Claimed Yet')}
                 />
               );
             })}

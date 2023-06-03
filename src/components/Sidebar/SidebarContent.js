@@ -7,7 +7,8 @@ import {
     Stack,
     Text,
     useColorModeValue,
-    Icon
+    Icon,
+    Img
 } from "@chakra-ui/react";
 import IconBox from "components/Icons/IconBox";
 import { CreativeTimLogo } from "components/Icons/Icons";
@@ -19,6 +20,7 @@ import { BsDeviceSsdFill } from 'react-icons/bs';
 import { getDevicesByUserId } from "Services/deviceServices";
 import { getCompanyByOwner } from 'Services/companyServices';
 import { getDevicesByCompanyId } from "Services/deviceServices";
+import { honkimg } from "assets/img/honkhate.jpeg";
 // this function creates the links and collapses that appear in the sidebar (left menu)
 
 
