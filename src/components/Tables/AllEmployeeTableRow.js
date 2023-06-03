@@ -10,7 +10,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
-import { FaTrash } from "react-icons/fa";
+import { FaPencilAlt, FaTrash } from "react-icons/fa";
 
 function AllEmployeeTableRow(props) {
 
@@ -51,6 +51,9 @@ function AllEmployeeTableRow(props) {
         </Text>
       </Td>
       <Td>
+      <Button p="0px" bg="transparent">
+          <Icon as={FaPencilAlt} color="gray.400" cursor="pointer" />
+        </Button>
       <Button p="0px" bg="transparent">
           <Icon as={FaTrash} color="gray.400" cursor="pointer" />
         </Button>

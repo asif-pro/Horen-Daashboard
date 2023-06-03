@@ -98,12 +98,15 @@ function SignIn() {
   const login = async (e) => {
     e.preventDefault()
     const result = await signin(email, password)
+    if(result.message === 'User not found'){
+      return setErrorMsg(true)
+    }
     if(result && (email.trim()!="" || password.trim()!="")){
       localStorage.setItem('accessToken', result.accessToken)
       localStorage.setItem('userType', result.type)
       localStorage.setItem('userId', result.id)
       
-      console.log(result)
+      // console.log(result)
       localStorage.setItem('profilePic', result.profilePic)
       setErrorMsg(false)
       initialRef.current.value=""

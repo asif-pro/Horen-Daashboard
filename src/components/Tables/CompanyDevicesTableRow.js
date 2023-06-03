@@ -50,11 +50,11 @@ function CompanyDevicesTableRow(props) {
       </Td>
       <Td>
       <QRCode
-        id="123456"
+        // id="123456"
         value={456747}
         size={55}
         level={"H"}
-        includeMargin={true}
+        // includeMargin={true}
       />
       </Td>
       <Td>

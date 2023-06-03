@@ -99,11 +99,14 @@ const AllEmployee = () => {
   // },[])
   React.useEffect(()=>{
     getCompanyByOwner(localStorage.getItem('userId')).then((res)=>{
-      setCompanyId(res[0]._id)
-      getAllEmployeesByCompany(res[0]._id).then((result)=>{
-        setAllEmployees(result)
+      if(res.length>0){
+        setCompanyId(res[0]._id)
+        getAllEmployeesByCompany(res[0]._id).then((result)=>{
+          setAllEmployees(result)
         // console.log(result)
       })
+      }
+      
     })
 
   },[])

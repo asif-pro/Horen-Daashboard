@@ -42,7 +42,7 @@ async function handleSave (){
         setError("No such device");
       }
       else{
-        if(res[0].user_id){
+        if(res[0].user_id || res[0].company_id){
           setIsInvalid(true);
           setError("Device is already claimed");
         }

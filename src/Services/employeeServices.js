@@ -15,7 +15,6 @@ export async function getAllEmployeesByCompany(company_id) {
 }
   
 export async function addEmployee(employee) {
-    // console.log(employee)
     return await fetch(url+'employee', {
         method: 'POST',
         headers: {
