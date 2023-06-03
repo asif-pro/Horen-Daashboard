@@ -44,12 +44,10 @@ const CompanyDevicesTableData = ({ title, captions, data }) => {
             {data.map((row) => {
               return (
                 <CompanyDevicesTableRow
-                  key={row.name}
-                  name={row.name}
-                  logo={row.logo}
-                  status={row.status}
-                  budget={row.budget}
-                  progression={row.progression}
+                  key={row._id}
+                  name={row.RU_id}
+                  qr_code={row.qr_code}
+                  employee={row.employee ? row.employee.name : "Yet to Assign"}
                 />
               );
             })}

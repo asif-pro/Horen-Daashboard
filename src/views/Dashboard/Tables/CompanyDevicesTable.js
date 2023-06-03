@@ -105,8 +105,8 @@ function CompanyDevicesTable() {
         }).then((result)=>{
             setCompanyId(result[0]._id)
             getDevicesByCompanyId(result[0]._id).then((data)=>{
-              console.log(data)
-              // setAllDevices()
+              // console.log(data)
+              setAllDevices(data)
             })
     })
 
@@ -119,11 +119,11 @@ function CompanyDevicesTable() {
         <Icon as={FaPlus} color="gray.400" cursor="pointer" fontSize={'18'} /> Claim Device
         </Button>
       </Box>
-      <CompanyDevicesTableData
+      {allDevices && <CompanyDevicesTableData
         title={"All Devices"}
         captions={["Device ID", "QR Code", "Employee", "Action"]}
-        data={dashboardTableData}
-      />
+        data={allDevices}
+      />}
 
 
 <Modal

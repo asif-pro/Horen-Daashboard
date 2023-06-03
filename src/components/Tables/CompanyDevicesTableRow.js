@@ -30,7 +30,7 @@ function CompanyDevicesTableRow(props) {
   const finalRef = React.useRef(null)
 
 
-  const { logo, name, status, budget, progression } = props;
+  const {  name, qr_code, employee} = props;
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
@@ -44,14 +44,14 @@ function CompanyDevicesTableRow(props) {
             fontWeight="bold"
             minWidth="100%"
           >
-            RU-2345
+            {name}
           </Text>
         </Flex>
       </Td>
       <Td>
       <QRCode
         // id="123456"
-        value={456747}
+        value={qr_code}
         size={55}
         level={"H"}
         // includeMargin={true}
@@ -59,7 +59,7 @@ function CompanyDevicesTableRow(props) {
       </Td>
       <Td>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          Employee Name
+          {employee}
         </Text>
       </Td>
       
