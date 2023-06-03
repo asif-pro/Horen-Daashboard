@@ -20,28 +20,21 @@ const LeaderBoard = () => {
             </Box> 
             <Box pl={20} pr={20}>
                 <GlobalRankTable
-                    title={"Country Rank"}
+                    title={"Company Rank (Inter)"}
                     captions={["Rank", "Name", "Horns",]}
                     data={tablesTableData}
                 />
             </Box> 
         </Flex>
-        <Box className="leaderboardBottomContainer">
-            {((localStorage.getItem('userType')==='corporate') || (localStorage.getItem('userType')==='super_admin')) && <Box >
-                    <GlobalRankTable
-                        title={"Inter Company Rank"}
-                        captions={["Rank", "Name", "Horns",]}
-                        data={tablesTableData}
-                    />
-                </Box> }
-                {(localStorage.getItem('userType')==='corporate') && <Box>
-                    <GlobalRankTable
-                        title={"Intra Company Rank"}
-                        captions={["Rank", "Name", "Horns",]}
-                        data={tablesTableData}
-                    />
-                </Box>}
-        </Box>
+        {(localStorage.getItem('userType')==='corporate') && <Flex p={30} justifyContent="center" className="leaderboardTopContainer">
+            <Box pl={20} pr={20}>
+                <GlobalRankTable
+                    title={"Intra Company Rank"}
+                    captions={["Rank", "Name", "Horns",]}
+                    data={tablesTableData}
+                />
+            </Box> 
+        </Flex>}
     
         </>
   )

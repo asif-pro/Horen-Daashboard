@@ -44,7 +44,7 @@ function CompanyDevicesTableRow(props) {
   return (
    <>
      <Tr>
-      <Td minWidth={{ sm: "250px" }} pl="0px">
+      <Td pl="0px">
         <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           <Text
             fontSize="md"
