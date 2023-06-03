@@ -60,6 +60,7 @@ return result;
 }
 export async function getDevicesByCompanyId(company_id) {
     console.log(company_id)
-    // return await fetch(url+'device/user_id/'+user_id).then((response) => response.json());
+    // https://device-service.fly.dev/device/company_id/647881aa1fdd11352c4ce1a2
+     return await fetch(url+'device/company_id/'+company_id).then((response) => response.json());
     
 }

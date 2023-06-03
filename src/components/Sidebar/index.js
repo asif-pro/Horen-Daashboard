@@ -15,7 +15,7 @@ function Sidebar(props) {
 
   const { logoText, routes, sidebarVariant } = props;
 
-  console.log('checking the routes', routes)
+  // console.log('checking the routes', routes)
 
   //  BRAND
   //  Chakra Color Mode
