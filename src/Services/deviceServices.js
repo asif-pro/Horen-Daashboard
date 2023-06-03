@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getEmployeeById } from "./employeeServices";
 // const url = process.env.REACT_APP_DEVICES_URL;
 const url = 'https://device-service.fly.dev/'
 
@@ -59,8 +60,17 @@ return result;
 //  }
 }
 export async function getDevicesByCompanyId(company_id) {
-    console.log(company_id)
-    // https://device-service.fly.dev/device/company_id/647881aa1fdd11352c4ce1a2
      return await fetch(url+'device/company_id/'+company_id).then((response) => response.json());
     
 }
+export async function assignEmployeeToDevice(employeeData,ru_id) {
+    const deviceAllInfo = await fetch(url+'device/'+ru_id).then((response) => response.json());
+    deviceAllInfo[0].employee = employeeData
+    
+    const result =  await axios({
+     method: 'PUT',
+     url: `${url}device/${ru_id}`,
+     data: deviceAllInfo[0]
+   })
+   return result;
+   }

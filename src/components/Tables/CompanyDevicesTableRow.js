@@ -23,14 +23,22 @@ import QRCode from "qrcode.react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import { BsFillPersonPlusFill } from "react-icons/bs";
 import SelectEmployee from "views/Company/Employee/SelectEmployee";
+import { assignEmployeeToDevice } from "Services/deviceServices";
 
 function CompanyDevicesTableRow(props) {
+  const [selectedEmployee, setSelectedEmployee] = React.useState();
+  const [selectedDeviceId, setSelectedDeviceId] = React.useState('');
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
 
+  const assignEmployee = () => {
+    assignEmployeeToDevice(selectedEmployee, selectedDeviceId)
+    onClose()
+  }
 
-  const {  name, qr_code, employee} = props;
+
+  const {RU_ID, qr_code, employee} = props;
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
@@ -44,7 +52,7 @@ function CompanyDevicesTableRow(props) {
             fontWeight="bold"
             minWidth="100%"
           >
-            {name}
+            {RU_ID}
           </Text>
         </Flex>
       </Td>
@@ -86,7 +94,7 @@ size="xl"
   <ModalHeader>Assign Device</ModalHeader>
   <ModalCloseButton />
   <ModalBody pb={6}>
-    <SelectEmployee></SelectEmployee>
+    <SelectEmployee deviceId={RU_ID} setSelectedEmployee={setSelectedEmployee} setSelectedDeviceId={setSelectedDeviceId}></SelectEmployee>
 
     {/* <FormControl mt={4}>
       <FormLabel>Device Configuration</FormLabel>
@@ -95,7 +103,7 @@ size="xl"
   </ModalBody>
 
   <ModalFooter>
-    <Button colorScheme='blue' mr={3}>
+    <Button colorScheme='blue' mr={3} onClick={assignEmployee}>
       Save
     </Button>
     <Button onClick={onClose}>Cancel</Button>

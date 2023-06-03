@@ -9,8 +9,9 @@ const { useState, useEffect } = React;
 // const data = [{id: 0, label: "Mr. John", emp_id: 'E-2323' }, {id: 1, label: "Mr. Zaman", emp_id: 'E-45873' }];
 
 
-const SelectEmployee = () => {
+const SelectEmployee = ({setSelectedEmployee, setSelectedDeviceId, deviceId}) => {
   const [allEmployees, setAllEmployees] = React.useState('');
+  // const [selectedEmployee, setSelectedEmployee] = React.useState('');
 //     const [isOpen, setOpen] = useState(false);
 //   const [items, setItem] = useState(data);
 //   const [selectedItem, setSelectedItem] = useState(null);
@@ -22,11 +23,23 @@ const SelectEmployee = () => {
 //     console.log(id)
 //     setOpen(false)
 //   }
+const handleEmployee = (e) => {
+  // console.log(e.target.value)
+  allEmployees.map((employee)=>{
+    if(employee._id == e.target.value){
+      setSelectedEmployee(employee)
+      setSelectedDeviceId(deviceId)
+    }
+  })
+  
+}
+
+
     React.useEffect(()=>{
       getCompanyByOwner(localStorage.getItem('userId')).then((res)=>{
         getAllEmployeesByCompany(res[0]._id).then((result)=>{
           setAllEmployees(result)
-          console.log(result)
+          // console.log(result)
         })
       })
 
@@ -34,9 +47,9 @@ const SelectEmployee = () => {
 
 
   return (
-    <Select placeholder='Select Employee' >
+    <Select placeholder='Select Employee' onChange={handleEmployee}>
       {allEmployees && allEmployees.map(employee => 
-      <option value={employee._id}>
+      <option value={employee._id} >
         {employee.name} [{employee.department}]
       </option>
       )}

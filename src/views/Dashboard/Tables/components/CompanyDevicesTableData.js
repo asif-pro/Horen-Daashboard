@@ -45,9 +45,10 @@ const CompanyDevicesTableData = ({ title, captions, data }) => {
               return (
                 <CompanyDevicesTableRow
                   key={row._id}
-                  name={row.RU_id}
+                  RU_ID={row.RU_id}
                   qr_code={row.qr_code}
-                  employee={row.employee ? row.employee.name : "Yet to Assign"}
+                  employee={row.employee ? row.employee.name+' ['+row.employee.department+']' : "Yet to Assign"}
+                  id={row._id}
                 />
               );
             })}

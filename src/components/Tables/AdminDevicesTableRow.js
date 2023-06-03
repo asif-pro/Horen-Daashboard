@@ -28,7 +28,7 @@ import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import QRCode from "qrcode.react";
 
 function DashboardTableRow(props) {
-  const { deviceID, ru_id, qr_code, device_config} = props;
+  const { deviceID, ru_id, qr_code, device_config, user_name} = props;
   const textColor = useColorModeValue("gray.700", "white");
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
@@ -39,7 +39,7 @@ function DashboardTableRow(props) {
     const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
     let downloadLink = document.createElement("a");
     downloadLink.href = pngUrl;
-    downloadLink.download = "23456234.png";
+    downloadLink.download = `${ru_id}.png`;
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
@@ -73,7 +73,7 @@ function DashboardTableRow(props) {
       <Td>
         <Text fontSize="md" color={textColor} pb=".5rem">
           {/* {status} */}
-          Not Assigned yet
+          {user_name}
         </Text>
       </Td>
       <Td>
@@ -141,7 +141,7 @@ function DashboardTableRow(props) {
             value={qr_code}
             size={'150'}
             level='H'
-            includeMargin={true} 
+            // includeMargin={true} 
             />
           </Box>
           </ModalBody>
