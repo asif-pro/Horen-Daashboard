@@ -8,7 +8,8 @@ import {
     Text,
     useColorModeValue,
     Icon,
-    Img
+    Img,
+    Image
 } from "@chakra-ui/react";
 import IconBox from "components/Icons/IconBox";
 import { CreativeTimLogo } from "components/Icons/Icons";
@@ -362,9 +363,10 @@ const SidebarContent = ({ logoText, routes }) => {
         alignItems="center"
         fontSize="11px"
       >
-        <CreativeTimLogo w="32px" h="32px" me="10px" />
+       
+        <img style={{borderRadius:'35px'}} width="70px" src="https://images.selise.club/b37623baea96d20241cc8e682974ea0e.webp"/>
         <Text fontSize="sm" mt="3px">
-          {logoText}
+          {/* {logoText} */}
         </Text>
       </Link>
       <Separator></Separator>
