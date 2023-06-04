@@ -49,6 +49,9 @@ const GlobalRankTable = ({ title, captions, data }) => {
                   domain={row.domain}
                   status={row.status}
                   date={row.date}
+                  km={row.km}
+                  rank={row.rank}
+                  horn={row.horn}
                 />
               );
             })}

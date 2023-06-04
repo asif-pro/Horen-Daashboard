@@ -8,6 +8,12 @@ import avatar7 from "assets/img/avatars/avatar7.png";
 import avatar8 from "assets/img/avatars/avatar8.png";
 import avatar9 from "assets/img/avatars/avatar9.png";
 import avatar10 from "assets/img/avatars/avatar10.png";
+import loop from "assets/img/Logo-1-01.png";
+import projectCode from "assets/img/PROJECT.png";
+import selise from "assets/img/logo.png";
+import prime from "assets/img/pbl_logo.png";
+import vertical from "assets/img/VIL-LOGO-150x75.png";
+import snap from "assets/img/snap.png";
 // Custom icons
 import {
   AdobexdLogo,
@@ -248,6 +254,154 @@ export const tablesTableData = [
     domain: "UI/UX Design",
     status: "Offline",
     date: "04/09/20",
+  },
+];
+export const globalRankTableData = [
+  {
+    logo: avatar1,
+    name: "Esthera Jackson",
+    email: "alexa@simmmple.com",
+    subdomain: "Manager",
+    domain: "Organization",
+    status: "Online",
+    date: "14/06/21",
+    horn: "128",
+    rank: '1',
+    km : '3,000km'
+  },
+  {
+    logo: avatar2,
+    name: "Alexa Liras",
+    email: "laurent@simmmple.com",
+    subdomain: "Programmer",
+    domain: "Developer",
+    status: "Offline",
+    date: "12/05/21",
+    horn: "136",
+    rank: '2',
+    km : '2,678km'
+  },
+  {
+    logo: avatar3,
+    name: "Laurent Michael",
+    email: "laurent@simmmple.com",
+    subdomain: "Executive",
+    domain: "Projects",
+    status: "Online",
+    date: "07/06/21",
+    horn: "149",
+    rank: '3',
+    km: '2,200'
+  },
+  {
+    logo: avatar4,
+    name: "Freduardo Hill",
+    email: "freduardo@simmmple.com",
+    subdomain: "Manager",
+    domain: "Organization",
+    status: "Online",
+    date: "14/11/21",
+    horn: "237",
+    rank: '4',
+    km : '2,078km'
+  },
+  {
+    logo: avatar5,
+    name: "Daniel Thomas",
+    email: "daniel@simmmple.com",
+    subdomain: "Programmer",
+    domain: "Developer",
+    status: "Offline",
+    date: "21/01/21",
+    horn: "278",
+    rank: '5',
+    km : '1,470km'
+  },
+  {
+    logo: avatar7,
+    name: "Mark Wilson",
+    email: "mark@simmmple.com",
+    subdomain: "Designer",
+    domain: "UI/UX Design",
+    status: "Offline",
+    date: "04/09/20",
+    horn: "328",
+    rank: '6',
+    km : '1,230km'
+  },
+];
+export const interComapnyRankTableData = [
+  {
+    logo: projectCode,
+    name: "Project Code",
+    email: "alexa@simmmple.com",
+    subdomain: "Manager",
+    domain: "Organization",
+    status: "Online",
+    date: "14/06/21",
+    horn: "1,278",
+    rank: '1',
+    km : '33,030km'
+  },
+  {
+    logo: selise,
+    name: "SELISE",
+    email: "laurent@simmmple.com",
+    subdomain: "Programmer",
+    domain: "Developer",
+    status: "Offline",
+    date: "12/05/21",
+    horn: "2,385",
+    rank: '2',
+    km : '28,678km'
+  },
+  {
+    logo: vertical,
+    name: "Vertical Innovation",
+    email: "laurent@simmmple.com",
+    subdomain: "Executive",
+    domain: "Projects",
+    status: "Online",
+    date: "07/06/21",
+    horn: "5,741",
+    rank: '3',
+    km: '22,790'
+  },
+  {
+    logo: loop,
+    name: "Loop",
+    email: "freduardo@simmmple.com",
+    subdomain: "Manager",
+    domain: "Organization",
+    status: "Online",
+    date: "14/11/21",
+    horn: "6,127",
+    rank: '4',
+    km : '21,078km'
+  },
+  {
+    logo: prime,
+    name: "Prime Bank",
+    email: "daniel@simmmple.com",
+    subdomain: "Programmer",
+    domain: "Developer",
+    status: "Offline",
+    date: "21/01/21",
+    horn: "7,178",
+    rank: '5',
+    km : '20,470km'
+  },
+  {
+    logo: snap,
+    name: "Snap Drop",
+    email: "mark@simmmple.com",
+    subdomain: "Designer",
+    domain: "UI/UX Design",
+    status: "Offline",
+    date: "04/09/20",
+    horn: "7,328",
+    rank: '6',
+    km : '17,270km'
   },
 ];
 

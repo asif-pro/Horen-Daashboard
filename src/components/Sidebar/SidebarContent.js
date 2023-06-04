@@ -39,7 +39,9 @@ const SidebarContent = ({ logoText, routes }) => {
         res.map((data)=>{
           data.clicked='deactive'
         })
-        res[0].clicked = 'active'
+        // res[0].clicked = 'active'
+        if(res[0]>0){res[0].clicked = 'active'}
+
         setDevices(res);
       })
     }

@@ -11,7 +11,7 @@ import {
 import React from "react";
 
 function GlobalRankTableRow(props) {
-  const { logo, name, email, subdomain, domain, status, date } = props;
+  const { logo, name, email, subdomain, domain, status, date, km, rank, horn } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
@@ -21,7 +21,7 @@ function GlobalRankTableRow(props) {
       <Td>
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
-            2
+            {rank}
           </Text>
           </Flex>
           </Td>
@@ -38,7 +38,7 @@ function GlobalRankTableRow(props) {
               {name}
             </Text>
             <Text fontSize="sm" color="gray.400" fontWeight="normal">
-              {email}
+              {km}
             </Text>
           </Flex>
         </Flex>
@@ -47,7 +47,7 @@ function GlobalRankTableRow(props) {
       <Td>
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
-            328
+            {horn}
           </Text>
           <Text fontSize="sm" color="gray.400" fontWeight="normal">
             Intotal
