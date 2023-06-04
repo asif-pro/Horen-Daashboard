@@ -60,7 +60,7 @@ var dashRoutes = [
     layout: "/auth",
   },
   {
-    path: "/order_success",
+    path: "/success",
     name: "Order Success",
     rtlName: "لوحة القيادة",
     icon: <DocumentIcon color="inherit" />,
