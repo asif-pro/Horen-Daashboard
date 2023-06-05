@@ -33,7 +33,18 @@ function CompanyDevicesTableRow(props) {
   const finalRef = React.useRef(null)
 
   const assignEmployee = () => {
-    assignEmployeeToDevice(selectedEmployee, selectedDeviceId)
+    assignEmployeeToDevice(selectedEmployee, selectedDeviceId).then((res)=>{
+      return res;
+    }).then((res)=>{
+        props.setAllDevices((prevDevices)=>{
+          
+           return prevDevices.map((device)=>{
+            console.log(res)
+            if(device.RU_id===res.data.RU_id) return res.data;
+            else return device
+           }) 
+        })
+    })
     onClose()
   }
 
@@ -94,7 +105,7 @@ size="xl"
   <ModalHeader>Assign Device</ModalHeader>
   <ModalCloseButton />
   <ModalBody pb={6}>
-    <SelectEmployee deviceId={RU_ID} setSelectedEmployee={setSelectedEmployee} setSelectedDeviceId={setSelectedDeviceId}></SelectEmployee>
+    <SelectEmployee deviceId={RU_ID} setSelectedEmployee={setSelectedEmployee} setSelectedDeviceId={setSelectedDeviceId} setAllDevices={props.setAllDevices}></SelectEmployee>
 
     {/* <FormControl mt={4}>
       <FormLabel>Device Configuration</FormLabel>

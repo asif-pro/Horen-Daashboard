@@ -22,6 +22,8 @@ import { getDevicesByUserId } from "Services/deviceServices";
 import { getCompanyByOwner } from 'Services/companyServices';
 import { getDevicesByCompanyId } from "Services/deviceServices";
 import { honkimg } from "assets/img/honkhate.jpeg";
+import { useSelector, useDispatch } from 'react-redux';
+import { selectDevice } from "reducers/deviceActions";
 // this function creates the links and collapses that appear in the sidebar (left menu)
 
 
@@ -32,33 +34,37 @@ const SidebarContent = ({ logoText, routes }) => {
   // this is for the rest of the collapses
   const [state, setState] = React.useState({});
   const [devices, setDevices] = React.useState([]);
+  const dispatch = useDispatch();
+
 
   React.useEffect(()=>{
     if(localStorage.getItem('userType')==='individual'){
       getDevicesByUserId(localStorage.getItem('userId')).then((res)=>{
+        
         res.map((data)=>{
-          data.clicked='deactive'
+           data.clicked='deactive'
         })
-        // res[0].clicked = 'active'
-        if(res[0]>0){res[0].clicked = 'active'}
+        if(res.length>0){
+          res[0].clicked = 'active'
+        }
 
         setDevices(res);
-      })
+      });
     }
     if(localStorage.getItem('userType')==='corporate'){
-      // console.log('Companyr jnne sidebar contetnt set kora hoy nai')
         const userId = localStorage.getItem('userId')
           getCompanyByOwner(localStorage.getItem('userId')).then((res)=>{
             return res
             }).then((result)=>{
-                // console.log(result[0]._id)
-                // setCompanyId(result[0]._id)
                 getDevicesByCompanyId(result[0]._id).then((data)=>{
                   data.map((device)=>{
                     device.clicked='deactive'
                   })
-                  data[0].clicked = 'active'
+                  if(data.length>0){
+                    data[0].clicked = 'active'
                   setDevices(data);
+                  }
+                  
                   // setAllDevices()
                 })
         })
@@ -73,6 +79,14 @@ const SidebarContent = ({ logoText, routes }) => {
   //   return location.pathname === routeName ? "active" : "";
   // };
   const handleClick = (RU_id)=>{
+
+  const selectedDevice = devices.filter((device)=>{
+        
+        if(device.RU_id===RU_id) return device
+  })
+      dispatch(selectDevice(selectedDevice));
+
+
    const updatedDevices = devices.map((device)=>{
       if (device.RU_id==RU_id){
         if(device.clicked==="deactive"){

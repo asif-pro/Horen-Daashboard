@@ -21,6 +21,7 @@ import TopChart from "./components/TopChart";
 import AreaHorn from "./components/AreaHorn";
 import GlobalHorn from "./components/GlobalHorn";
 import { cleanDataByTime, formatForApex } from "utils/chartCleaning";
+import {useSelector} from 'react-redux'
 import { getWeekBracket } from "utils/chartCleaning";
 
   
@@ -29,46 +30,74 @@ import { getWeekBracket } from "utils/chartCleaning";
 
     const [devices, setDevices] = React.useState([]);
     const [lineChartData, setLineChartData] = React.useState({});
+    const device = useSelector(state => state.device);
 
     if(localStorage.getItem('orderDetails')){
       const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
     }
-    
+
+    const fetchchartData = async () => {
+      try {
+        const userId = localStorage.getItem('userId');
+     
+        const deviceResponse = await fetch(
+          `${process.env.REACT_APP_DEVICES_URL}device/user_id/${userId}`
+        );
+        const deviceData = await deviceResponse.json();
+        setDevices(deviceData);
+        if(deviceData.length > 0){
+          const ruId = deviceData[0].RU_id;
+          const requestBody = {
+            deviceRUids: [ruId],
+          };
+          console.log(process.env.REACT_APP_SIGNAL_URL)
+          axios.post(`${process.env.REACT_APP_SIGNAL_URL}signal/SignalSumByDateByDevices`, requestBody)
+            .then((res)=>{
+              const week = getWeekBracket();
+             
+              return cleanDataByTime(week,res.data)
+
+            })
+            .then((res)=>{
+              setLineChartData(res);   
+            });
+        }
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchchartDatabyDevice = async (device) => {
+      try {
+         const ruId = device[0].RU_id;
+          const requestBody = {
+            deviceRUids: [ruId],
+          };
+          axios.post(`${process.env.REACT_APP_SIGNAL_URL}signal/SignalSumByDateByDevices`, requestBody)
+            .then((res)=>{
+              const week = getWeekBracket();
+             
+              return cleanDataByTime(week,res.data)
+
+            })
+            .then((res)=>{
+              setLineChartData(res);   
+            });       
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
       React.useEffect(() => {
         
-        const fetchchartData = async () => {
-          try {
-            const userId = localStorage.getItem('userId');
-         
-            const deviceResponse = await fetch(
-              `${process.env.REACT_APP_DEVICES_URL}device/user_id/${userId}`
-            );
-            const deviceData = await deviceResponse.json();
-            setDevices(deviceData);
-            if(deviceData.length > 0){
-              const ruId = deviceData[0].RU_id;
-              const requestBody = {
-                deviceRUids: [ruId],
-              };
-              console.log(process.env.REACT_APP_SIGNAL_URL)
-              axios.post(`${process.env.REACT_APP_SIGNAL_URL}signal/SignalSumByDateByDevices`, requestBody)
-                .then((res)=>{
-                  const week = getWeekBracket();
-                 
-                  return cleanDataByTime(week,res.data)
-
-                })
-                .then((res)=>{
-                  setLineChartData(res);   
-                });
-            }
-            
-          } catch (error) {
-            console.log(error);
-          }
-        };
+        
         fetchchartData();
-      }, [])
+      }, []);
+
+      React.useEffect(()=>{
+        fetchchartDatabyDevice(device)
+      },[device])
     
   
     return (

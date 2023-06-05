@@ -16,7 +16,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CompanyDevicesTableRow from "components/Tables/CompanyDevicesTableRow";
 import React from "react";
 
-const CompanyDevicesTableData = ({ title, captions, data }) => {
+const CompanyDevicesTableData = ({ title, captions, data, setAllDevices }) => {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Card my='22px' overflowX={{ sm: "scroll", xl: "hidden" }}>
@@ -49,6 +49,7 @@ const CompanyDevicesTableData = ({ title, captions, data }) => {
                   qr_code={row.qr_code}
                   employee={row.employee ? row.employee.name+' ['+row.employee.department+']' : "Yet to Assign"}
                   id={row._id}
+                  setAllDevices={setAllDevices}
                 />
               );
             })}
