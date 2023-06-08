@@ -27,13 +27,13 @@ const LeaderBoard = () => {
                     data={interComapnyRankTableData}
                 />
             </Box> 
-            <Box pl={20} pr={20}>
+            {(localStorage.getItem('userType')==='corporate') && <Box pl={20} pr={20}>
                 <GlobalRankTable
                     title={"Intra Company Rank"}
                     captions={["Rank", "Name", "Horns",]}
                     data={globalRankTableData}
                 />
-            </Box> 
+            </Box> }
             </>}
             </Box>
         </Flex>

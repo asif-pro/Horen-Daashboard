@@ -88,7 +88,7 @@ console.log(user)
                         icon={<StatsIcon h={"15px"} w={"15px"} color='white' />}
                         />
                     </SimpleGrid>
-                    <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}><Guage></Guage></SimpleGrid>
+                    <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}>{(localStorage.getItem('userType')!='super_admin') &&<Guage></Guage>}</SimpleGrid>
                     <SimpleGrid gap={{ sm: "12px" }} p={'15px'} columns={2}>
                         {/* <MiniStatistics
                         title={"Average per minute"}
@@ -96,20 +96,20 @@ console.log(user)
                         percentage={17}
                         icon={<WalletIcon h={"24px"} w={"24px"} color='white' />}
                         /> */}
-                        <DashboardStatistics
+                        {(localStorage.getItem('userType')!='super_admin') && <DashboardStatistics
                           icon={<Icon h={"24px"} w={"24px"} color='white' as={FaWallet} />}
                           title={"db"}
                           description={"Per Hour"}
                           amount={17}
                           stat={119}
-                        />
-                        <DashboardStatistics
+                        />}
+                        {(localStorage.getItem('userType')!='super_admin') && <DashboardStatistics
                           icon={<Icon h={"24px"} w={"24px"} color='white' as={FaWallet} />}
                           title={"db"}
                           description={"Per km"}
                           amount={14}
                           stat={110}
-                        />
+                        />}
                     </SimpleGrid>
     </Card>
   );
