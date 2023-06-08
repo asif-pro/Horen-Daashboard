@@ -9,10 +9,12 @@ import {
   Tooltip,
   Legend
 } from "recharts";
+import {useSelector, useDispatch} from 'react-redux';
 
 function HornsPerDay({chartData}){
-
-
+  const device = useSelector(state => state.device);
+  console.log(device)
+  
   return (
     <>    { chartData?.length > 0 && (
       <LineChart

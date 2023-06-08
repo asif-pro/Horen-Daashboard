@@ -5,9 +5,12 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import React from "react";
 import HornsPerDay from "components/Charts/LineChart";
+import {useSelector, useDispatch} from 'react-redux';
 
 const TopChart = ({ title, percentage, chartData }) => {
   const textColor = useColorModeValue("gray.700", "white");
+  const device = useSelector(state => state.device);
+    console.log(device)
   return (
     <Card p='28px 10px 16px 0px' mb={{ sm: "26px", lg: "0px" }}>
       <CardHeader mb='20px' pl='22px'>
@@ -16,19 +19,19 @@ const TopChart = ({ title, percentage, chartData }) => {
             {title}
           </Text>
           <Spacer/>
-          <Select ml={'2'} placeholder='Select Device' width={'9vw'}>
+          {/* <Select ml={'2'} placeholder='Select Device' width={'9vw'}>
             <option value='option2'>Device1</option>
             <option value='option3'>Device2</option>
             <option value='option1'>Device3</option>
             <option value='option1'>Device4</option>
-          </Select>
+          </Select> */}
          
          
-          <Select ml={'2'} placeholder='Time-frame' width={'9vw'}>
+          {/* <Select ml={'2'} placeholder='Time-frame' width={'9vw'}>
             <option value='option2'>Week</option>
             <option value='option3'>Month</option>
      
-          </Select>
+          </Select> */}
             
           {/* <Text fontSize='md' fontWeight='medium' color='gray.400'>
             <Text

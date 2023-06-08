@@ -55,6 +55,7 @@ function CompanyDevicesTable() {
             const userId = localStorage.getItem('userId')
             getCompanyByOwner(localStorage.getItem('userId')).then((res)=>{
               // setCompanyId(res[0]._id)
+              console.log(res[0]._id)
               return res[0]._id
              }).then((result)=>{
               fetch(`${process.env.REACT_APP_DEVICES_URL}device/${initialRef.current.value}`, {
@@ -123,6 +124,7 @@ function CompanyDevicesTable() {
         title={"All Devices"}
         captions={["Device ID", "QR Code", "Employee", "Action"]}
         data={allDevices}
+        setAllDevices={setAllDevices}
       />}
 
 
